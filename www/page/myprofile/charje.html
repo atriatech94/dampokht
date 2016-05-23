@@ -1,0 +1,53 @@
+<dir-tabbar></dir-tabbar>
+<ons-page>
+    <ons-toolbar>
+        <a ng-click="go('/myprofile')" class="left"><ons-back-button></ons-back-button></a>
+        <div class="center">شارژ حساب کاربری</div>
+    </ons-toolbar>
+    <ons-list-header class="rtl f18 p10"> افزایش اعتبار </ons-list-header>
+    <div class="charje_money">
+        <label><input type="number" name="cust" placeholder="مبلغ به تومان"> </label>
+        <label><button class="button--large--cta"> افزایش اعتبار </button></label>
+    </div>
+    <ons-list-header class="rtl f18 p10"> افزایش اعتبار </ons-list-header>
+    <div class="charje_pakage">
+        <ons-list-item modifier="chevron" ng-repeat="pack in [1,2,3,4,5,6]">
+            <ons-icon icon="ion-card" size="20px"></ons-icon>
+            مبلغ 50.000 تومان 
+            <span class="list-item-note lucent">10.000 تومان هدیه </span>
+        </ons-list-item>
+    </div>
+
+</ons-page>
+<style>
+    .charje_money{
+        box-sizing: border-box;
+        background-color: #fff;
+        padding: 4px 10px;
+    }
+    .charje_money label input{
+        width: 100%;
+        border-bottom: 1px solid #b7b7b7;
+    }
+    .charje_money label button{
+        margin: 10px auto;
+        background-color: #6ba736;
+    }
+     .charje_pakage ons-list-item{
+        background-color: rgba(168, 202, 43, 0.14);
+    }
+    .charje_pakage .list-item-note {
+       position: absolute;
+       left: 36px;
+       top: 0px;
+       font-size: 12px;
+       color: #798B0E;
+       opacity: .8;
+   }
+    .charje_pakage  .list__item--chevron:before{
+        color: #ABB315;   
+    }
+    .list__item{
+        font-size: 14px;
+    }    
+</style>
