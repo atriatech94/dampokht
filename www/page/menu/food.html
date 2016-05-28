@@ -1,25 +1,27 @@
 <dir-tabbar></dir-tabbar>
-<div style="padding-top:0px;" class="food">
-      <ons-page modifier="shop-details">
+<div  class="food">
+    <ons-page modifier="shop-details">
         <ons-toolbar modifier="transparent">
-          <div class="right"  ng-click="go('/comment/'+food[0].id+'/'+branch_id)">
-            <ons-toolbar-button><ons-icon icon="ion-ios-chatboxes" style="color: white"></ons-icon></ons-toolbar-button>
-          </div>
-          <div class="left" ng-click="go('/menu/'+branch_id)" >
-            <a><ons-toolbar-button><ons-icon icon="ion-arrow-left-c" style="color: white; font-size: 28px;" fixed-width="false"></ons-icon></ons-toolbar-button></a>
-          </div>
-        </ons-toolbar>
+            <div class="right"  ng-click="go('/comment/'+food[0].id+'/'+branch_id)">
+              <ons-toolbar-button><ons-icon icon="ion-ios-chatboxes" style="color: white"></ons-icon></ons-toolbar-button>
+            </div>
+            <div class="left" ng-click="go('/menu/'+branch_id)" >
+              <a><ons-toolbar-button><ons-icon icon="ion-arrow-left-c" style="color: white; font-size: 28px;" fixed-width="false"></ons-icon></ons-toolbar-button></a>
+            </div>
+          </ons-toolbar>
 
-        <div class="card">
+        <div class="card" style="padding-top:0px !important;" >
             <img ng-src="{{ base_img + food[0].picname }}">
             <div class="card-name">{{ food[0].name }} </div>
             <div class="card-desc" ng-if = "food[0].special == 1">پیشنهاد ویژه دمپخت</div>
         </div>
-        <div class="rating"><div class="rating-num">
-            <ons-icon ng-repeat="rates in rate | limitTo : realrate" icon="fa-star" fixed-width="false"></ons-icon>
-            <ons-icon ng-repeat="rates in rate | limitTo : 5 - realrate" icon="fa-star-o" fixed-width="false"></ons-icon>
-          
-        </div></div>
+        
+        <div class="rating">
+            <div class="rating-num">
+                <ons-icon ng-repeat="rates in rate | limitTo : realrate" icon="fa-star" fixed-width="false"></ons-icon>
+                <ons-icon ng-repeat="rates in rate | limitTo : 5 - realrate" icon="fa-star-o" fixed-width="false"></ons-icon>
+            </div>
+          </div>
  
 
         <ons-list style="border-top: none"><ons-list-item style="line-height: 1; padding: 0;">
@@ -124,4 +126,9 @@
         </ons-dialog>
     </ons-template>
 </div>
+<style>
+    .food .page__content{
+        padding-top: 0px !important;
+    }
+</style>
 

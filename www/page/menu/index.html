@@ -40,7 +40,7 @@
                          <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="cost"> قیمت :   {{food.price | currency : '' : 0  }} تومان  </div>
                         <ons-button ng-click="go('/food/' + food.id +'/'+ branch_id)" modifier="quiet">اطلاعات بیشتر</ons-button>
                     </a>
-                  </ons-col>
+                  </ons-col> 
                 <ons-col ng-click="add_to_card(food.id,branch_id,food.picname,food.price,food.name,food.b_name)"  width="60px"><ons-icon icon="ion-ios-cart-outline"></ons-icon></ons-col>
               </ons-row>
             </ons-list-item>

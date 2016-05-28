@@ -110,9 +110,13 @@ angular.module('my-app')
             templateUrl: 'page/other/law.html',
             controller: 'lawController',
 		})
-       .when('/edit_address/:id', {
+       .when('/edit_address/:id/:type', {
             templateUrl: 'page/myprofile/edit_address.html',
             controller: 'EditAddressController',
+		})
+         .when('/edit_address_map/:id/:type', {
+            templateUrl: 'page/myprofile/edit_address_map.html'
+           
 		})
         .when('/checkout/:id', {
             templateUrl: 'page/checkout/index.html',

@@ -24,7 +24,7 @@ angular.module('my-app')
                                   document.getElementById('loading').setAttribute('style','display:none;'); 
                                   $scope.profile = response.data.profile;
                                   $rootScope.count_o = response.data.orders[0].c;
-                                  $rootScope.count_t = response.data.ticket[0].c;
+                                   $rootScope.count_t = response.data.ticket[0].c;
                                        
                           }, function errorCallback(response) {
                               document.getElementById('loading').setAttribute('style','display:none;'); 
@@ -422,7 +422,7 @@ angular.module('my-app')
               
 })
 
-.controller('EditAddressController',function($scope,$location,$routeParams,$http,$filter){
+.controller('EditAddressController',function($scope,$location,$routeParams,$http,$filter,$rootScope){
     
     $scope.gback = function(){ window.history.back() };
     $scope.branch_area = '';
@@ -521,7 +521,7 @@ angular.module('my-app')
                                var index = addresses.map(function (item) {
                                     return item.id;
                                 }).indexOf($routeParams.id);
-                               addresses[index] = ({id:$routeParams.id , address : $scope.address});
+                               addresses[index] = ({id:$routeParams.id , address : $scope.address , branch_id: $scope.branch , type:1});
                                localStorage.setItem('address',JSON.stringify(addresses));
                                 ons.notification.alert({
                                                 title: 'پیام',
@@ -654,7 +654,7 @@ angular.module('my-app')
                             if (response.data != 0)
                             {
                                var addresses = JSON.parse(localStorage.getItem('address'));
-                               addresses.push({id:response.data , address : $scope.address_info.address1 , branch_id : $scope.address_info.branch});
+                               addresses.push({id:response.data , address : $scope.address_info.address1 , branch_id : $scope.address_info.branch , type: 1 });
                                localStorage.setItem('address',JSON.stringify(addresses));
                                 ons.notification.alert({
                                                 title: 'پیام',
@@ -1066,8 +1066,61 @@ angular.module('my-app')
     
 })
 
-.controller('charjeController',function($scope,$location){
+.controller('charjeController',function($scope,$location,$http){
     $scope.go = function ( path ) { $location.path( path ); };
+     document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'GET',
+                url: base_url+'charj/HamiDaMin23QZYTRRE782'
+               }).then(function successCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                            $scope.charj = response.data;
+                               
+                        }, function errorCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                           });
+                        
+                 }); 
+       $scope.user_price = "";
+       $scope.submit = function(){
+          if( $scope.user_price == ""){
+               ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'لطفا مبلغ را وارد کنید'
+                           });
+              return false;             
+          } 
+        if(  isNaN (Number($scope.user_price)) ){
+              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'مبلغ وارد شده معتبر نیست'
+                           });
+              return false;
+        }
+        
+         if(  Number($scope.user_price) < 500 ){
+              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'حداقل مبلغ شارژ 500 تومان است'
+                           });
+              return false;
+        }
+       /* okey */ 
+     };                
+     
+       $scope.buy = function(id){
+             alert(id); 
+          
+       };        
+            
+                 
 });
 
 

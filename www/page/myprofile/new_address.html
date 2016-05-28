@@ -4,7 +4,7 @@
         <div class="left" ng-click="hback()"><ons-back-button></ons-back-button></div>
         <div class="center">آدرس جدید</div>
     </ons-toolbar>
-	<div class="navigation-bar" ng-init="show_case = '1' ">
+	<div class="navigation-bar" ng-init="show_case = '1' "  style="margin-top:44px;">
           <div class="navigation-bar__center">
             <!-- segment control -->
             <div class="button-bar" style="width:200px; margin:8px auto 0;">
@@ -72,7 +72,10 @@
 					</div>
 					<!-- /.form-group -->
 					
-					<div id="submit-map" lat="29.36" long="52.33" class="googleMap"></div>
+					<div class="show_gmap">
+                        <div id="submit-map" lat="29.36" long="52.33" class="googleMap"></div>
+                        <div class="now_me"></div>
+                   </div>
 					 <div class="lucent">
 						<p class="note">می توانید با جا به جا کردن پوینتر مکان خود را تغییر دهید .</p>
 					</div>
@@ -92,7 +95,7 @@
 					</div>
 				</section>
 			  <!-- /#place-on-map -->
-                <div class="now_me"><button class="btn_def">مکان فعلی من</button></div>
+                
 			</div>
 		
 		<div class="map_block"> <div class="vspc form-row"><ons-button ng-click="submit_map()" modifier="large--cta">افزودن آدرس جدید</ons-button> </div> </div>

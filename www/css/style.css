@@ -322,23 +322,28 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     padding-bottom: 5px;
 }
 .owl-carousel_two .slider_item{
-    height: 230px;
-    background-color: #fff;
+    height: 190px;
+    background-color: #DE0101;
     position: relative;
+    color: #fff;
+    border-radius: 10px;
 }
 .owl-carousel_two .slider_item img{
     height: 150px;
     width: 100%;
     object-fit: cover;
     display: block;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
 .owl-carousel_two .slider_item h3{
     direction: rtl;
     text-align: right;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
-    padding: 10px 10px 0;
-    font-weight: 800;
+    padding: 7px 10px 0;
+    font-weight: 100;
+    text-align: center;
 }
 .owl-carousel_two .slider_item p{
     direction: rtl;
@@ -417,10 +422,11 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
 .favurite .thumbnail {
     width: 80px;
     height: 80px;
-    border-radius: 4px;
-    -webkit-border-radius: 4px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
     object-fit: cover;
     border: 1px solid #E6E6E6;
+    box-shadow: -4px 4px 10px -6px #585858;
 }
 
 .favurite .name {
@@ -441,7 +447,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     transition-delay: 1s;
 }
 .favurite ons-list-item:active{
-    background-color: rgba(255, 1, 99, 0.33);
+    background-color: rgba(198, 204, 61, 0.33);
     transition-delay:0s;
     
 }
@@ -472,11 +478,9 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     color:#A71635;
     background-color: transparent;
 }
-.favurite  ons-col:hover .ons-icon{
-    
-    color:#404040;
-    background-color:#fff;
-    border-color:#404040;
+.favurite  ons-col .ons-icon:active{
+    color: #FFFFFF;
+    text-shadow: 0 0 5px #10AEFF;
 }
 
 #not_branch{
@@ -876,8 +880,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
 
 .food .rating-num {
     position: relative;
-    top: -24px;
-    height: 24px;
+    top: -14px;
     color: white;
     line-height: 24px;
     font-size: 12px;
@@ -992,13 +995,16 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
 /*--=============-- myprofile --===================--*/
 
 .myprofile .profile-card {
-  width: 100%;
-  text-align: center;
-  color: white;
-  padding: 30px 0;
-  line-height: 1.4;
-  background-color:#541520;
-  text-shadow: rgba(0, 0, 0, 0.4) 0px 1px 0px;
+    width: 100%;
+    text-align: center;
+    color: #000;
+    padding: 30px 0;
+    line-height: 1.4;
+    background-image:url(../img/bg4.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-shadow: rgba(255, 255, 255, 0.4) 0px 0px 3px;
 }
 
 .myprofile .profile-image {
@@ -1010,6 +1016,8 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     border 1px solid white;
     box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 0px 0px;
     -webkit-box-shadow:rgba(0, 0, 0, 0.2) 0px 2px 0px 0px;
+    object-fit: cover;
+    object-position: center;
 }
 
 .myprofile .profile-name {
@@ -1019,17 +1027,17 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
 }
 
 .myprofile .profile-id {
-  margin: 0 0 5px 0;
-  font-size: 14px;
-  opacity: 0.6;
+    margin: 0 0 5px 0;
+    font-size: 14px;
+    color: #5c5c5c;
 }
 
 .myprofile .profile-desc {
     font-size: 15px;
-    opacity: 0.6;
     width: 90%;
     text-align: center;
     margin: 0 auto;
+    color: #5c5c5c;
 }
 
 .myprofile .info-col {
@@ -1052,7 +1060,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     opacity: 0.4;
 }
 .myprofile ons-toolbar + .page__background + .page__content{
-    top: 44px;
+    top: 0px;
 }
 .myprofile .back-button {
     color: rgba(154, 10, 58, 0.81);
@@ -1070,6 +1078,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     border-radius: 4px;
     -webkit-border-radius: 4px;
     border: inset 1px rgba(0, 0, 0, 0.3);
+    object-fit: contain;
 }   
 
 .setting .profile-name {
@@ -1105,7 +1114,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     box-shadow: inset 0 0 0 2px rgba(255, 115, 85, 0.82);
 }
 .setting ons-toolbar + .page__background + .page__content {
-    top: 0;
+    top: 0px;
 }
 /*--=============-- .address --===================--*/
 .address .radio-button--list-item{
@@ -1119,7 +1128,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
 }
 .address .page__background + .page__content {
     margin-top: -1px;
-    top: 0;
+    top: 44px;
 }
 /*--=============--  --===================--*/
 .contain{
@@ -1178,6 +1187,22 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     width: 100%;
     height: 300px;
 }
+.show_gmap{
+    position: relative;
+}
+.now_me{
+    position: absolute;
+    z-index: 2;
+    width: 30px;
+    height: 30px;
+    bottom: 30px;
+    left: 10px;
+    background-image: url(../img/mylocation.svg);
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .address_p{
     width: 85%;
     margin: 0 auto;
@@ -1391,7 +1416,7 @@ buybasket-dir .person-image {
 }
 /*--=============-- .page__content --===============--*/
 .checkout .page__content{
-    padding-top: 0px;
+    padding-top: 44px;
 }
 .checkout .checkbox--list-item {
     font-size: 13px;
@@ -1489,6 +1514,10 @@ buybasket-dir .person-image {
     border-bottom:none;
 }
 /*--=============-- branches --===============--*/
+.navigation-bar + .page__background + .page__content {
+    margin-top: -1px;
+    top: 0;
+}
 .branches{
     padding: 0 8px;
     margin-top: 10px;
@@ -1575,7 +1604,7 @@ buybasket-dir .person-image {
 }
 
 .order_list .plan-right {
-  padding: 10px 40px 10px 10px;
+  padding: 10px 10px 10px 10px;
 }
 
 .order_list .plan-date {
@@ -1591,9 +1620,12 @@ buybasket-dir .person-image {
 }
 
 .order_list .plan-name {
-    font-size: 16px;
+    font-size: 13px;
     margin-bottom: 8px;
-    /*text-shadow: 0 0 3px #D3D3D3;*/
+    text-overflow: ellipsis; 
+    white-space: nowrap;
+    overflow: hidden;
+
 }
 
 .order_list .plan-info {
@@ -1625,7 +1657,7 @@ buybasket-dir .person-image {
     margin-left: 5px;
 }
 .page__content {
-    padding-top: 0px;
+    padding-top: 44px;
 }
 .order_list .list{
     border:none;   
@@ -1760,10 +1792,11 @@ buybasket-dir .person-image {
 }
 
 .faq .item-accordion {
-    line-height: 37px;
+    line-height: 27px;
     padding-top: 0;
     padding-bottom: 0;
-    transition: 0.3s all ease-out;
+    transition: .1s all ease-out;
+    -webkit-transition: .1s all ease-out;
 }
 
 .faq .item-accordion.ng-hide {
@@ -1785,14 +1818,28 @@ buybasket-dir .person-image {
 }
 #faq .page__content{
     padding-top: 44px !important;
+    overflow-y: auto;
+}
+#faq .page{
+    margin-bottom: 0px;
 }
 .faq .item-accordion:first-child{
     font-size: 16px;
 }
 
-
+.faq .item-accordion{
+    background: rgba(243, 255, 57, 0.24);
+    font-size: 16px;
+    padding: 10px;
+    text-align: justify;
+}
 .faq .item-accordion:last-child{
     font-size: 14px;
+    text-align: justify;
+    box-sizing: border-box;
+    padding: 10px 15px;
+    background-color: #fff;
+    border-bottom: #B9B9B9 solid 1px;
 }
 #faq  .icon_close{
     top:35%;
@@ -1947,4 +1994,51 @@ buybasket-dir .person-image {
     border-left:1px solid #ae1f33;
     box-sizing: border-box;
 }
+/*=====================================*/
+.navigation-bar .toolbar-button--quiet2 {
+    display: table;
+    width: 30px;
+    margin-right: 20px;
+}
+.charje_money{
+    box-sizing: border-box;
+    background-color: #fff;
+    padding: 4px 15px;
+    width: 100%;
+    overflow-x: hidden;
+}
+.charje_money label{
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+}
+.charje_money label input{
+    width: 100%;
+    border-bottom: 1px solid #b7b7b7;
+    box-sizing: border-box;
+    margin: 0px;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
     
+}
+.charje_money label button{
+    margin: 10px auto;
+    background-color: #6ba736;
+}
+ .charje_pakage ons-list-item{
+    background-color: rgba(168, 202, 43, 0.14);
+}
+.charje_pakage .list-item-note {
+   position: absolute;
+   left: 36px;
+   top: 0px;
+   font-size: 12px;
+   color: #798B0E;
+   opacity: .8;
+}
+.charje_pakage  .list__item--chevron:before{
+    color: #ABB315;   
+}
+.list__item{
+    font-size: 14px;
+} 
