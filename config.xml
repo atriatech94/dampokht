@@ -36,7 +36,7 @@
     <plugin name="phonegap-plugin-push" source="npm">
             <param name="SENDER_ID" value="<Your Sender ID>" />
     </plugin>
-    <gap:plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay"/>
+    <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
     <icon src="icon.png" />
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
