@@ -39,22 +39,22 @@
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <icon src="icon.png" />
       <platform name="ios">
-        <icon height="57"  src="www/res/icon/ios/icon.png" width="57" />
-        <icon height="114"  src="www/res/icon/ios/icon@2x.png" width="114" />
-        <icon height="40"  src="www/res/icon/ios/icon-40.png" width="40" />
-        <icon height="80"  src="www/res/icon/ios/icon-40@2x.png" width="80" />
-        <icon height="50"  src="www/res/icon/ios/icon-50.png" width="50" />
-        <icon height="100"  src="www/res/icon/ios/icon-50@2x.png" width="100" />
-        <icon height="60"  src="www/res/icon/ios/icon-60.png" width="60" />
-        <icon height="120"  src="www/res/icon/ios/icon-60@2x.png" width="120" />
-        <icon height="180"  src="www/res/icon/ios/icon-60@3x.png" width="180" />
-        <icon height="72"  src="www/res/icon/ios/icon-72.png" width="72" />
-        <icon height="144"  src="www/res/icon/ios/icon-72@2x.png" width="144" />
-        <icon height="76"  src="www/res/icon/ios/icon-76.png" width="76" />
-        <icon height="152"  src="www/res/icon/ios/icon-76@2x.png" width="152" />
-        <icon height="29"  src="www/res/icon/ios/icon-small.png" width="29" />
-        <icon height="58" src="www/res/icon/ios/icon-small@2x.png" width="58" />
-        <icon height="87"  src="www/res/icon/ios/icon-small@3x.png" width="87" />
+        <icon   src="www/res/icon/ios/icon.png" height="57" width="57" />
+        <icon  src="www/res/icon/ios/icon@2x.png" height="114"  width="114" />
+        <icon  src="www/res/icon/ios/icon-40.png" height="40"  width="40" />
+        <icon  src="www/res/icon/ios/icon-40@2x.png" height="80"  width="80" />
+        <icon   src="www/res/icon/ios/icon-50.png" height="50" width="50" />
+        <icon   src="www/res/icon/ios/icon-50@2x.png" height="100" width="100" />
+        <icon   src="www/res/icon/ios/icon-60.png" height="60" width="60" />
+        <icon  src="www/res/icon/ios/icon-60@2x.png" height="120"  width="120" />
+        <icon   src="www/res/icon/ios/icon-60@3x.png" height="180" width="180" />
+        <icon   src="www/res/icon/ios/icon-72.png" height="72" width="72" />
+        <icon  src="www/res/icon/ios/icon-72@2x.png" height="144" width="144" />
+        <icon  src="www/res/icon/ios/icon-76.png" height="76"  width="76" />
+        <icon  src="www/res/icon/ios/icon-76@2x.png" height="152" width="152" />
+        <icon   src="www/res/icon/ios/icon-small.png" height="29" width="29" />
+        <icon  src="www/res/icon/ios/icon-small@2x.png" height="58"  width="58" />
+        <icon   src="www/res/icon/ios/icon-small@3x.png" height="87" width="87" />
         <splash height="1136"  src="www/res/screen/ios/Default-568h@2x~iphone.png" width="640" />
         <splash height="1334"  src="www/res/screen/ios/Default-667h.png" width="750" />
         <splash height="2208"  src="www/res/screen/ios/Default-736h.png" width="1242" />
