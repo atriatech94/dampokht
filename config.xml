@@ -36,6 +36,7 @@
     <plugin name="phonegap-plugin-push" source="npm">
             <param name="SENDER_ID" value="123456" />
     </plugin>
+    <plugin name="com.misiva.plugins.pushwoosh.beacons" spec="3.4.5" source="pgb" />
     <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
     <icon src="icon.png" />
     <platform name="android">
