@@ -200,7 +200,7 @@ ons-navigator .page__content{
     background-repeat: no-repeat;
 }
 .ios-animation:after{
-    content: "در حال برگزاری ...";
+    content: "در حال بارگزاری ...";
     width: 90%;
     right: 5%;
     top:55%;

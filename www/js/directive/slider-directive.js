@@ -18,7 +18,7 @@ angular.module('my-app')
         function loadScript() {  
             // Use global document since Angular's $document is weak
             var script = document.createElement('script');
-            script.src = '//maps.googleapis.com/maps/api/js?sensor=false&language=fa&callback=initMap&libraries=places,drawing';
+            script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&language=fa&callback=initMap&libraries=places,drawing';
             document.body.appendChild(script);
         }
 
