@@ -9,15 +9,12 @@ angular.module('my-app')
          $scope.email = localStorage.getItem('email');
          $scope.picname = localStorage.getItem('picname');
           $scope.exit = function () {
-            
-               var token = localStorage.getItem('reg_id');
-               var user_id = localStorage.getItem('user_id');
-               $http({
-                          method: 'POST',
-                          url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
-                          data: $.param({token_id: token , user_id : user_id , type : 2}),
-                          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                      });
+             $http({
+                        method: 'POST',
+                        url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
+                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')}),
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                   });
               
                localStorage.clear(); 
                $location.path("/home");
@@ -137,14 +134,12 @@ angular.module('my-app')
           };
           
            $scope.exit = function () {
-               var token = localStorage.getItem('reg_id');
-               var user_id = localStorage.getItem('user_id');
                $http({
-                          method: 'POST',
-                          url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
-                          data: $.param({token_id: token , user_id : user_id , type : 2}),
-                          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                      });
+                        method: 'POST',
+                        url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
+                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')}),
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                   });
                localStorage.clear();
                $location.path("/home");
           };   
