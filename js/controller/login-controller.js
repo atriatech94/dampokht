@@ -69,6 +69,7 @@ angular.module('my-app')
                           alert(localStorage.getItem('reg_id'));
                           push.on('registration', function(data) {
                              localStorage.setItem('reg_id',data.registrationId);
+                             alert();
                              $http({
                                 method: 'POST',
                                 url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
