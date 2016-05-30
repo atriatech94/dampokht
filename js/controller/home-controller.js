@@ -2,11 +2,6 @@ angular.module('my-app')
 .controller('HomeController', function($scope,$location,$rootScope,$routeParams) {
 
     
-    
-     $scope.show = function(e) {
-         $rootScope.popover.show(e);
-      };
-   
         $scope.prompt = function(material) {
             var mod = material ? 'material' : undefined;
             ons.notification.prompt({

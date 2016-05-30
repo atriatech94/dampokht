@@ -3,6 +3,52 @@ angular.module('my-app')
     return {
         link: function(scope) {
           
+          
+          $timeout(function(){
+              if(localStorage.getItem('reg_id') && !localStorage.getItem('has_reg_id')){
+                       $http({
+                          method: 'POST',
+                          url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                          data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                       }).then(function successCallback(response) {
+                             localStorage.setItem('has_reg_id',1);  
+                       });    
+                 }
+                 else{
+                    $timeout(function(){
+                          if(localStorage.getItem('reg_id')  && !localStorage.getItem('has_reg_id')){
+                            $http({
+                                method: 'POST',
+                                url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                             }).then(function successCallback(response) {
+                                localStorage.setItem('has_reg_id',1);  
+                             });     
+                          }
+                          else{
+                             $timeout(function(){  
+                                     if(localStorage.getItem('reg_id')  && !localStorage.getItem('has_reg_id')){
+                                     $http({
+                                        method: 'POST',
+                                        url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                      }).then(function successCallback(response) {
+                                        localStorage.setItem('has_reg_id',1);  
+                                     });  
+                                   }
+                                       
+                             },6500); 
+                              
+                          }
+                        
+                     },2000); 
+                 }
+          },1500);
+          
+          
            if(localStorage.getItem('cart')){
              scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
           }
