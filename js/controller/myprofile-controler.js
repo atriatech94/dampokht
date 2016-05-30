@@ -12,16 +12,13 @@ angular.module('my-app')
             
                var token = localStorage.getItem('reg_id');
                var user_id = localStorage.getItem('user_id');
-               push.unregister(function() {
-                   $http({
+               $http({
                           method: 'POST',
                           url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
                           data: $.param({token_id: token , user_id : user_id , type : 2}),
                           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                       });
-                }, function() {
-                    console.log('error');
-                });
+              
                localStorage.clear(); 
                $location.path("/home");
           };
@@ -142,16 +139,12 @@ angular.module('my-app')
            $scope.exit = function () {
                var token = localStorage.getItem('reg_id');
                var user_id = localStorage.getItem('user_id');
-               push.unregister(function() {
-                   $http({
+               $http({
                           method: 'POST',
                           url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
                           data: $.param({token_id: token , user_id : user_id , type : 2}),
                           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                       });
-                }, function() {
-                    console.log('error');
-                });
                localStorage.clear();
                $location.path("/home");
           };   
