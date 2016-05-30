@@ -1,10 +1,7 @@
 angular.module('my-app')
 .controller('HomeController', function($scope,$location,$rootScope,$routeParams) {
 
-    /*======================AMIN----------------------*/
-    ons.createPopover('myPopover.html').then(function (popover) {
-        $rootScope.popover = popover;
-    });
+    
     
      $scope.show = function(e) {
          $rootScope.popover.show(e);
@@ -30,6 +27,33 @@ angular.module('my-app')
         $scope.go = function(path){
             $location.path(path);
         }
+        
+            /* register for push */
+            if(localStorage.getItem('reg_id') && !localStorage.getItem('has_reg_id')){
+                    $http({
+                    method: 'POST',
+                    url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                    data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id'), type : 2}),
+                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                }).then(function successCallback(response) {
+                    localStorage.setItem('has_reg_id',1);  
+                });   
+                }
+                else if(!localStorage.getItem('reg_id') && !localStorage.getItem('has_reg_id')) {
+                    push.on('registration', function(data) {
+                        localStorage.setItem('reg_id',data.registrationId);
+                        $http({
+                            method: 'POST',
+                            url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                            data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }).then(function successCallback(response) {
+                            localStorage.setItem('has_reg_id',1);    
+                        });
+                        
+                    });
+            }
+            /* end register for push */
    
 })
 

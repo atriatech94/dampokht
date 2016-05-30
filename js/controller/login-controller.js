@@ -54,6 +54,31 @@ angular.module('my-app')
                     localStorage.setItem('home_phone',$scope.user_info.home_phone);
                     localStorage.setItem('address',JSON.stringify($scope.user_info.address));
                     localStorage.setItem('whishlist',JSON.stringify($scope.user_info.whishlist));
+                   
+                   if(localStorage.getItem('reg_id')){
+                        $http({
+                        method: 'POST',
+                        url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : $scope.user_info.customer_id , type : 2}),
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                      }).then(function successCallback(response) {
+                           localStorage.setItem('has_reg_id',1);  
+                      });   
+                    }
+                    else{
+                          push.on('registration', function(data) {
+                             localStorage.setItem('reg_id',data.registrationId);
+                             $http({
+                                method: 'POST',
+                                url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                data: $.param({token_id: localStorage.getItem('reg_id') , user_id : $scope.user_info.customer_id , type : 2}),
+                                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                            }).then(function successCallback(response) {
+                                   localStorage.setItem('has_reg_id',1);    
+                            });
+                            
+                          });
+                    }
                     $location.path("/home");
                 }
                                     
