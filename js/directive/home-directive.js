@@ -552,6 +552,10 @@ angular.module('my-app')
              localStorage.clear();
              $location.path("/home");
         };
+        
+       scope.share = function(){
+           window.plugins.socialsharing.share('دمپخت', null,null, "www.dampokht.com");
+        };
                     
         }
         
