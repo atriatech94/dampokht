@@ -4,18 +4,18 @@ angular.module('my-app')
         {
             $location.path("/home");
         }
+       
          $scope.base_img = base_img + 'profile/' ;
          $scope.name = localStorage.getItem('name');
          $scope.email = localStorage.getItem('email');
          $scope.picname = localStorage.getItem('picname');
           $scope.exit = function () {
-             $http({
+              $http({
                         method: 'POST',
                         url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
                         data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')}),
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                    });
-              
                localStorage.clear(); 
                $location.path("/home");
           };
@@ -134,7 +134,7 @@ angular.module('my-app')
           };
           
            $scope.exit = function () {
-               $http({
+             $http({
                         method: 'POST',
                         url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
                         data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')}),

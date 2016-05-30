@@ -525,7 +525,7 @@ angular.module('my-app')
         } 
 }})
 
-.directive('moreDir' , function ($location){
+.directive('moreDir' , function ($location,$http){
     return {
         link: function(scope) {
              if(localStorage.getItem('cart')){
@@ -543,6 +543,12 @@ angular.module('my-app')
                } 
          
           scope.exit = function(){
+            $http({
+                method: 'POST',
+                url: base_url+'unreg_id/HDaMin2dsaZ3QZYTRRE782',
+                data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+              });
              localStorage.clear();
              $location.path("/home");
         };
