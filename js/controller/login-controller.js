@@ -56,22 +56,25 @@ angular.module('my-app')
                     localStorage.setItem('whishlist',JSON.stringify($scope.user_info.whishlist));
                    
                    if(localStorage.getItem('reg_id')){
+                       alert(localStorage.getItem('reg_id'));
                         $http({
                         method: 'POST',
                         url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
-                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : $scope.user_info.customer_id , type : 2}),
+                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                       }).then(function successCallback(response) {
                            localStorage.setItem('has_reg_id',1);  
+                            alert(localStorage.getItem('has_reg_id'));
                       });   
                     }
                     else{
                           push.on('registration', function(data) {
                              localStorage.setItem('reg_id',data.registrationId);
+                             alert(localStorage.getItem('reg_id'));
                              $http({
                                 method: 'POST',
                                 url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
-                                data: $.param({token_id: localStorage.getItem('reg_id') , user_id : $scope.user_info.customer_id , type : 2}),
+                                data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id')  , type : 2}),
                                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                             }).then(function successCallback(response) {
                                    localStorage.setItem('has_reg_id',1);    

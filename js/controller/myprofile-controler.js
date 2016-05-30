@@ -128,6 +128,7 @@ angular.module('my-app')
           
            $scope.exit = function () {
                localStorage.clear();
+               
                $location.path("/home");
           };   
            
