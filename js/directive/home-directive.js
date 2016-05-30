@@ -559,7 +559,7 @@ angular.module('my-app')
 }})
 
 
-.directive('quickLogin' , function ($location,$http,$rootScope,$filter){
+.directive('quickLogin' , function ($location,$http,$rootScope,$filter,$timeout){
     return {
         link: function(scope) {
            scope.username = '';
@@ -620,8 +620,7 @@ angular.module('my-app')
                                         {
                                             $rootScope.icon = 1;
                                         }
-                                        
-                                          /* register for push */
+                                         /* register for push */
                                               if(localStorage.getItem('reg_id')){
                                                 $http({
                                                     method: 'POST',
@@ -635,6 +634,50 @@ angular.module('my-app')
                                                 else{
                                                     app1.initialize();  
                                                 }
+                                         
+                                           $timeout(function(){
+                                                if(localStorage.getItem('reg_id') && !localStorage.getItem('has_reg_id')){
+                                                        $http({
+                                                            method: 'POST',
+                                                            url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                                            data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                                                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                                        }).then(function successCallback(response) {
+                                                                localStorage.setItem('has_reg_id',1);  
+                                                        });    
+                                                    }
+                                                    else if(!localStorage.getItem('has_reg_id')){
+                                                        $timeout(function(){
+                                                            if(localStorage.getItem('reg_id')  && !localStorage.getItem('has_reg_id')){
+                                                                $http({
+                                                                    method: 'POST',
+                                                                    url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                                                    data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                                                                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                                                }).then(function successCallback(response) {
+                                                                    localStorage.setItem('has_reg_id',1);  
+                                                                });     
+                                                            }
+                                                            else{
+                                                                $timeout(function(){  
+                                                                        if(localStorage.getItem('reg_id')  && !localStorage.getItem('has_reg_id')){
+                                                                        $http({
+                                                                            method: 'POST',
+                                                                            url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
+                                                                            data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
+                                                                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                                                                        }).then(function successCallback(response) {
+                                                                            localStorage.setItem('has_reg_id',1);  
+                                                                        });  
+                                                                    }
+                                                                        
+                                                                },6500); 
+                                                                
+                                                            }
+                                                            
+                                                        },2000); 
+                                                    }
+                                            },1500);       
                                          /* end register for push */
                                         
                                        
