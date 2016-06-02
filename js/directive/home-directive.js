@@ -554,7 +554,7 @@ angular.module('my-app')
         };
         
        scope.share = function(){
-           window.plugins.socialsharing.share('دمپخت', null,null, "www.dampokht.com");
+           window.plugins.socialsharing.share('دمپخت', null,null,"www.dampokht.com");
         };
                     
         }
