@@ -506,6 +506,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     font-weight: 100 !important;
     text-align: center;
     direction: rtl;
+    line-height: 35px;
 }
 #not_branch i{
     display: block ;
@@ -1063,7 +1064,7 @@ input[type=email], input[type=password] , input[type=text],input[type=number]{
     top: 0px;
 }
 .myprofile .back-button {
-    color: rgba(154, 10, 58, 0.81);
+   /* color: rgba(154, 10, 58, 0.81);*/
 }
 
 /*--=============-- setting --===================--*/

@@ -8,7 +8,7 @@ angular.module('my-app')
          $scope.base_img = base_img + 'profile/' ;
          $scope.name = localStorage.getItem('name');
          $scope.email = localStorage.getItem('email');
-         $scope.picname = localStorage.getItem('picname');
+         $scope.picname = "";
           $scope.exit = function () {
               $http({
                         method: 'POST',
@@ -30,8 +30,10 @@ angular.module('my-app')
             }).then(function successCallback(response) {
                                   document.getElementById('loading').setAttribute('style','display:none;'); 
                                   $scope.profile = response.data.profile;
+                                  $scope.picname = response.data.profile[0].picname;
+                                  localStorage.setItem('picname',$scope.picname);
                                   $rootScope.count_o = response.data.orders[0].c;
-                                   $rootScope.count_t = response.data.ticket[0].c;
+                                  $rootScope.count_t = response.data.ticket[0].c;
                                        
                           }, function errorCallback(response) {
                               document.getElementById('loading').setAttribute('style','display:none;'); 
@@ -700,9 +702,10 @@ angular.module('my-app')
       };//end submit           
 })
 .controller('OrderlistController',function($http,$scope,$q,$location,$rootScope,$route){
-    
+    $scope.gone = 1;
      document.getElementById('loading').setAttribute('style','display:none;'); 
      $scope.detail = function (id){
+        if($scope.gone == 1)  
         $location.path( '/myprofile/order_detail/'+id );
      };
      $scope.go = function ( path ) {$location.path( path );};
@@ -726,10 +729,12 @@ angular.module('my-app')
             itemScope.item.id = data[0].id;
             itemScope.item.name = data[0].name;
             itemScope.item.order_status = data[0].order_status;
+            $scope.gone = 1;
           
           }).error(function() {
               itemScope.item.date = "خطا در برقراری ارتباط";
               itemScope.item.name = "Error";
+              $scope.gone = 0;
           
           });
         }
@@ -800,9 +805,11 @@ angular.module('my-app')
 
 .controller('supportController',function($http,$scope,$q,$location,$rootScope,$route){
    document.getElementById('loading').setAttribute('style','display:none;'); 
+   $scope.gone = 1;
    $scope.go = function ( path ) {$location.path( path );};
    $scope.detail = function (id){
-        $location.path( '/myprofile/support_detail/'+id );
+        if($scope.gone == 1)
+         $location.path( '/myprofile/support_detail/'+id );
      };
      
      $scope.refresh = function(){
@@ -827,10 +834,12 @@ angular.module('my-app')
             itemScope.item.subject = data[0].subject;
             itemScope.item.id = data[0].id;
             itemScope.item.status = data[0].status;
+            $scope.gone = 1;
          
            }).error(function() {
               itemScope.item.subject = "خطا در برقراری ارتباط";
               itemScope.item.date = "Error";
+              $scope.gone = 0;
           
           });
         }
@@ -957,7 +966,7 @@ angular.module('my-app')
                         return false;
                  });
           
-        }
+        };
        scope.close_modal = function(){
             dialog.hide();
          }     

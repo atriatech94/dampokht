@@ -4,8 +4,8 @@
         <div class="left" ng-click="go('/myprofile')"><ons-back-button></ons-back-button></div>
         <div class="center">درخواست های من</div>
         <div class="right" >
-            <ons-icon icon="ion-ios-plus-empty" ng-click="go('/myprofile/support_new')" style="vertical-align: -16px;color:#0dab62 ; font-size: 28px ; padding-right:20px;"></ons-icon>
-            <ons-icon icon="ion-ios-refresh-empty" ng-click="refresh()" style="vertical-align: -17px;color:#0D5DAB ; font-size: 28px ; padding-right:15px;"></ons-icon>
+            <ons-icon icon="ion-ios-plus" ng-click="go('/myprofile/support_new')" style="vertical-align: -20px;color: #0D5DAB; font-size: 30px ; padding-right:20px;"></ons-icon>
+            <ons-icon icon="ion-ios-refresh-empty" ng-click="refresh()" style="vertical-align: -20px;color:#0D5DAB ; font-size: 30px ; padding-right:15px;"></ons-icon>
         </div>
     </ons-toolbar> 
     
@@ -32,5 +32,12 @@
             </ons-row>
         </ons-list-item>
     </ons-list>
+      <!--==================== if support 0 ====================-->
+           <div id="not_branch" ng-show="count_t == 0" >
+               <p><i class="ion-ios-plus"  ng-click="go('/myprofile/support_new')" ></i>
+                شما تا کنون در خواستی ثبت نکرده اید
+               </p>       
+           </div> 
+    <!--==================== if support 0 ====================-->
 </ons-page>
 

@@ -89,7 +89,7 @@
             <!--- =========h3============-->
             <h3 class="title-ios">بهترین های دمپخت </h3>
             <div class="owl-carousel_two">
-                <div class="item" ng-repeat="special in specials">
+                <div class="item" ng-repeat="special in specials" ng-click="go('/branch')">
                     <div class="slider_item">
                         <img ng-src="{{base_img + special.picname}}">
                         <h3>{{special.name}}</h3>

@@ -1,5 +1,5 @@
 <dir-tabbar></dir-tabbar>
-<div  class="food">
+<div  class="food food-detail">
     <ons-page modifier="shop-details">
         <ons-toolbar modifier="transparent">
             <div class="right"  ng-click="go('/comment/'+food[0].id+'/'+branch_id)">
@@ -81,7 +81,7 @@
               </div>
           </ons-list-item>
           <ons-list-item style="line-height:22px;padding-bottom:5px;padding-top:5px;">
-              <div class="prop-desc">
+              <div class="prop-desc icon_b">
                   <ons-icon icon="ion-pie-graph"></ons-icon>
                   {{ food[0].short_des }}
               </div>
@@ -129,6 +129,19 @@
 <style>
     .food .page__content{
         padding-top: 0px !important;
+    }
+    .icon_b .ons-icon{
+        position: absolute;
+        top:5px;
+        right:0px;
+    }
+    .icon_b {
+        position: relative;
+        box-sizing: border-box;
+        padding-right: 25px;
+    }
+    .food-detail ons-toolbar ons-icon{
+        text-shadow: 0 0 2px #000;
     }
 </style>
 

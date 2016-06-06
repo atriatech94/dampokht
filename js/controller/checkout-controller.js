@@ -167,10 +167,16 @@ angular.module('my-app')
   
         
 })
-.controller('OrdertrueController',function($scope,$location,$rootScope){
+.controller('OrdertrueController',function($scope,$location,$rootScope,$filter){
     $scope.go = function ( path ) {$location.path( path );};
     $scope.result = $rootScope.order_result;
-    console.log( $scope.result );
+    $scope.branch_id = $scope.result.final_result.branch_id;
+    $scope.cart = JSON.parse(localStorage.getItem('cart'));
+    $scope.cart_branch = JSON.parse(localStorage.getItem('cart_branch'));
+    $scope.cart_branch_new = $filter('filter')($scope.cart_branch,{branch_id:'!'+$scope.branch_id},true);
+    $scope.cart_new = $filter('filter')($scope.cart,{branch_id:'!'+$scope.branch_id},true);
+    localStorage.setItem('cart',JSON.stringify($scope.cart_new));
+    localStorage.setItem('cart_branch',JSON.stringify($scope.cart_branch_new));
 })
 .controller('OrderfalseController',function($scope,$location){
     $scope.go = function ( path ) {$location.path( path );};

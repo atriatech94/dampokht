@@ -7,8 +7,8 @@
     
       <ons-row class="profile-wrapper">
           <ons-col width="60px" class="profile-image-wrapper"> 
-              <img ng-if="picname==''" ng-src="img/user_men.jpg" class="profile-image">
-              <img ng-if="picname!=''" ng-src="{{base_img + picname}}" class="profile-image">
+              <img ng-if="picname=='' || picname=='null'" ng-src="img/user_men.jpg" class="profile-image">
+              <img ng-if="picname!='' && picname!='null'" ng-src="{{base_img + picname}}" class="profile-image">
           </ons-col>
           <ons-col>
               <div class="profile-name">{{name}}</div>

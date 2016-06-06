@@ -72,11 +72,12 @@ angular.module('my-app')
           
          if($rootScope.specials_root == null)
          {
+             document.getElementById('loading').removeAttribute('style');   
              $http({
                 method: 'GET',
                 url: base_url+'home_info/HamiDaMin23QZYTRRE782',
             }).then(function successCallback(response) {
-                         
+                        document.getElementById('loading').style.display = 'none';       
                             if(response.data.done == 1)
                             {
                                 $rootScope.specials_root = response.data.specials;
@@ -107,6 +108,7 @@ angular.module('my-app')
                             }
                            
                         }, function errorCallback(response) {
+                             document.getElementById('loading').style.display = 'none';   
                              ons.notification.alert({
                                 title: 'خطا',
                                 buttonLabel:"بستن " ,
@@ -554,7 +556,12 @@ angular.module('my-app')
         };
         
        scope.share = function(){
-           window.plugins.socialsharing.share('دمپخت', null,null,"www.dampokht.com");
+          var options = {
+                            message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
+                            subject: 'دمپخت', // fi. for email
+                            url: 'http://dampokht.com/food/detail/'
+                        }
+              window.plugins.socialsharing.shareWithOptions(options);
         };
                     
         }

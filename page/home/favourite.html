@@ -79,33 +79,14 @@
         </div>
       </ons-toolbar>
 
-      <div class="nav_content" style="text-align: center">
-        <p>
-          برای دیدن لیست علاقه مندی ها وارد شوید
-        </p>
-
-        <p>
-         <quick-logindir>
-          <ons-button ng-click="register()">عضویت</ons-button>  
-          <ons-button ng-click="login()">ورود</ons-button>
-         </quick-logindir>  
-        </p>
-      </div>
+        <div class="nav_content" style="text-align: center">
+            <p style="    margin: 0 0 5px;">برای دیدن لیست علاقه مندی ها وارد شوید</p>
+            <quick-logindir>
+             <ons-button style="width: 40%;" ng-click="register()">عضویت</ons-button>  
+             <ons-button style="width: 40%;" ng-click="login()">ورود</ons-button>
+            </quick-logindir>  
+        </div>
     </ons-navigator>
   </ons-dialog>
 </ons-template>
 <!--- =================================================================================--->
-<ons-template id="myPopover.html">
-    <ons-popover cancelable direction="down">
-        <div style="text-align: center;">
-             <ons-list>
-                    <pop-over>
-                    <ons-list-item ng-click="go('/login')" ng-if="login == 0" >ورود به حساب کاربری</ons-list-item>
-                    <ons-list-item ng-click="go('/register')" ng-if="login == 0" >عضویت در دمپخت</ons-list-item>
-                    <ons-list-item ng-if="login == 1" >{{ name }}</ons-list-item>
-                    <ons-list-item ng-if="login == 1" ng-click="logout()" >برون رفت</ons-list-item>
-                </pop-over>
-            </ons-list>
-        </div>
-    </ons-popover>
-</ons-template>

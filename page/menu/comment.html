@@ -1,3 +1,4 @@
+<dir-tabbar></dir-tabbar>
 <ons-page class="comment">
     <ons-toolbar>
         <div class="left" ng-click="goBack()"><ons-toolbar-button><ons-icon icon="ion-ios-arrow-left" size="25px" style="padding-top:10px;"></ons-icon></ons-toolbar-button></div>
@@ -23,31 +24,18 @@
 
 
 <ons-template id="login.html">
-  <ons-dialog var="dialog" cancelable>
-
-    <ons-toolbar inline>
-      <div class="center">
-        برای نظر دادن وارد شوید
-      </div>
-    </ons-toolbar>
-  <quick-login>
-        <p>
-        <input ng-model="username" placeholder="ایمیل یا شماره همراه" id="username" class="text-input">
-        </p>
-
-        <p>
-        <input ng-model="password"  type="password" placeholder="کلمه عبور" id="username" class="text-input">
-        </p>
-
-        <p>
-        <ons-button modifier="large" ng-click="submit();">ورود</ons-button>
-        </p>
-        <p ng-click="go('/register')">
-            عضویت در دمپخت
-        </p>
-   </quick-login>
-  </ons-dialog>
-</ons-template>
+        <ons-dialog var="dialog" cancelable>
+            <ons-toolbar inline>
+                <div class="center">ابتدا به حساب کاربری خود وارد شوید</div>
+            </ons-toolbar>
+            <quick-login>
+                <label class="label_inp"><input ng-model="username" placeholder="ایمیل یا شماره همراه" id="username" class="text-input text-input--transparent"></label>
+                <label class="label_inp"><input ng-model="password"  placeholder="کلمه عبور" type="password"  id="username" class="text-input text-input--transparent"></label>
+                <label class="label_inp"><ons-button modifier="large" ng-click="submit();">ورود</ons-button></label>
+                <p class="create_acc" ng-click="go('/register')"> عضویت در دمپخت</p>
+            </quick-login>
+        </ons-dialog>
+    </ons-template>
 </div>
 <style>
 .page__content {
@@ -61,4 +49,7 @@ ons-dialog:not([modifier='material']) p {
 input {
   width: 100%;
 }
+ .comment .page__content{
+    padding-top: 54px !important;
+ }
 </style>

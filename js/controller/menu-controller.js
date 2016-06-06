@@ -119,15 +119,12 @@ angular.module('my-app')
        $scope.rate = [1,2,3,4,5]; 
        
         $scope.share = function(id,branch_id){
-            
-            var options = {
-                    message: 'share this', // not supported on some apps (Facebook, Instagram)
-                    subject: 'the subject', // fi. for email
-                    files: ['', ''], // an array of filenames either locally or remotely
-                    url: 'https://dampokht.com/',
-                    chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
-                    }
-            window.plugins.socialsharing.shareWithOptions(options);
+              var options = {
+                            message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
+                            subject: 'دمپخت', // fi. for email
+                            url: 'http://dampokht.com/food/detail/'+id+'/'+branch_id
+                        }
+              window.plugins.socialsharing.shareWithOptions(options);
         };
        
         $scope.order = function(id,branch_id,picname,price,name,branch_name){
