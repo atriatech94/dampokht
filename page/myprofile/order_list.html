@@ -1,43 +1,58 @@
-<dir-tabbar></dir-tabbar>
-<ons-page class="order_list">
-    <ons-toolbar>
-        <div class="left" ng-click="go('/myprofile')"><ons-back-button></ons-back-button></div>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
         <div class="center">سفارش های من</div>
-        <div class="right" ng-click="refresh()"><ons-icon icon="ion-ios-refresh-empty" style="vertical-align: -20px;color: #0D5DAB; font-size: 28px ; padding-right:15px;"></ons-icon></div>
+        <div class="right"> 
+            <ons-toolbar-button ng-click="refresh()" modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
     </ons-toolbar>
+
+    <ons-page class="order_list">
    
-    <ons-list class="plan-list">
-          <ons-list-item modifier="chevron" ng-click="detail(item.id)" class="plan" ons-lazy-repeat="MyDelegate" >
-            <ons-row>
-              <ons-col width="80px" class="plan-left">
-                <div ng-show="item.date==''">
-                  <div class="plan-date"><ons-icon icon='fa-spinner' spin='true'></ons-icon></div>
-                </div>
-                  <div class="plan-date">{{ item.name }}</div>
-                  <div class="plan-duration">{{ item.id }}</div>
-              </ons-col>
+        <ons-list class="plan-list">
+              <ons-list-item modifier="chevron" ng-click="detail(item.id)" class="plan" ons-lazy-repeat="MyDelegate" >
+                <ons-row>
+                  <ons-col width="80px" class="plan-left">
+                    <div ng-show="item.date==''">
+                      <div class="plan-date"><ons-icon icon='fa-spinner' spin='true'></ons-icon></div>
+                    </div>
+                      <div class="plan-date">{{ item.name }}</div>
+                      <div class="plan-duration">{{ item.id }}</div>
+                  </ons-col>
 
-              <ons-col ng-if="item.order_status == 1"  width="6px" class="plan-center status-1" ></ons-col>
-              <ons-col ng-if="item.order_status == 2"  width="6px" class="plan-center status-3" ></ons-col>
-              <ons-col ng-if="item.order_status == 3"  width="6px" class="plan-center status-2" ></ons-col>
-              <ons-col ng-if="item.order_status == 4"  width="6px" class="plan-center status-4" ></ons-col>
-              <ons-col ng-if="item.order_status == 5"  width="6px" class="plan-center status-5" ></ons-col>
+                  <ons-col ng-if="item.order_status == 1"  width="6px" class="plan-center status-1" ></ons-col>
+                  <ons-col ng-if="item.order_status == 2"  width="6px" class="plan-center status-3" ></ons-col>
+                  <ons-col ng-if="item.order_status == 3"  width="6px" class="plan-center status-2" ></ons-col>
+                  <ons-col ng-if="item.order_status == 4"  width="6px" class="plan-center status-4" ></ons-col>
+                  <ons-col ng-if="item.order_status == 5"  width="6px" class="plan-center status-5" ></ons-col>
 
-              <ons-col class="plan-right">
-                <div ng-show="item.date==''">
-                    <div class="plan-name"><ons-icon icon='fa-spinner' spin='true'></ons-icon> درحال دریافت اطلاعات </div>
-                </div>
-                <div class="plan-name">{{ item.date }}</div>
-                <div class="plan-info">
-                    <div><ons-icon icon="ion-social-usd-outline"></ons-icon>{{ item.price | currency : '' : 0   }} تومان</div>
-                    <div ng-if="item.order_status == 1" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>درحال بررسی</div>
-                    <div ng-if="item.order_status == 2" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>تایید شده</div>
-                    <div ng-if="item.order_status == 3" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>ارسال شده</div>
-                    <div ng-if="item.order_status == 4" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>تحویل شده</div>
-                    <div ng-if="item.order_status == 5" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>لغو شده</div>
-                </div>
-              </ons-col>
-            </ons-row>
-        </ons-list-item>
-   </ons-list> 
-</ons-page>
+                  <ons-col class="plan-right">
+                    <div ng-show="item.date==''">
+                        <div class="plan-name"><ons-icon icon='fa-spinner' spin='true'></ons-icon> درحال دریافت اطلاعات </div>
+                    </div>
+                    <div class="plan-name">{{ item.date }}</div>
+                    <div class="plan-info">
+                        <div><ons-icon icon="ion-social-usd-outline"></ons-icon>{{ item.price | currency : '' : 0   }} تومان</div>
+                        <div ng-if="item.order_status == 1" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>درحال بررسی</div>
+                        <div ng-if="item.order_status == 2" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>تایید شده</div>
+                        <div ng-if="item.order_status == 3" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>ارسال شده</div>
+                        <div ng-if="item.order_status == 4" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>تحویل شده</div>
+                        <div ng-if="item.order_status == 5" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>لغو شده</div>
+                    </div>
+                  </ons-col>
+                    <ons-col width="30px" class="tiket_view" ><i class="fa fa-chevron-left" aria-hidden="true"></i></ons-col>
+                </ons-row>
+            </ons-list-item>
+       </ons-list> 
+    </ons-page>
+</ons-template>
+<style>
+ons-row {
+    background: #fff;
+}
+</style>

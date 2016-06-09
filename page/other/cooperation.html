@@ -1,33 +1,45 @@
-<dir-tabbar></dir-tabbar>
-<ons-page class="setting">
-    <ons-toolbar>
-        <div ng-click="go('/more')" class="left"><ons-back-button><a>بازگشت</a></ons-back-button></div>
-        <div class="center"> همکاری با دمپخت </div>
-    </ons-toolbar>
-    <div class="contain">
-        <h3>همکاری با دمپخت</h3>
-        <p ng-bind-html="description" ></p>
-    </div>
-    
-    <div class="progress-bar progress-bar--indeterminate" style="display:none;" id="loading"></div>
-    <ons-list modifier="inset" style="margin-top: 10px;margin: 0 20px;">
-        
-        <ons-list-item>
-          <input type="text" ng-model="name" class="text-input text-input--transparent" placeholder="نام" style="width: 100%">
-        </ons-list-item>
-        
-        <ons-list-item>
-          <input type="text" ng-model="phone" class="text-input text-input--transparent" placeholder="شماره تماس" style="width: 100%">
-        </ons-list-item>
-        
-        <ons-list-item>
-          <input type="text" ng-model="title" class="text-input text-input--transparent" placeholder="عنوان همکاری" style="width: 100%">
-        </ons-list-item>
 
-        <ons-list-item>
-          <textarea ng-model="text" class="textarea textarea--transparent" placeholder="متن همکاری" style="width: 100%; height: 100px;"></textarea>
-        </ons-list-item>
-    </ons-list>
-    
-    <div style="padding: 20px 20px"><ons-button modifier="large" ng-click="submit()" style="margin: 0 auto;">ارسال درخواست</ons-button></div>
-</ons-page>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">همکاری با ما</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="go('/branch')" modifier="material"><ons-icon icon="fa-cutlery"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/cart')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page class="setting">
+        
+        <div class="contain">
+            <h3>همکاری با دمپخت</h3>
+            <p ng-bind-html="description" ></p>
+        </div>
+
+
+
+        <ons-list modifier="inset" style="margin-top: 10px;padding: 0 20px;" >
+            <ons-list-item>
+                    <ons-input type="text" id="name" class="w100 d-b"  placeholder="نام شما" float></ons-input>
+                </ons-list-item>
+                 <ons-list-item>
+                    <ons-input type="number"  id="phone" class="w100 d-b"  placeholder="شماره تماس" float></ons-input>
+                </ons-list-item>
+                <ons-list-item>
+                    <ons-input type="text" id="title" class="w100 d-b" placeholder="عنوان همکاری" float></ons-input>
+                </ons-list-item>
+
+                <ons-list-item>
+                    <div class="input-field w100 d-b" >
+                        <textarea id="text" class="materialize-textarea" ></textarea>
+                        <label for="textarea1"  >متن همکاری</label>
+                    </div>
+                </ons-list-item>
+        </ons-list>
+
+        <div style="padding: 20px 20px"><ons-button ng-click="submit()" modifier="large" style="margin: 0 auto;">ارسال درخواست</ons-button></div>
+    </ons-page>
+</ons-template>

@@ -29,7 +29,7 @@
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
     <plugin name="phonegap-plugin-push" source="npm">
-            <param name="SENDER_ID" value="123456" />
+            <param name="SENDER_ID" value="dampokht-1336" />
     </plugin>
     <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />

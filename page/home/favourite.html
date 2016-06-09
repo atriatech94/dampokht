@@ -1,92 +1,62 @@
-<dir-tabbar></dir-tabbar>
-<!--- =================================================================================--->
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu" swipeable="true"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
 <favourite-dir>
-    <ons-toolbar>
-        <div class="ons-css navigation-bar">
-            <div class="navigation-bar navigation-bar--android">
-                
-                <div class="navigation-bar__left navigation-bar--android__left">
-                    <span ng-click="go('/buybasket')" class="toolbar-button navigation-bar__line-height basket_anim" >
-                        <i class="ion-ios-cart-outline rubberBand animated" ></i>
-                        <span class="back_txt rubberBand">{{ basket_size }}</span>                
-                    </span>
-                </div>
-                
-                <div class="navigation-bar__center navigation-bar--android__center">
-                    <div class="logo_img"></div>
-                </div>
-                
-                <div ng-click="go('/branch')" class="navigation-bar__right navigation-bar--android__right"   >
-                    <span class="toolbar-button--quiet toolbar-button--quiet2 navigation-bar__line-height"  >
-                        <i class="da-dish icon_list" style="font-size:26px;"></i>
-                    </span>
-                </div>
-                
-            </div> 
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
         </div>
-    </ons-toolbar> 
-    <!--- =================================================================================--->
-     <div class="progress-bar progress-bar--indeterminate" style="display:none;" id="loading"></div> 
-    <!--==================================================================================------>
-    <ons-page>
-       <ons-list>
-           <!--==================== if branch not set ====================-->
-           <div id="not_branch" ng-if="branches.length == 0">
+        <div class="center">لیست علاقه مندی ها</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="go('/cart')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page >
+        <ons-list>
+            <div id="not_branch" ng-if="branches.length == 0">
                <p><i class="ion-ios-heart-outline"></i>
-                لیست علاقه مند های شما خالی است . 
+                لیست علاقه مند های شما خالی است. 
                </p>       
            </div> 
-           <!--===========================================================--->
-          <div id="each_branch" ng-repeat="branch in branches"> 
-            <h3 class="title-ios rtl"  style="background-color: #F7F7F7;">{{branch.name}}</h3>
-            <div class="favurite pt10">
+            <div class="favurite pt10" ng-repeat="branch in branches">
+               <!--=============================================================-->
+                    <ons-list-header  class="rtl f18 p10 fav-head"> {{branch.name}}</ons-list-header>
+                    <ons-carousel class="m15 cursol-fav" initial-index="0" swipeable overscrollable  auto-scroll  ng-repeat="wish in wishes | filter:{ branch_id : branch.id } : true ">
+                        <ons-carousel-item>
+                           <div class="list-item-container br-green" >
+                                <ons-row>
+                                    <ons-col width="95px"><img ng-src="{{base_img + wish.picname}}" class="thumbnail"></ons-col>
 
-                <ons-list-item ng-repeat="wish in wishes | filter:{ branch_id : branch.id } : true " modifier="" class="list-item-container">
-                  <ons-row>
-                    <ons-col width="95px">
-                      <img ng-src="{{base_img + wish.picname}}" class="thumbnail">
-                    </ons-col>
-                    <ons-col>
-                      <div class="name">{{wish.name}}</div>
-                            <div class="location">
-                                <div class="rating" rate="{{wish.rate  | number: 0}}"><span class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span></div>
+
+                                    <ons-col>
+                                        <div class="name">{{wish.name}}</div>
+                                        <div class="location">
+                                            <div class="rating" rate="{{wish.rate  | number: 0}}"><span class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span></div>
+                                        </div>
+                                        <div class="desc">{{wish.price | currency : '' : 0  }}  تومان </div>
+                                    </ons-col>
+                                    <ons-col ng-click="add_to_card(wish.id,wish.branch_id,wish.picname,wish.price,wish.name,branch.name)"   width="40px"><ons-icon icon="ion-android-cart"></ons-icon></ons-col>
+                                </ons-row>
                             </div>
-                            
-                             <div class="desc">
-                                {{wish.price | currency : '' : 0  }}  تومان     
-                            </div>
-                      </ons-col>
-                    <ons-col ng-click="add_to_card(wish.id,wish.branch_id,wish.picname,wish.price,wish.name,branch.name)"  width="50px"><ons-icon icon="ion-ios-cart-outline"></ons-icon></ons-col>
-
-                    <ons-col ng-click="remove(wish.id,wish.branch_id)"  width="50px"><ons-icon icon="ion-ios-close-outline"></ons-icon></ons-col>
-                  </ons-row>
-                </ons-list-item>
-
+                        </ons-carousel-item>
+                        <ons-carousel-item>
+                           <div ng-click="remove(wish.id,wish.branch_id)" class="remove_item"> <p><i class="fa fa-trash" aria-hidden="true"></i> برای حذف کلیک کنید</p></div>
+                        </ons-carousel-item>
+                    </ons-carousel>                
+                <!--=============================================================-->
             </div>
-          </div>
+            <div id="mainList"></div>
         </ons-list>
-         <div  id="mainList"></div>
     </ons-page>
-   
-</favourite-dir>
-<ons-template id="navigator.html">
-  <ons-dialog style="height: 170px;" var="naviDialog" cancelable>
-
-    <ons-navigator var="myNav">
-      <ons-toolbar inline>
-        <div class="center">
-         پیام
-        </div>
-      </ons-toolbar>
-
-        <div class="nav_content" style="text-align: center">
-            <p style="    margin: 0 0 5px;">برای دیدن لیست علاقه مندی ها وارد شوید</p>
-            <quick-logindir>
-             <ons-button style="width: 40%;" ng-click="register()">عضویت</ons-button>  
-             <ons-button style="width: 40%;" ng-click="login()">ورود</ons-button>
-            </quick-logindir>  
-        </div>
-    </ons-navigator>
-  </ons-dialog>
 </ons-template>
-<!--- =================================================================================--->
+</favourite-dir>
+
+<style>
+.fav-head{
+    margin-top: 10px;
+    background-color: #F3F2F2;
+    min-height: 30px;
+    line-height: 30px;
+}
+</style>

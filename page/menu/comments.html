@@ -1,0 +1,50 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">نظر کاربران</div>
+        <div class="right">
+           <ons-toolbar-button ng-click="go()" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page>
+
+        <ons-list>
+            <div class="container comment support_one food_cm ">
+                <div class="tiket_list">
+                    <div class="tiket_one user profile-wrapper">
+                    <!--========================================tiketone -----------===============-->
+                        <div ng-repeat="comment in comments" class="profile-wrapper2 tiket_oned">
+                            <div class="profile-image-wrapper">
+                                <img ng-if="comment.picname" ng-src="{{ base_img + comment.picname }}" class="profile-image">
+                                <img ng-if="!comment.picname" ng-src="img/user_men.jpg" class="profile-image">
+                            </div>
+                            <div class="cm_info">
+                                <div class="profile-name">{{ comment.name }}</div>
+                                <div class="profile-date">{{ comment.date }}</div>
+                            </div>
+                            <div class="tiket_text"> 
+                                {{ comment.text }}
+                            </div>
+                        </div> 
+                        <!--============================tiketone ==========================-->
+
+                        <!--============================tiketone ==========================-->
+                    </div>
+                </div>
+                <!--===================================new tiket===========================-->
+
+            </div>
+            
+             <div class="tiket_list" ng-if="comments.length == 0">
+                <div class="tiket_one user profile-wrapper" style="text-align:center">
+                نظری ثبت نشده است
+                </div>
+            </div>
+            
+        </ons-list>
+    </ons-page>
+</ons-template>

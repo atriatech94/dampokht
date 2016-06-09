@@ -1,0 +1,93 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">سبد خرید</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="go('/branch')" modifier="material"><ons-icon icon="fa-cutlery"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/home')" modifier="material"><ons-icon icon="ion-android-home"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar> 
+ <buybasket-dir>   
+    <ons-page class="cart">
+         <div  ng-show="empty">
+          <div id="not_branch">
+               <p><i class="ion-android-cart"></i>
+               سبد خرید شما خالی است .
+               </p>       
+           </div> 
+     </div> 
+     
+        <ons-list ng-repeat="branch in cart_branch" ng-show="!empty">
+            <h3 class="title-ios rtl" style="background-color: #F7F7F7;">{{branch.branch_name}}</h3>
+            <div class="favurite pt10">
+                
+                <ons-carousel class="cart-coursel" initial-index="0" swipeable overscrollable  auto-scroll ng-repeat="item in cart | filter:{ branch_id : branch.branch_id } : true"  >
+                    <ons-carousel-item>
+                        <ons-list-item modifier="" class="list-item-container" >
+                          <ons-row  >
+                              <ons-col width="95px">
+                                  <img ng-src="{{ base_img + item.picname }}" class="thumbnail">
+                              </ons-col>
+                              <ons-col>
+                                  <div class="name">{{item.name}}</div>
+                                  <div class="desc">
+                                      <p>قیمت کل : </p>
+                                      <div class="total_one"> {{item.price * item.quantity | currency : '' : 0  }} <span>تومان</span></div>
+                                  </div>
+                              </ons-col>
+                              <ons-col class="item_num"  width="150px">
+                                  <div class="cart_count">
+                                      <button ng-click="plusFood(item.id,item.branch_id)" class="fab fab--mini plus"><i class="zmdi zmdi-plus"></i></button>
+                                      <input readonly type="text" value="{{item.quantity}}" name="count" >
+                                      <button ng-click="minesFood(item.id,item.branch_id)" class="fab fab--mini mines"><i class="ion-android-remove"></i></button>
+                                  </div>
+                              </ons-col>
+                            </ons-row>
+                        </ons-list-item>
+                    </ons-carousel-item>
+                    <ons-carousel-item><div ng-click ="remove_food(item.id,item.branch_id)" class="remove_item"> <p><i class="fa fa-trash" aria-hidden="true"></i> برای حذف کلیک کنید</p></div></ons-carousel-item>
+                </ons-carousel> 
+                
+                
+                <div class="total_cost">
+                     <div class="tax"><span>مبلغ سفارش : </span><span>{{ branch.total | currency : '' : 0  }} <i> تومان </i></span></div>
+                    <div class="tax"><span>مالیات بر ارزش افزوده : </span><span>{{ branch.total * 0.09  | currency : '' : 0  }} <i> تومان </i></span></div>
+                    <div class="total_all"><span>مبلغ قابل پرداخت : </span><span>{{ branch.total + branch.total * 0.09  | currency : '' : 0  }}<i> تومان </i></span></div>
+                </div>
+                <ons-button ng-if="user_id_wish == 1" modifier="large" ng-click="go('/checkout/'+branch.branch_id);"  class="cart-button" >تایید و ادامه خرید</ons-button>
+                <ons-button ng-if="user_id_wish == 0" modifier="large" ng-click="show('login.html');"  class="cart-button" >تایید و ادامه خرید</ons-button>
+            </div>
+
+        </ons-list>
+    </ons-page>
+</ons-template>
+</buybasket-dir>
+
+<ons-template id="login.html">
+    <ons-dialog var="dialog" cancelable>
+        <ons-toolbar inline>
+            <div class="center">ابتدا به حساب کاربری خود وارد شوید</div>
+        </ons-toolbar>
+        <quick-login>
+            <label class="label_inp"><input ng-model="username" placeholder="ایمیل یا شماره همراه" id="username" class="text-input text-input--transparent"></label>
+            <label class="label_inp"><input ng-model="password"  placeholder="کلمه عبور" type="password"  id="username" class="text-input text-input--transparent"></label>
+            <label class="label_inp"><ons-button modifier="large" ng-click="submit();">ورود</ons-button></label>
+            <p class="create_acc" ng-click="go('/register')"> عضویت در دمپخت</p>
+        </quick-login>
+    </ons-dialog>
+</ons-template>
+<style>
+.cart-coursel{
+    height: 115px;
+    margin-bottom: 10px;
+}
+    .cart-button{
+        height: 45px;
+        line-height: 45px;
+        margin-bottom: 20px;
+    }
+</style>

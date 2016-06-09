@@ -1,15 +1,23 @@
-<dir-tabbar></dir-tabbar>
-<ons-page class="order_list support_one">
-    <ons-toolbar>
-        <div class="left" ng-click="hback()"><ons-back-button></ons-back-button></div>
-        <div class="center">#2359875 سفارش</div>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">خطا</div>
+        <div class="right">
+              <ons-toolbar-button ng-click="go('/myprofile/address')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
     </ons-toolbar>
-    <div id="not_branch"  class="ng-scope">
-        <p><ons-icon icon="fa-chain-broken" style="color:rgba(227, 21, 21, 0.8)" size="30px"></ons-icon>
-           خطا در پرداخت <br>
-           <span style="position:relative;top:20px;" ng-click=""> برای بازگشت
-              <span style="color:#54b927"> کلیک </span>
-               کنید </span>
-        </p>       
-    </div>
-</ons-page> 
+    <ons-page class="order_list support_one">
+        <div id="not_branch"  class="ng-scope">
+            <p><ons-icon icon="fa-chain-broken" style="color:rgba(227, 21, 21, 0.8)" size="30px"></ons-icon>
+               خطا در پرداخت <br>
+               <span style="position:relative;top:20px;" ng-click=""> برای بازگشت
+                  <span style="color:#54b927"> کلیک </span>
+                   کنید </span>
+            </p>       
+        </div>
+    </ons-page> 
+</ons-template>

@@ -1,62 +1,46 @@
-<dir-tabbar></dir-tabbar>
-<ons-toolbar>
-    <div class="ons-css navigation-bar">
-        <div class="navigation-bar navigation-bar--android">
-            <div ng-click="go('/buybasket')" class="navigation-bar__left navigation-bar--android__left">
-                <span class="toolbar-button navigation-bar__line-height basket_anim" >
-                    <i class="ion-ios-cart-outline rubberBand animated" ></i>
-                    <span class="back_txt rubberBand">{{ basket_size }}</span>                
-                </span>
-            </div>
-            <div class="navigation-bar__center navigation-bar--android__center">
-                <div class="logo_img"></div>
-            </div>
-            <div class="navigation-bar__right navigation-bar--android__right"   >
-                <span class="toolbar-button--quiet navigation-bar__line-height" ng-click="refresh()" style="vertical-align: -23px;" >
-                    <i class="ion-ios-refresh-empty" style="font-size:28px;"></i>
-                </span>
-            </div>
-        </div> 
-    </div> 
-</ons-toolbar>
-<ons-page class="menu">
-    
-    
-    <ons-list>
-      <div id="each_category" ng-repeat="category in categories"> 
-        <h3 class="title-ios rtl"  style="background-color: #F7F7F7;">{{category.name}}</h3>
-        <div class="favurite pt10">
-           <ons-list-item ng-repeat="food in foods | filter:{ category_id : category.id }  : true" modifier="" class="list-item-container">
-              <ons-row>
-                <ons-col width="95px">
-                  <img ng-click="go('/food/' + food.id +'/'+ branch_id)" ng-src="{{base_img + food.picname}}" class="thumbnail">
-                </ons-col>
-                <ons-col>
-                    <a >
-                        <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="name">{{food.name}}</div>
-                        <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="location">
-                            <div class="rating" rate="{{food.rate | number : 0}}"><span class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span></div>
-                        </div>
-                         <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="cost"> قیمت :   {{food.price | currency : '' : 0  }} تومان  </div>
-                        <ons-button ng-click="go('/food/' + food.id +'/'+ branch_id)" modifier="quiet">اطلاعات بیشتر</ons-button>
-                    </a>
-                  </ons-col> 
-                <ons-col ng-click="add_to_card(food.id,branch_id,food.picname,food.price,food.name,food.b_name)"  width="60px"><ons-icon icon="ion-ios-cart-outline"></ons-icon></ons-col>
-              </ons-row>
-            </ons-list-item>
-          </div>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
         </div>
-        <div  id="mainList"></div>
-    </ons-list>
-</ons-page>
-<style>
-.menu ons-button{
-    font-size: 12px;
-    padding: 0;
-    height: 12px;
-    line-height: 12px;
-    color: rgba(83, 166, 255, 0.92);
-    text-shadow: 0 0px 1px rgba(0, 0, 0, 0.43);
-}
+        <div class="center">سفارش غذا</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="refresh()" modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+             <ons-toolbar-button ng-click="go('/cart/')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
     
-</style>
+    <ons-page>
+        <ons-list>
+            
+            <div class="favurite pt10">
+             <div ng-repeat="category in categories">  
+                <h3 class="title-ios rtl">{{category.name}}</h3>
+                <ons-list-item modifier="" ng-repeat="food in foods | filter:{ category_id : category.id }  : true" class="list-item-container">
+                  <ons-row>
+                    <ons-col ng-click="go('/food/' + food.id +'/'+ branch_id)" width="95px">
+                      <img ng-src="{{base_img + food.picname}}" class="thumbnail">
+                    </ons-col>
+                    <ons-col>
+                        <a>
+                            <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="name">{{food.name}}</div>
+                            <div class="location">
+                                <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="rating" rate="{{food.rate | number : 0}}"><span class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span><span  class="fa fa-star-o"></span></div>
+                            </div>
+                            <div ng-click="go('/food/' + food.id +'/'+ branch_id)" class="desc">
+                               قیمت :   {{food.price | currency : '' : 0  }} تومان 
+                            </div>
+                        </a>
+                      </ons-col>
+                    <ons-col  width="50px"><ons-icon  ng-click="add_to_card(food.id,branch_id,food.picname,food.price,food.name,food.b_name)"  icon="ion-android-cart"></ons-icon></ons-col>
+                  </ons-row>
+                </ons-list-item>
+               </div>  
+             </div>
+            <div id="mainList"></div>
+        </ons-list>
+        
+    </ons-page>
+</ons-template>

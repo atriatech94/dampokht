@@ -1,4 +1,4 @@
-/*! onsenui - v2.0.0-rc.4 - 2016-05-03 */
+/*! onsenui - v2.0.0-rc.5 - 2016-05-17 */
 /*
 Copyright 2013-2015 ASIAL CORPORATION
 
@@ -430,11 +430,10 @@ ons-input .text-input__container {
 
 ons-input .text-input--material__label {
   position: absolute;
-  left: 0px;
-  top: 2px;
+  right: 0px;
+  top: 10px;
   font-size: 16px;
   font-weight: 400;
-  font-family: 'Roboto', 'Noto', sans-serif;
   pointer-events: none;
 }
 
@@ -443,10 +442,11 @@ ons-input .text-input__label:not(.text-input--material__label) {
 }
 
 ons-input .text-input__label--active {
+   top: 5px;
   transform: translate(0, -75%) scale(0.75);
   -webkit-transform: translate(0, -75%) scale(0.75);
-  transform-origin: left top;
-  -webkit-transform-origin: left top;
+  transform-origin: right top;
+  -webkit-transform-origin: right top;
   -webkit-transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
   transition: color 0.1s ease-in, -webkit-transform 0.1s ease-in;
   transition: transform 0.1s ease-in, color 0.1s ease-in;

@@ -1,0 +1,67 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">خانه</div>
+        <div class="right">
+            <ons-toolbar-button modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button modifier="material"><ons-icon icon="md-search"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page>
+        <!---=================================================================================--->
+        <div class="page__content ons-page-inner" style="directon:ltr">
+            <!--- ===========slider==========-->
+            <owl-slider>
+                <div class="owl-carousel_one">
+                    <div class="item"><div class="slider_item"><img ng-src="img/test/f1.jpg"><h3>دمپخت من</h3><p>بهترین های ما</p></div></div>
+                    <div class="item"><div class="slider_item"><img ng-src="img/test/f2.jpg"><h3>دمپخت من</h3><p>بهترین های ما</p></div></div>
+                    <div class="item"><div class="slider_item"><img ng-src="img/test/f3.jpg"><h3>دمپخت من</h3><p>بهترین های ما</p></div></div>
+                    <div class="item"><div class="slider_item"><img ng-src="img/test/f1.jpg"><h3>دمپخت من</h3><p>بهترین های ما</p></div></div>
+                </div>
+            </owl-slider>
+            <!---=========list============-->
+            <ul class="list">
+                <li class="list__item list__item--chevron" ><i class="ion-ios-book-outline icon_list"></i>لیست شعبه ها</li>
+                <li class="list__item list__item--chevron" ><i class="ion-ios-keypad icon_list"></i>لیست غذا ها</li>
+            </ul>
+            <!--- =========h3============-->
+            <h3 class="title-ios">بهترین های دمپخت در این هفته</h3>
+            <owl-slider2>
+                <div class="owl-carousel_two">
+                    <div class="item"><div class="slider_item">
+                        <img ng-src="img/test/f1.jpg">
+                        <h3>عنوان غذا</h3>
+                        <p>لورم اپسوم متنی است ساختگی</p>
+                        <span><i class="ion-ios-clock-outline"></i>17 اردیبهشت 94</span>
+                        </div>
+                    </div>
+                    <div class="item"><div class="slider_item">
+                        <img ng-src="img/test/f2.jpg">
+                        <h3>عنوان غذا</h3>
+                        <p>لورم اپسوم متنی است ساختگی</p>
+                        <span><i class="ion-ios-clock-outline"></i>17 اردیبهشت 94</span>
+                        </div>
+                    </div>
+                    <div class="item"><div class="slider_item">
+                        <img ng-src="img/test/f3.jpg">
+                        <h3>عنوان غذا</h3>
+                        <p>لورم اپسوم متنی است ساختگی</p>
+                        <span><i class="ion-ios-clock-outline"></i>17 اردیبهشت 94</span>
+                        </div>
+                    </div>
+                    <div class="item"><div class="slider_item">
+                        <img ng-src="img/test/f1.jpg">
+                        <h3>عنوان غذا</h3>
+                        <p>لورم اپسوم متنی است ساختگی</p>
+                        <span><i class="ion-ios-clock-outline"></i>17 اردیبهشت 94</span>
+                        </div>
+                    </div>
+                </div>
+            </owl-slider2>
+        </div>
+    </ons-page>
+</ons-template>

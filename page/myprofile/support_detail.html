@@ -1,52 +1,52 @@
-<dir-tabbar></dir-tabbar>
-<ons-page class="order_list support_one">
-    <ons-toolbar>
-        <div class="left" ng-click="go('/myprofile/support')"><ons-back-button></ons-back-button></div>
-        <div class="center">#{{id}} درخواست شماره</div>
-        <div class="right" ng-click="show('login.html')"><ons-icon icon="ion-ios-paperplane" style="vertical-align: -20px;color: #0D5DAB; font-size: 30px ; padding-right:15px;"></ons-icon></div>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">جزئیات درخواست شماره {{id}}# </div>
+        <div class="right">
+            <ons-toolbar-button ng-click="go('/myprofile/support')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
     </ons-toolbar>
-    <div class="tiket_list">
-        <div class="tiket_one user profile-wrapper">
-		<!--========================================tiketone -----------===============-->
-            <ons-row ng-repeat="ticket in tickets" class="profile-wrapper2">
-                <ons-col width="60px" ng-if="!ticket.a_name" class="profile-image-wrapper">
+    <ons-page>
+        <div class="container comment support_one food_cm">
+            <!--========================================tiketone -----------===============-->
+            <div class="profile-wrapper2 tiket_oned" ng-repeat="ticket in tickets" >
+                <div width="70px" ng-if="!ticket.a_name" class="profile-image-wrapper">
                     <img ng-if="!ticket.picname" ng-src="img/user_men.jpg" class="profile-image">
                     <img ng-if="ticket.picname" ng-src="{{ base_img + ticket.picname }}" class="profile-image">
-                </ons-col>
-                
-                 <ons-col width="60px" ng-if="ticket.a_name" class="profile-image-wrapper">
+                </div>  
+                <div width="70px"  ng-if="ticket.a_name" class="profile-image-wrapper">
                     <img ng-if="!ticket.a_picname" ng-src="img/user_men.jpg" class="profile-image">
                     <img ng-if="ticket.a_picname" ng-src="{{ base_img_a + ticket.a_picname }}" class="profile-image">
-                </ons-col>
-                
-                <ons-col>
-                    <div ng-if="ticket.a_name" class="profile-name">{{ticket.a_name}}</div>
-                    <div ng-if="!ticket.a_name" class="profile-name">{{ticket.name}}</div>
-                    <div ng-if="!ticket.a_name" class="profile-email">کاربر</div>
-                    <div ng-if="ticket.a_name" class="profile-email">{{ticket.post}}</div>
-                    <div class="profile-date"> {{ticket.date}}</div>
-                </ons-col>
-                <div class="tiket_text" data-ng-bind-html="ticket.messages"></div>
-            </ons-row>  
-		
-        </div>
-    </div>
-</ons-page>
+                </div>
 
- <ons-template id="login.html">
-     <ons-dialog var="dialog" cancelable>
-         <ons-toolbar inline>
-             <div class="center">  پاسخ به این درخواست </div>
-         </ons-toolbar>
-         <ticket-answer>
-             <label class="support_txt"><textarea ng-model="text" placeholder="پاسخ خود را بنویسید" width="100%" rows="3"></textarea></label>
-             <label class="supoort_btns">
-                 <ons-button  ng-click="send_answer();">ارسال</ons-button>
-                 <ons-button  ng-click="close_modal();">لغو</ons-button>
-             </label>
-         </ticket-answer>
-    </ons-dialog>
+                <div class="cm_info">
+                        <div ng-if="ticket.a_name" class="profile-name">{{ticket.a_name}}</div>
+                        <div ng-if="!ticket.a_name" class="profile-name">{{ticket.name}}</div>
+                        <div ng-if="!ticket.a_name" class="profile-date">کاربر</div>
+                        <div ng-if="ticket.a_name" class="profile-date">{{ticket.post}}</div>
+                        <div class="profile-date"> {{ticket.date}}</div>
+                </div>
+                <div class="tiket_text" data-ng-bind-html="ticket.messages"></div>
+            </div> 
+            <!--========================================tiketone -----------===============-->
+        </div>
+        <div class="tiket_fab"  ng-click="showDialog('dialog-1')"><ons-icon icon="fa-reply"></ons-icon></div>
+        
+
+
+    </ons-page>
+    <ons-alert-dialog id="dialog-1">
+        <div class="alert-dialog-title">پاسخ به این درخواست</div>
+        <div class="alert-dialog-content">
+            <textarea class="tiket_answer_text" id="text_a" name="text" placeholder="به این تیکت پاسخ دهید ."></textarea>
+        </div>
+        <div class="alert-dialog-footer">
+            <button class="alert-dialog-button" ng-click="hideDialog('dialog-1')">لغو</button>
+            <button class="alert-dialog-button" ng-click="send_answer('dialog-1')">ارسال</button>
+        </div>
+    </ons-alert-dialog>
 </ons-template>
-<style>
-    
-</style>

@@ -1,43 +1,44 @@
-<dir-tabbar></dir-tabbar>
-<ons-page class="order_list support_list">
-    <ons-toolbar>
-        <div class="left" ng-click="go('/myprofile')"><ons-back-button></ons-back-button></div>
-        <div class="center">درخواست های من</div>
-        <div class="right" >
-            <ons-icon icon="ion-ios-plus" ng-click="go('/myprofile/support_new')" style="vertical-align: -20px;color: #0D5DAB; font-size: 30px ; padding-right:20px;"></ons-icon>
-            <ons-icon icon="ion-ios-refresh-empty" ng-click="refresh()" style="vertical-align: -20px;color:#0D5DAB ; font-size: 30px ; padding-right:15px;"></ons-icon>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
         </div>
-    </ons-toolbar> 
-    
-    <ons-list class="plan-list" >
-          <ons-list-item modifier="chevron" class="plan" ng-click="detail(item.id)" ons-lazy-repeat="MyDelegate" >
-            <ons-row>
-                 <ons-col ng-if="item.status == 0" width="6px" class="plan-center status-1" ></ons-col>
-                 <ons-col ng-if="item.status == 1" width="6px" class="plan-center status-2" ></ons-col>
-                 <ons-col ng-if="item.status == 2" width="6px" class="plan-center status-3" ></ons-col>
-                 <ons-col ng-if="item.status == 3" width="6px" class="plan-center status-4" ></ons-col>
+        <div class="center">پشتیبانی</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="refresh()" modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page> 
+        <div class="container support prl0" style="padding-top:0px;">
+            <ons-list class="plan-list" >
+                <ons-list-item modifier="material" class="plan" ng-click="detail(item.id)" ons-lazy-repeat="MyDelegate"  >
+                    <ons-row>
+                        <ons-col ng-if="item.status == 0"  width="6px" class="plan-center status-1" ></ons-col>
+                        <ons-col ng-if="item.status == 1"  width="6px" class="plan-center status-2" ></ons-col>
+                        <ons-col ng-if="item.status == 2"  width="6px" class="plan-center status-3" ></ons-col>
+                        <ons-col ng-if="item.status == 3"  width="6px" class="plan-center status-4" ></ons-col>
+                        <ons-col class="plan-right">
+                            <div ng-show="item.subject==''" class="plan-name"><ons-icon icon='fa-spinner' spin='true'></ons-icon>  درحال دریافت اطلاعات </div> 
+                            <div ng-show="item.subject!=''" class="plan-name">{{ item.subject }}</div>   
+                            <div class="plan-info">
+                                <div ng-show="item.date==''" ><ons-icon icon="ion-ios-clock-outline"></ons-icon><ons-icon icon='fa-spinner' spin='true'></div>
+                                <div class="tiket_date" ng-show="item.date!=''"><ons-icon icon="ion-ios-clock-outline"></ons-icon>{{ item.date }}</div>
+                                <div ng-if="item.status == 0" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>در حال بررسی</div>
+                                <div ng-if="item.status == 1" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>پاسخ داده شده</div>
+                                <div ng-if="item.status == 2" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>پاسخ مشتری</div>
+                                <div ng-if="item.status == 3" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>بسته شده</div>
+                            </div>
+                        </ons-col>
+                        <ons-col width="30px" class="tiket_view" ><i class="fa fa-chevron-left" aria-hidden="true"></i></ons-col>
+                    </ons-row>
+                </ons-list-item>
+            </ons-list>
+            <!--========================================================-->
+           <div class="tiket_fab"  ng-click="go('myprofile/support_new')"><ons-icon icon="fa-plus"></ons-icon></div>
                
-                <ons-col class="plan-right">
-                    <div ng-show="item.subject==''" class="plan-name"><ons-icon icon='fa-spinner' spin='true'></ons-icon>  درحال دریافت اطلاعات </div> 
-                    <div ng-show="item.subject!=''" class="plan-name">{{ item.subject }}</div>   
-                    <div class="plan-info">
-                        <div ng-show="item.date==''" ><ons-icon icon="ion-ios-clock-outline"></ons-icon><ons-icon icon='fa-spinner' spin='true'></div>
-                        <div ng-show="item.date!=''"><ons-icon icon="ion-ios-clock-outline"></ons-icon>{{ item.date }}</div>
-                        <div ng-if="item.status == 0" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>در حال بررسی</div>
-                        <div ng-if="item.status == 1" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>پاسخ داده شده</div>
-                        <div ng-if="item.status == 2" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>پاسخ مشتری</div>
-                        <div ng-if="item.status == 3" ng-hide="a % 3 == 0"><ons-icon icon="ion-stats-bars"></ons-icon>بسته شده</div>
-                    </div>
-                </ons-col>
-            </ons-row>
-        </ons-list-item>
-    </ons-list>
-      <!--==================== if support 0 ====================-->
-           <div id="not_branch" ng-show="count_t == 0" >
-               <p><i class="ion-ios-plus"  ng-click="go('/myprofile/support_new')" ></i>
-                شما تا کنون در خواستی ثبت نکرده اید
-               </p>       
-           </div> 
-    <!--==================== if support 0 ====================-->
-</ons-page>
-
+                
+    </ons-page>
+</ons-template>
