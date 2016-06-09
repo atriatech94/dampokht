@@ -10,29 +10,6 @@ angular.module('my-app')
                 });
         }/* end */
 }})
-.directive('owlSlider2' , function ($timeout){
-    return {
-        link: function() {
-                $('.owl-carousel_two').owlCarousel({
-                    items:2,
-                    margin:5,
-                    autoHeight:true,
-                    nav:false,
-                    dots:false,
-                    rtl:true,
-                });
-        }/* end */
-}})
-.directive('foodDir' , function ($timeout){
-    return {
-        link: function() {
-            $timeout(function(){
-              //  Waves.attach('.flat-box', ['waves-block']);
-              //  Waves.attach('.wave', ['waves-button']);
-            });
-            
-        }/* end */
-}})
 .service('loadGoogleMapAPI', ['$window', '$q', function ( $window, $q ) {
 
         var deferred = $q.defer(); 
@@ -41,7 +18,7 @@ angular.module('my-app')
         function loadScript() {  
             // Use global document since Angular's $document is weak
             var script = document.createElement('script');
-            script.src = '//maps.googleapis.com/maps/api/js?sensor=false&language=fa&callback=initMap&libraries=places,drawing';
+            script.src = 'http://maps.googleapis.com/maps/api/js?sensor=false&language=fa&callback=initMap&libraries=places,drawing';
             document.body.appendChild(script);
         }
 
@@ -142,7 +119,7 @@ angular.module('my-app')
                         });
 
                             //  Autocomplete
-                        var input = document.getElementById('address_type');
+                        var input = document.getElementById('address-map') ;
                         var autocomplete = new google.maps.places.Autocomplete(input);
                         autocomplete.bindTo('bounds', map);
                         /*get suggest place*/
@@ -475,9 +452,6 @@ angular.module('my-app')
 .directive('mapeditDir' , function ($timeout,$http,$rootScope , $location , $routeParams){
     return {
         link: function(scope) {
-           scope.go = function ( path ) {
-              $location.path( path );
-          };
             document.getElementById('loading').removeAttribute('style');   
             $http({
                 method: 'POST',
@@ -515,7 +489,7 @@ angular.module('my-app')
             });  
             
         }/* end */
-}})
+}}) 
 .directive('googleMapedit',  function( $rootScope, loadGoogleMapAPI , $http , $location , $routeParams ) {  
 
         return {

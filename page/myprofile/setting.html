@@ -1,139 +1,51 @@
-<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
-<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
-<ons-template id="page1.html">
-    <ons-toolbar modifier="material" class="inbox-interface">
-        <div class="left">
-            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
-        </div>
+<dir-tabbar></dir-tabbar>
+<ons-page class="setting">
+    <ons-toolbar>
+        <div ng-click="go('/myprofile')" class="left"><ons-back-button><a >پروفایل من</a></ons-back-button></div>
         <div class="center">تنظیمات</div>
-        <div class="right">
-           <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
-        </div>
-    </ons-toolbar> 
-
-    <ons-page class="setting">
-        <ons-row class="profile-wrapper">
-            <ons-col width="60px" class="profile-image-wrapper"> 
-              <img ng-if="picname=='' || picname=='null'"  ng-src="img/user_men.jpg" class="profile-image">
+    </ons-toolbar>
+    
+      <ons-row class="profile-wrapper">
+          <ons-col width="60px" class="profile-image-wrapper"> 
+              <img ng-if="picname=='' || picname=='null'" ng-src="img/user_men.jpg" class="profile-image">
               <img ng-if="picname!='' && picname!='null'" ng-src="{{base_img + picname}}" class="profile-image">
-            </ons-col>
-            <ons-col>
-                <div class="profile-name">{{name}}</div>
-                <div class="profile-email">{{email}}</div>
-            </ons-col>
+          </ons-col>
+          <ons-col>
+              <div class="profile-name">{{name}}</div>
+              <div class="profile-email">{{email}}</div>
+          </ons-col>
 
-        </ons-row> 
+    </ons-row>
 
-       <!--==============================================================--->
-        <ons-list >
-          <ons-list-item class="inbox-li" modifier="material" >
-            <ons-row>
-                <ons-col width="56px">
-                    <label class="switch switch--material">
-                        <input ng-click="sms()" type="checkbox" class="switch__input switch--material__input" ng-if="sms1" checked>
-                        <input ng-click="sms()" type="checkbox" class="switch__input switch--material__input" ng-if="!sms1">
-                        <div class="switch__toggle switch--material__toggle">
-                            <div class="switch__handle switch--material__handle"></div>
-                        </div>
-                    </label>
-                </ons-col>
-                <ons-col>
-                  <div class="inbox-from">
-                      <span class="inbox-name">ارسال پیام کوتاه </span>
-                      <span class="inbox-subject">ارسال پیام کوتاه های  دمپخت</span>
-                  </div>
-              </ons-col>
-            </ons-row>
+    <div class="settings-header">اعلان ها </div>
+
+    <ons-list modifier="inset" class="settings-list">
+        <ons-list-item> پیام کوتاه
+            <ons-switch ng-model="sms1"  ng-click="sms()" modifier="list-item"  ></ons-switch>
+        </ons-list-item>
+        <ons-list-item> اعلان ها 
+            <ons-switch ng-model="notification1" ng-click="notification()" modifier="list-item"></ons-switch>
+            
+         </ons-list-item>
+    </ons-list>
+
+    <div class="settings-header"> اطلاعات کاربری</div>
+
+    <ons-list modifier="inset" class="settings-list">
+        <ons-list-item ng-click="go('/myprofile/change_info')" modifier="chevron"> ویرایش اطلاعات کاربری </ons-list-item>
+        <ons-list-item ng-click="go('/myprofile/change_pass')" modifier="chevron"> تغییر کلمه ی عبور </ons-list-item>
+    </ons-list>
+
+    <br>
+    <ons-list modifier="inset" class="settings-list">
+          <ons-list-item ng-click="exit()" modifier="tappable">
+            <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
+            <a >خروج از این حساب کاربری</a>
           </ons-list-item>
-
-            <ons-list-item class="inbox-li" modifier="material" >
-                <ons-row> 
-                    <ons-col width="56px">
-                        <label class="switch switch--material">
-                            <input  ng-click="notification()"  type="checkbox" class="switch__input switch--material__input" ng-if="notification1" checked>
-                            <input  ng-click="notification()"  type="checkbox" class="switch__input switch--material__input" ng-if="!notification1">
-                            <div class="switch__toggle switch--material__toggle">
-                                <div class="switch__handle switch--material__handle"></div>
-                            </div>
-                        </label>
-                    </ons-col>
-                    <ons-col>
-                        <div class="inbox-from">
-                            <span class="inbox-name">ارسال نوتیفیکیشن </span>
-                            <span class="inbox-subject">ارسال اعلان های  دمپخت</span>
-                        </div>
-                    </ons-col>
-                </ons-row>
-            </ons-list-item>
-        </ons-list>
-       <!--==============================================================--->
-        <ons-list class="" modifier="material">
-           <div class="android_list">
-               <ons-list-item modifier="material" class="contact-block-li contact-block-header">
-                   <div class="contact-from">
-                       <span class="contact-block-item-title contact-interface-text" style="padding-top:5px;">تنظیمات اطلاعات کاربری</span>
-                   </div>
-               </ons-list-item>
-
-
-              <ons-list-item modifier="material" class="contact-block-li contact-block-subdivision">
-                  <ons-row>
-                      <ons-col width="40px" align="center" class="contact-block-col-left"><ons-icon icon="ion-person" class="contact-interface-text" size="24px"></ons-icon></ons-col>
-                      <ons-col  ng-click="go('/myprofile/change_info')">
-                          <div class="contact-from"> <span class="contact-block-item-title">ویرایش اطلاعات کاربری</span></div>
-                          <div class="contact-block-item-details">تغییر نام و اطلاعت تماس</div>
-                      </ons-col>
-                  </ons-row>
-              </ons-list-item>
-
-               <ons-list-item modifier="material" class="contact-block-li"  style="border-bottom: 1px solid #ddd !important;">
-                   <ons-row>
-                       <ons-col width="40px" align="center" class="contact-block-col-left">  <ons-icon icon="ion-key" class="contact-interface-text" size="24px"></ons-icon></ons-col>
-                       <ons-col  ng-click="go('/myprofile/change_pass')">
-                           <span class="contact-block-item-title">ویرایش کلمه عبور</span>
-                           <div class="contact-block-item-details">برای ویرایش کلیک کنید</div>
-                      </ons-col>
-                  </ons-row>
-              </ons-list-item>
-
-          </div>
-      </ons-list>
-       <!--==============================================================--->
-        <ons-list class="" modifier="material" style="border-bottom: 1px solid #ddd !important;">
-           <div class="android_list">
-               <ons-list-item modifier="material" class="contact-block-li contact-block-division">
-                   <ons-row>
-                       <ons-col width="40px" align="center" class="contact-block-col-left">   <ons-icon icon="fa-sign-out" class="contact-interface-text" size="24px"></ons-icon> </ons-col>
-                       <ons-col ng-click="exit()">
-                           <div  class="contact-from"><span class="contact-block-item-title">برون رفت </span></div>
-                           <div class="contact-block-item-details">خروج از این حساب کاربری </div>
-                       </ons-col>
-                   </ons-row>
-               </ons-list-item>
-            </div>
-        </ons-list>
-       <!--==============================================================--->
-        <!--
-        <ons-list modifier="inset" class="settings-list">
-            <ons-list-item>اعلان های دمپخت<ons-switch modifier="list-item"></ons-switch></ons-list-item>
-            <ons-list-item>اعلان های دمپخت 2<ons-switch modifier="list-item" checked></ons-switch></ons-list-item>
-        </ons-list>
-
-        <div class="settings-header"> تنظیمات شماره دوم </div>
-
-        <ons-list modifier="inset" class="settings-list">
-            <ons-list-item modifier="chevron"><a href="#/myprofile/change_info"> ویرایش اطلاعات کاربری </a></ons-list-item>
-            <ons-list-item modifier="chevron"><a href="#/myprofile/change_pass"> تغییر کلمه ی عبور </a></ons-list-item>
-        </ons-list>
-
-        <br>
-        <ons-list modifier="inset" class="settings-list">
-              <ons-list-item modifier="tappable">
-                <ons-icon icon="ion-log-out" style="opacity: 0.8"></ons-icon>
-                <a href="#/myprofiel">خروج از این حساب کاربری</a>
-              </ons-list-item>
-        </ons-list>
-
-        -->
-    </ons-page>
-</ons-template>
+    </ons-list>
+</ons-page>
+<style>
+.setting .page__content{
+    padding-top: 44px;
+}
+</style>

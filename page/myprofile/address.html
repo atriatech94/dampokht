@@ -1,41 +1,34 @@
-<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
-<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
-<ons-template id="page1.html">
-    <ons-toolbar modifier="material" class="inbox-interface">
-        <div class="left">
-            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
-        </div>
+<dir-tabbar></dir-tabbar>
+<ons-page class="address">
+    <ons-toolbar>
+        <div class="left" ng-click="go('/myprofile')"><ons-back-button><a>پروفایل من</a></ons-back-button></div>
         <div class="center">آدرس ها</div>
-        <div class="right">
-            <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
-        </div>
     </ons-toolbar>
-    <ons-page class="address">
-        <ons-list-header class="rtl"> آرشیو آدرس ها </ons-list-header>
-        <ons-row class="inbox-li" ng-repeat="address in addressses">
-                <!--=================================================-->
-            <ons-col class="address_n">{{address.address}}</ons-col>
-            <ons-col ng-click="delete_address(address.id)" class="address_icon" width="40px"><ons-icon icon="ion-android-close" size="25px"></ons-icon></ons-col>
-            <ons-col ng-if="address.type == 1" ng-click="go('/edit_address/'+address.id+'/'+address.type)" class="address_icon" width="40px"><ons-icon icon="ion-edit"  size="25px"></ons-icon></ons-col>
-            <ons-col ng-if="address.type == 2" ng-click="go('/edit_address_map/'+address.id+'/'+address.type)" class="address_icon" width="40px"><ons-icon icon="ion-edit"  size="25px"></ons-icon></ons-col>
+    <div class="address_list" >
+        <ons-list >
 
-        </ons-row>
-                <!--=================================================-->
+            <ons-list-header class="rtl">  آدرس های من </ons-list-header>
 
-        <ons-button modifier="material" ng-click="go('/myprofile/new_address')"><ons-icon icon="fa-location-arrow" size="20px"></ons-icon> آدرس جدید اضافه کنید </ons-button>
-    </ons-page>
-</ons-template>
+            <ons-list-item modifier="tappable" ng-repeat="address in addressses">
+                <label class="checkbox checkbox--list-item">
+                    <ons-row>
+                        <ons-col >
+                            {{address.address | limitTo : 30 }}...
+                        </ons-col>
+                        <ons-col width="35px" ng-click="delete_address(address.id)" class="options">
+                            <ons-icon size="28px" class="option_icon" icon="ion-ios-close-empty" width: style="color:#b41a1a"></ons-icon>
+                        </ons-col>
+                         <ons-col ng-if="address.type == 1" width="30px"  class="options" ng-click="go('/edit_address/'+address.id+'/'+address.type)">
+                         <ons-icon size="14px" class="option_icon" icon="ion-edit" style="color:#83c32c"></ons-icon>
+                        </ons-col>
+                         <ons-col ng-if="address.type == 2" width="30px"  class="options" ng-click="go('/edit_address_map/'+address.id+'/'+address.type)">
+                         <ons-icon size="14px" class="option_icon" icon="ion-edit" style="color:#83c32c"></ons-icon>
+                        </ons-col>
+                    </ons-row>
+                </label>
+            </ons-list-item>
 
-<style>
-.address_icon{
-    line-height: 51px;
-    height: 40px;
-    text-align: center;
-}
-.address_icon ons-icon[icon="ion-android-close"]{
-    color:#af0f0f;
-}
-.address_icon ons-icon[icon="ion-edit"]{
-    color:#59af0f;
-}
-</style>
+            <ons-list-item ng-click="go('/myprofile/new_address')" modifier="chevron"><ons-icon icon="fa-location-arrow" size="20px"></ons-icon> آدرس جدید اضافه کنید </ons-list-item>
+        </ons-list>
+    </div>
+</ons-page>

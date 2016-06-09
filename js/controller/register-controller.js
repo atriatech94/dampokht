@@ -1,24 +1,16 @@
-angular.module('my-app') 
+angular.module('my-app')
 .controller('RegisterController', function($scope,$http,$location) {
-              if(localStorage.getItem('cart')){
-             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
-          }
-          else{
-             $scope.basket_size = 0; 
-          }  
-
-          $scope.go = function ( path ) {$location.path( path )};
-           $scope.hback=function(){window.history.back()};
-    
+    if(localStorage.getItem('user_id')){ $location.path("/home"); } 
          
+    $scope.hback=function(){window.history.back()};
+    
+            $scope.Name = "";
+            $scope.email = "";
+            $scope.phone = "";
+            $scope.password = "";
+            $scope.ConfPassword = "";
            
         $scope.submit = function () {
-            
-            $scope.Name =  document.getElementById('Name').value;
-            $scope.email =  document.getElementById('email').value;
-            $scope.phone =  document.getElementById('phone').value;
-            $scope.password =  document.getElementById('password').value;
-            $scope.ConfPassword =  document.getElementById('ConfPassword').value;
            
              if($scope.Name == '' ||  $scope.email == '' || $scope.phone == '' || $scope.password == ''  || $scope.ConfPassword == ''){
                   ons.notification.alert({
@@ -39,14 +31,22 @@ angular.module('my-app')
                 });
                 return false;
              } 
-             $scope.phone = Number($scope.phone);
-             if($scope.phone.toString().length != 10  )
+             if(typeof ($scope.phone) != 'number' )
+             {
+                  ons.notification.alert({
+                     title: 'خطا',
+                     buttonLabel:"بستن " ,
+                     message: 'شماره تلفن وارد شده معتبر نیست !!'
+                });
+                return false;
+             }
+             if($scope.phone.toString().length != 10 && $scope.phone.toString().length != 11 )
              {
               
                 ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
-                     message: 'تلفن همراه معتبر نیست !!'
+                     message: 'تلفن همراه باید 11 رقم باشد !!'
                 });
                 return false;
              } 
@@ -106,7 +106,7 @@ angular.module('my-app')
                                     $http({
                                         method: 'POST',
                                         url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
-                                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 1}),
+                                        data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
                                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                                     }).then(function successCallback(response) {
                                         localStorage.setItem('has_reg_id',1);  
@@ -129,4 +129,7 @@ angular.module('my-app')
                         return false;
                  });
           };//end submit 
+           
+           
+    
 });

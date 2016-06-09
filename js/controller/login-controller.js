@@ -1,25 +1,16 @@
 angular.module('my-app')
 .controller('LoginController', function($scope,$location,$http) {
-    if(localStorage.getItem('cart')){
-             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
-          }
-          else{
-             $scope.basket_size = 0; 
-          }  
-
-
     if(localStorage.getItem('user_id'))
     {
         $location.path("/home");
     }  
- 
+    $scope.user = "";
+    $scope.password = "";
              
     $scope.go = function ( path ) {$location.path( path )};
     $scope.hback=function(){window.history.back()};
     
     $scope.submit = function () {
-         $scope.user = document.getElementById('username').value;
-         $scope.password = document.getElementById('password').value;
         if($scope.user == '' ||  $scope.password == '')
         {
             ons.notification.alert({
@@ -68,7 +59,7 @@ angular.module('my-app')
                        $http({
                           method: 'POST',
                           url: base_url+'reg_id/HDaMin2dsaZ3QZYTRRE782',
-                          data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 1}),
+                          data: $.param({token_id: localStorage.getItem('reg_id') , user_id : localStorage.getItem('user_id') , type : 2}),
                           headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                       }).then(function successCallback(response) {
                            localStorage.setItem('has_reg_id',1);  
@@ -92,5 +83,5 @@ angular.module('my-app')
         }
                 
              
-    };
-});
+    };         
+});  

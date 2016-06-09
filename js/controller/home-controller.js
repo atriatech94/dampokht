@@ -1,15 +1,19 @@
 angular.module('my-app')
-.controller('HomeController', function($scope) {
-    $scope.test_d = [1,2,3,4,5,6,7,8,9];
+.controller('HomeController', function($scope,$location,$rootScope,$routeParams) {
+     $scope.go = function(path){
+            clearTimeout(timer);
+            $location.path(path);
+        }
+       
+   
 })
-.controller('CooperationController', function($scope,$http,$sce,$location,$timeout) {
-   if(localStorage.getItem('cart')){
-             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
-          }
-          else{
-             $scope.basket_size = 0; 
-          }  
-     $scope.go = function ( path ) {$location.path( path );};
+
+
+
+.controller('CooperationController', function($scope,$http,$sce,$location) {
+     $scope.go = function ( path ) {
+         $location.path( path );
+        };
      document.getElementById('loading').removeAttribute('style');     
             $http({
                 method: 'GET',
@@ -29,22 +33,15 @@ angular.module('my-app')
                         
                  });  
     
-       if(localStorage.getItem('user_id')){
-         $timeout(function(){
-               document.getElementById('name').value = localStorage.getItem('name') ;
-               document.getElementById('phone').value = localStorage.getItem('phone') ;
-            }); 
-       }
     
-     
+    
+      $scope.name = ""; 
+      $scope.phone = "";
+      $scope.title = "";
+      $scope.text = "";
      
        $scope.submit = function () {
            
-                $scope.name =  document.getElementById('name').value; 
-                $scope.phone = document.getElementById('phone').value; 
-                $scope.title = document.getElementById('title').value; 
-                $scope.text = document.getElementById('text').value; 
-            
              if($scope.name == '' || $scope.phone == '' || $scope.title == ''  || $scope.text == ''){
                   ons.notification.alert({
                      title: 'خطا',
@@ -90,43 +87,9 @@ angular.module('my-app')
                  });  
        };//end submit
 })
-.controller('AboutController', function($scope,$http,$location,$sce) {
-    if(localStorage.getItem('cart')){
-             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
-          }
-          else{
-             $scope.basket_size = 0; 
-          }  
-     $scope.go = function ( path ) {$location.path( path );};
-     document.getElementById('loading').removeAttribute('style');     
-            $http({
-                method: 'GET',
-                url: base_url+'about/HamiDaMin23QZYTRRE782',
-             }).then(function successCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                            $scope.about = response.data;
-                            $scope.description = $sce.trustAsHtml( $scope.about[0].text);
-                            $scope.base_img = base_img + 'about-small/' +  $scope.about[0].picname;
-                        
-                     }, function errorCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                           });
-                        
-                 });  
-    
-})
-.controller('ContactController', function($scope,$http,$location,$timeout) {
-   if(localStorage.getItem('cart')){
-             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
-          }
-          else{
-             $scope.basket_size = 0; 
-          }  
-     $scope.go = function ( path ) {$location.path( path );};
+
+.controller('ContactController', function($scope,$http,$location) {
+      $scope.go = function ( path ) {$location.path( path );};
       document.getElementById('loading').removeAttribute('style');     
             $http({
                 method: 'GET',
@@ -145,23 +108,14 @@ angular.module('my-app')
                         
                  });  
      
-      if(localStorage.getItem('user_id')){
-         $timeout(function(){
-               document.getElementById('name').value = localStorage.getItem('name') ;
-               document.getElementById('phone_or_email').value = localStorage.getItem('email') ;
-               document.getElementById('phone').value = localStorage.getItem('phone') ;
-            }); 
-      } 
      
      
+      $scope.name = localStorage.getItem('name');
+      $scope.phone_or_email = localStorage.getItem('email');
+      $scope.title = "";
+      $scope.phone = localStorage.getItem('phone');
+      $scope.text = "";
        $scope.submit = function () {
-           
-           
-            $scope.name = document.getElementById('name').value;
-            $scope.phone_or_email = document.getElementById('phone_or_email').value;
-            $scope.title = document.getElementById('title').value;
-            $scope.phone = document.getElementById('phone').value;
-            $scope.text = document.getElementById('text').value;
            
              if($scope.name == '' || $scope.phone_or_mail == '' || $scope.title == ''  || $scope.text == ''){
                   ons.notification.alert({
@@ -219,4 +173,92 @@ angular.module('my-app')
                  });  
        };//end submit
 })
+.controller('faqController', function($scope,$http,$sce,$location) {
+    $scope.go = function ( path ) {$location.path( path );};
+    $scope.toggleGroup = function(group) {
+        if ($scope.isGroupShown(group)) {
+            $scope.shownGroup = null;
+        }else{
+            $scope.shownGroup = group;
+        }
+    };
+    $scope.isGroupShown = function(group) {
+        return $scope.shownGroup === group;
+    };
+    
+     document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'GET',
+                url: base_url+'faq/HamiDaMin23QZYTRRE782'
+               }).then(function successCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                            $scope.faq = response.data;
+                            for(var i=0 ; i < $scope.faq.length ; i++ ){
+                                   $scope.faq[i].answer = $sce.trustAsHtml( $scope.faq[i].answer);
+                            }
+                             
+                        }, function errorCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                           });
+                        
+                 });  
+    
+
+})
+
+
+
+.controller('AboutController', function($scope,$http,$sce,$location) {
+     $scope.go = function ( path ) {$location.path( path );};
+     document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'GET',
+                url: base_url+'about/HamiDaMin23QZYTRRE782',
+             }).then(function successCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                            $scope.about = response.data;
+                            $scope.description = $sce.trustAsHtml( $scope.about[0].text);
+                            $scope.base_img = base_img + 'about-small/' +  $scope.about[0].picname;
+                        
+                     }, function errorCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                           });
+                        
+                 });  
+})
+
+
+.controller('lawController', function($scope,$http,$sce,$location) {
+      $scope.go = function ( path ) {$location.path( path );};
+     document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'GET',
+                url: base_url+'law/HamiDaMin23QZYTRRE782',
+             }).then(function successCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                            $scope.laws = response.data;
+                            for(var i=0 ; i < $scope.laws.length ; i++ ){
+                                   $scope.laws[i].text = $sce.trustAsHtml( $scope.laws[i].text);
+                            }
+                              
+                        }, function errorCallback(response) {
+                            document.getElementById('loading').setAttribute('style','display:none;'); 
+                              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                           });
+                        
+                 });  
+    
+});
+  
   

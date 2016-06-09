@@ -1,39 +1,36 @@
-<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
-<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
-<ons-template id="page1.html">
-    <ons-toolbar modifier="material" class="inbox-interface">
-        <div class="left">
-            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
-        </div>
-        <div class="center">ویرایش آدرس</div>
-        <div class="right">
-              <ons-toolbar-button ng-click="go('/myprofile/address')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
-        </div>
+<dir-tabbar></dir-tabbar>
+<ons-page class="pt0">
+    <ons-toolbar>
+        <div class="left"><ons-back-button><a href="#/myprofile/address">آدرس ها </a></ons-back-button></div>
+        <div class="center">ویرایش آدرس </div>
     </ons-toolbar>
-            <ons-page>
-                    <div class="formarea newaddress">
-                      <div class="form-row">
-                          <select id="branch" ng-model="branch"  ng-change="changeArea(branch)" style="height: 50px;" class="width-full rtl add_branch">
-                              <option value="">شعبه را انتخاب کنید</option>
-                              <option ng-repeat="option in branches" value="{{option.id}}">{{option.city}} - {{option.name}}</option>
-                          </select>
-                        </div>
-                        <div class="form-row">   
-                              <select  id="area" style="height: 50px;" ng-model="area2" class="width-full rtl" ng-options="option.id as option.area for option in branch_area">
-                                <option value="">محدوده را انتخاب کنید</option>
-                                
-                             </select>
-                          </div>               
-                         <div class="form-row">
-                             <div class="input-field col s12">
-                                 <textarea id="textarea1" ng-model="address" class="textarea textarea--transparent rtl" placeholder="" style="width: 100%; height: 100px ;padding: 5px;border-bottom:1px solid #ddd;margin-top:5px"></textarea>
-                                 <label for="textarea1">آدرس</label>
-                             </div>
-                        </div>      
-                        <div class="form-row" style="margin-top:20px;"> <ons-input  id="code_posti" modifier="underbar" type="text"  class="width-full rtl"  placeholder="کد پستی (اختیاری)" float></ons-input> </div>
-                        <div class="vspc form-row"><ons-button ng-click="submit()" modifier="material">ویرایش آدرس </ons-button></div>
-                    </div>
-                </ons-page>
-            
-   
-</ons-template>
+   <div  id="method-1" >
+        <div class="formarea pt0" >
+            <div class="form-row rtl"> 
+                <select ng-model="branch"  ng-change="changeArea(branch)"  class="text-input--underbar width-full rtl">
+                    <option value="">شعبه را انتخاب کنید</option>
+                    <option ng-repeat="option in branches" value="{{option.id}}">{{option.city}} - {{option.name}}</option>
+                </select>
+            </div>
+
+            <div class="form-row rtl"> 
+                <select ng-model="area" class="text-input--underbar width-full rtl">
+                    <option value="">محدوده را انتخاب کنید</option>
+                    <option ng-repeat="option in branch_area"  value="{{option.id}}">{{option.area}}</option>
+                </select>
+            </div>
+
+            <div class="form-row"> 
+                 <textarea ng-model="address" class="textarea textarea--transparent rtl" placeholder="آدرس" style="width: 100%; height: 100px ;padding: 5px;border-bottom:1px solid #ddd"></textarea>
+            </div>  
+            <div class="form-row">
+                <input type="text" ng-model="code_posti" class="text-input--underbar width-full rtl" placeholder="کد پستی (اختیاری)" >
+            </div>    
+            <div class="vspc form-row">
+                <ons-button ng-click="submit()" modifier="large--cta">ذخیره تغییرات</ons-button>
+            </div>
+        </div>
+    </div>
+  
+
+</ons-page>

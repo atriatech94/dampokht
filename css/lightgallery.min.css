@@ -42,20 +42,16 @@
   color: #FFF;
 }
 .lg-actions .lg-next {
-    right: 20px;
-    font-family: FontAwesome;
+  right: 20px;
 }
 .lg-actions .lg-next:before {
-    content: "\f105";
-    font-family: FontAwesome;
+  content: "\e095";
 }
 .lg-actions .lg-prev {
-    left: 20px;
-    font-family: FontAwesome;
+  left: 20px;
 }
 .lg-actions .lg-prev:after {
-    content: "\f104";
-    font-family: FontAwesome;
+  content: "\e094";
 }
 
 @-webkit-keyframes lg-right-end {

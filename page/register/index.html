@@ -1,44 +1,33 @@
-<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
-<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
-<ons-template id="page1.html">
-    <ons-toolbar modifier="material" class="inbox-interface">
-        <div class="left">
-            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
-        </div>
-        <div class="center">عضویت</div>
-        <div class="right">
-             <ons-toolbar-button ng-click="go('/branch')" modifier="material"><ons-icon icon="fa-cutlery"></ons-icon></ons-toolbar-button>
-            <ons-toolbar-button ng-click="go('/cart')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
-        </div>
-    </ons-toolbar>
-    <ons-page>
+<dir-tabbar></dir-tabbar>
+<ons-page class="pw">
+  <ons-toolbar>
+    <div ng-click="hback();" class="left"><ons-back-button></ons-back-button></div>
+    <div class="center">عضویت در دمپخت</div>
+  </ons-toolbar>
+  <form class="login-form">
+    <div class="progress-bar progress-bar--indeterminate" style="display:none;" id="loading"></div>
+      <div class="form-row">
+        <input type="text" ng-model="Name" class="text-input--underbar width-half rtl" placeholder="نام شما" >
+      </div>
 
-        <div class="formarea register_form">
-
-            <div class="form-row">
-                <ons-input type="text" id="Name"  modifier="underbar" placeholder="نام شما"class="width-full rtl" float></ons-input>
-            </div>
-
-            <div class="form-row">
-                <ons-input type="email" id="email"  modifier="underbar" placeholder="پست الکترونیک " class="width-full rtl" float></ons-input>
-            </div> 
-
-            <div class="form-row">
-                <ons-input type="number" id="phone"  modifier="underbar" placeholder="شماره موبایل" class="width-full rtl" float></ons-input>
-            </div>
-
-            <div class="form-row">
-                <ons-input type="password"   id="password"  modifier="underbar" placeholder="کلمه ی عبور" class="width-full rtl" float></ons-input>
-            </div>
-          <div class="form-row">
-                <ons-input type="password"  id="ConfPassword"  modifier="underbar" placeholder="تکرار کلمه ی عبور" class="width-full rtl" float></ons-input>
-            </div>
-
-          <div class="vspc form-row">
-              <ons-button ng-click="submit()" modifier="material">عضویت در دمپخت</ons-button>
-          </div>
-             <ons-button ng-click="go('/login')"  modifier="quiet" class="forgot-password"> <a> قبلا ثبت نام کرده ام ! ورود به دمپخت  </a></ons-button>
+        <div class="form-row">
+          <input type="email" ng-model="email" class="text-input--underbar width-full rtl" placeholder="پست الکترونیک شما">
+        </div> 
+       <div class="form-row">
+          <input type="number" ng-model="phone" class="text-input--underbar width-full rtl" placeholder="شماره موبایل">
         </div>
 
-    </ons-page> 
-</ons-template>
+        <div class="form-row">
+            <input type="password" ng-model="password" class="text-input--underbar width-full rtl" placeholder="کلمه ی عبور">
+        </div>
+         <div class="form-row">
+            <input type="password"  ng-model="ConfPassword" class="text-input--underbar width-full rtl" placeholder="تکرار کلمه ی عبور">
+        </div>
+      <br>
+      <div class="vspc form-row mt30">
+          <ons-button ng-click="submit()" modifier="large" class="login-button">به دمپخت بپیوندید</ons-button>
+      </div>
+        
+    </div>
+  </form>
+</ons-page> 

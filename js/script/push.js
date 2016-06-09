@@ -18,15 +18,19 @@ var app1 = {
     onDeviceReady: function() {
        
       push = PushNotification.init({
-           android: {
-              senderID: "dampokht-1336"
-            },
+          
+            ios: {
+                alert: "true",
+                badge: "true",
+                sound: "true"
+            }
         });
 
         push.on('registration', function(data) {
            localStorage.setItem('reg_id',data.registrationId);
         });
       
+
         push.on('notification', function(data) {
             // data.message,
             // data.title,
