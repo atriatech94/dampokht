@@ -1,24 +1,30 @@
 angular.module('my-app')
 .controller('checkoutController', function($scope,$http,$location,$routeParams,$filter,$rootScope) {
-    $scope.go = function(path){
+     if(localStorage.getItem('cart')){
+             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
+          }
+          else{
+             $scope.basket_size = 0; 
+          }  
+     $scope.go = function(path){
             $location.path(path);
         }
-
-      $scope.go2 = function(){
-            $location.path('/new_address_check/'+$routeParams.id);
-        }    
-     
+     $scope.total = 0 ;
         if(localStorage.getItem('cart'))
         {
             $scope.cart = JSON.parse(localStorage.getItem('cart'));
              if($scope.cart.length == 0)
                 {
-                    $location.path('/buybasket');
+                    $location.path('/cart');
                 }
                 else{
                   
                    $scope.addresses = JSON.parse(localStorage.getItem('address')); 
                    $scope.foods  = $filter('filter')($scope.cart, {branch_id : $routeParams.id} ,true);  
+                   for(var i=0 ; i< $scope.foods.length ; i++){
+                        $scope.total =  $scope.total + ( $scope.foods[i].price *  $scope.foods[i].quantity);
+                   }
+                      
                  }
           document.getElementById('loading').removeAttribute('style');   
           $http({
@@ -43,14 +49,14 @@ angular.module('my-app')
                                 buttonLabel:"بستن " ,
                                 message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
                            });
-                        $location.path('/buybasket');   
+                        $location.path('/cart');   
                         return false;
                  }); 
-                 
+              
+              
             $scope.off = function(point){
              
              if( $scope.c_off == 0){
-               
                  var totalPrice = $scope.total + $scope.total * 0.09;
                  var totalOff = parseInt( $scope.change_rate[0].off ) * parseInt(point);
                  var finalPrice = totalPrice - totalOff; 
@@ -79,10 +85,10 @@ angular.module('my-app')
               
             };  
             $scope.address_1 = "";
-            $scope.description = "";
+          
           
             $scope.submit =  function(payment){
-               
+               $scope.description = document.getElementById('description').value;
                if(  $scope.address_1 == ""){
                      ons.notification.alert({
                                 title: 'خطا',
@@ -98,6 +104,7 @@ angular.module('my-app')
                                 buttonLabel:"بستن " ,
                                 message: 'پرداخت آنلاین به زودی راه اندازی می شود !!'
                            });
+                          return false;    
                }
                
                if(payment == 3){
@@ -159,16 +166,18 @@ angular.module('my-app')
            
         
             $scope.addr =  function(address){
-           
+                var a = document.getElementsByClassName('address-p');
+                for(var i=0 ; i<a.length ; i++){
+                   a[i].removeAttribute("checked");
+                }
+                document.getElementById('p-'+address).setAttribute("checked", "checked");
                 $scope.address_1 = address;
            };    
             
         }
         else{
-             $location.path('/buybasket');
+             $location.path('/cart');
         }
-        
-  
         
 })
 .controller('OrdertrueController',function($scope,$location,$rootScope,$filter){

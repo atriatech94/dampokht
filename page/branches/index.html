@@ -1,0 +1,37 @@
+
+<!---================================start hamber-menu =======================================-->
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+
+<!---================================end hamber-menu =======================================-->
+<ons-template id="page1.html"> 
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">لیست شعب</div>
+        <div class="right">
+            <ons-toolbar-button ng-click="go('/home')" modifier="material"><ons-icon icon="ion-android-home"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    
+    <div class="branches">
+        <ons-list-item modifier="" class="list-item-container branches_one "  ng-repeat="branch in branches" >
+            <ons-row>
+                <ons-col>
+                    <div class="name"><ons-icon  icon="fa-code-fork" size="16px"></ons-icon> {{branch.name}}</div>
+                    <div class="location">{{branch.address}}</div>
+                    <div class="location">شمار تماس : {{branch.phone}}</div>
+                    <div class="location"> <p>مناطق تحت پوشش : </p> <p> <span ng-repeat="area in branch.area" >{{area}}</span> </p> </div>
+                
+                    <div class="btns">
+                        <ons-button  ng-click="add_branch(branch.id)" ng-if="d_branch != branch.id && d_branch != null" modifier="material material--flat"  class="button button--material button--material--flat" >شعبه ی پیشفرض</ons-button>
+                        <ons-button  ng-click="remove_branch(branch.id)" ng-if="d_branch == branch.id && d_branch != null" modifier="material material--flat"  class="button button--material button--material--flat" ><i class="ion-checkmark-circled" ></i>  شعبه ی پیشفرض</ons-button>
+                        <ons-button  ng-click="go('/menu/'+branch.id)" modifier="material material--flat"  class="button button--material button--material--flat" >سفارش غذا</ons-button>
+                    </div>
+                </ons-col>
+
+            </ons-row>
+        </ons-list-item>
+    </div>
+</ons-template>

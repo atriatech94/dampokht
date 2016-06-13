@@ -1,6 +1,12 @@
-angular.module('my-app')
+angular.module('my-app') 
 .controller('MyprofileController',function($scope,$location,$http,$rootScope){
-        if(!localStorage.getItem('user_id'))
+      if(localStorage.getItem('cart')){
+             $scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
+          }
+          else{
+             $scope.basket_size = 0; 
+          }  
+     if(!localStorage.getItem('user_id'))
         {
             $location.path("/home");
         }
@@ -53,15 +59,17 @@ angular.module('my-app')
                document.getElementById('loading').removeAttribute('style');     
               $location.path( path );
           };
+       
+    
 })
-
 .controller('SettingController',function($scope,$location,$http){
-       $scope.go = function ( path ) {
+  
+    $scope.go = function ( path ) {
               $location.path( path );
           };
        $scope.name = localStorage.getItem('name');
        $scope.sms1 = localStorage.getItem('sms');
-       if($scope.sms1 == 0){
+      if($scope.sms1 == 0){
            $scope.sms1 = false;
        }
        else{
@@ -78,11 +86,14 @@ angular.module('my-app')
        $scope.base_img = base_img + 'profile/' ;
        
         $scope.sms = function ( ) {
+             
               if($scope.sms1 == true){
-                   $scope.sms_result = 1;
+                   $scope.sms_result = 0;
+                   $scope.sms1 = false;
                 }
                 else{
-                   $scope.sms_result = 0;
+                   $scope.sms_result = 1;
+                   $scope.sms1 = true;
                 }
                 $http({
                 method: 'POST',
@@ -108,10 +119,12 @@ angular.module('my-app')
           
         $scope.notification = function ( ) {
               if($scope.notification1 == true){
-                   $scope.notification_result = 1;
+                   $scope.notification_result = 0;
+                   $scope.notification1 = false;
                 }
                 else{
-                   $scope.notification_result = 0;
+                   $scope.notification_result = 1;
+                   $scope.notification1 = true;
                 }
                 $http({
                 method: 'POST',
@@ -144,19 +157,21 @@ angular.module('my-app')
                    });
                localStorage.clear();
                $location.path("/home");
-          };   
-           
+          };
 })
-.controller('ChangepassController',function($scope,$http,$location){
+.controller('ChangepassController',function($location,$scope,$http){
+  
       $scope.go = function ( path ) {
               $location.path( path );
           };  
-      $scope.current_pass = "";
-      $scope.new_pass = "";
-      $scope.new_conf_pass = "";
+     
       $scope.submit = function () {
-      
-        if($scope.current_pass == '' ||  $scope.new_pass == '' || $scope.new_conf_pass == '' )
+        
+         $scope.current_pass = document.getElementById('current_pass').value;
+         $scope.new_pass = document.getElementById('new_pass').value;
+         $scope.new_conf_pass = document.getElementById('new_conf_pass').value;
+        
+       if($scope.current_pass == '' ||  $scope.new_pass == '' || $scope.new_conf_pass == '' )
               {
                    ons.notification.alert({
                      title: 'خطا',
@@ -234,24 +249,28 @@ angular.module('my-app')
               
              
           };    
-    
           
 })
-
-.controller('ChangeinfoController',function($scope,$http,$location){
-      $scope.go = function ( path ) {
+.controller('ChangeinfoController',function($location,$scope,$http,$timeout){
+  
+     $scope.go = function ( path ) {
               $location.path( path );
-          };  
-        $scope.name = localStorage.getItem('name');
-        $scope.email = localStorage.getItem('email');
-        $scope.phone = Number(localStorage.getItem('phone'));
-        if(localStorage.getItem('home_phone'))
-          $scope.home_phone = localStorage.getItem('home_phone');
-        else  
-           $scope.home_phone = "";
-        $scope.current_pass = "";
-        
+          }; 
+    $timeout(function() {
+          document.getElementById('name').value = localStorage.getItem('name'); 
+          document.getElementById('email').value = localStorage.getItem('email'); 
+          document.getElementById('phone').value = Number(localStorage.getItem('phone')); 
+          if(localStorage.getItem('home_phone'))
+          document.getElementById('home_phone').value = localStorage.getItem('home_phone');
+     });     
+       
+      
         $scope.submit = function () {
+                $scope.name =  document.getElementById('name').value;
+                $scope.email = document.getElementById('email').value;
+                $scope.phone = Number(document.getElementById('phone').value);
+                $scope.home_phone = document.getElementById('home_phone').value;
+                $scope.current_pass = document.getElementById('current_pass').value;
             if($scope.name == '' ||  $scope.email == '' || $scope.phone == '' || $scope.current_pass == ''){
                   ons.notification.alert({
                      title: 'خطا',
@@ -272,23 +291,13 @@ angular.module('my-app')
                 return false;
              }
              
-             if(typeof ($scope.phone) != 'number' )
-             {
-                  ons.notification.alert({
-                     title: 'خطا',
-                     buttonLabel:"بستن " ,
-                     message: 'شماره تلفن همراه وارد شده معتبر نیست !!'
-                });
-                return false;
-             } 
-           
             if($scope.phone.toString().length != 10 && $scope.phone.toString().length != 11 )
              {
               
                 ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
-                     message: 'تلفن همراه باید 11 رقم باشد !!'
+                     message: 'شماره تلفن همراه وارد شده معتبر نیست !!'
                 });
                 return false;
              } 
@@ -341,7 +350,7 @@ angular.module('my-app')
                                                 buttonLabel:"بستن" ,
                                                 message: 'اطلاعات با موفقیت ویرایش شد'
                                             });
-                                            $location.path('/myprofile/setting');
+                                        $location.path('/myprofile/setting');     
                             }
                             else
                             {
@@ -363,15 +372,14 @@ angular.module('my-app')
                         return false;
                  });
              
-        };//end submit 
-        
+        };//end submit
+          
 })
 .controller('AddressController',function($scope,$location,$rootScope,$http){
-      $scope.go = function ( path ) {
+   $scope.go = function ( path ) {
               $location.path( path );
           };
-    
-    $scope.addressses =  JSON.parse(localStorage.getItem('address'));
+     $scope.addressses =  JSON.parse(localStorage.getItem('address'));
      $scope.delete_address = function ( address_id ) {
          
             ons.notification.confirm({
@@ -392,7 +400,7 @@ angular.module('my-app')
          
           }; 
           
-    $scope.do_remove = function ( address_id ){
+        $scope.do_remove = function ( address_id ){
          document.getElementById('loading').removeAttribute('style');       
            $http({
                 method: 'POST',
@@ -435,20 +443,18 @@ angular.module('my-app')
                            });
                         return false;
                  });  
-    };      
-              
+    };          
 })
-
 .controller('EditAddressController',function($scope,$location,$routeParams,$http,$filter,$rootScope){
     
-    $scope.gback = function(){ window.history.back() };
+    $scope.go = function ( path ) {
+              $location.path( path );
+          };
     $scope.branch_area = '';
-    $scope.area = '';
+    $scope.area2 = '';
     $scope.branch = '';
-    $scope.address = '';
-    $scope.code_posti = '';
-    
-       document.getElementById('loading').removeAttribute('style');   
+ 
+    document.getElementById('loading').removeAttribute('style');   
        $http({
                 method: 'POST',
                 url: base_url+'edit_address_info/HamiDaMin23QZYTRRE782',
@@ -463,10 +469,11 @@ angular.module('my-app')
                                  $scope.my_address = response.data.customer_address;
                                  $scope.temp_area = $filter('filter')($scope.areas,{id:$scope.my_address[0].area_id},true);
                                  $scope.branch_area = $filter('filter')($scope.areas,{branch_id:$scope.temp_area[0].branch_id},true);
-                                 $scope.area = $scope.my_address[0].area_id;
+                                 $scope.area2 = $scope.my_address[0].area_id;
                                  $scope.branch = $scope.temp_area[0].branch_id;
                                  $scope.address = $scope.my_address[0].address;
-                                 $scope.code_posti = $scope.my_address[0].zip_code;
+                                 document.getElementById('code_posti').value = $scope.my_address[0].zip_code;
+
                             }
                             else
                             {
@@ -489,12 +496,19 @@ angular.module('my-app')
                  });   
                  
         $scope.changeArea = function(branch_id){
-        $scope.branch_area = $filter('filter')($scope.areas,{branch_id:branch_id},true);
-        $scope.area = ''; 
+          $scope.branch_area = $filter('filter')($scope.areas,{branch_id:branch_id},true);
+          $scope.area2 = ""; 
+         
      };    
      
        $scope.submit = function () {
-            if($scope.branch == ''){
+            $scope.code_posti =  document.getElementById('code_posti').value;
+            $scope.address = document.getElementById('textarea1').value; 
+            $scope.area2 = document.getElementById('area').value.split(":")[1]; 
+            if($scope.area2 === undefined )
+              $scope.area2 = "";
+           
+             if($scope.branch == ''){
                   ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
@@ -502,7 +516,7 @@ angular.module('my-app')
                 });
                 return false;
              }
-              if($scope.area == ''){
+              if($scope.area2 == ''){
                   ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
@@ -524,7 +538,7 @@ angular.module('my-app')
                 method: 'POST',
                 url: base_url+'edit_address/HamiDaMin23QZYTRRE782',
                 data: $.param({
-                     area_id: $scope.area ,
+                     area_id: $scope.area2 ,
                      zip_code : $scope.code_posti,
                      address : $scope.address,
                      address_id :  $routeParams.id
@@ -573,18 +587,18 @@ angular.module('my-app')
            
 })
 
+
 .controller('NewaddressController',function($http,$scope,$filter,$location,$rootScope){
-    
-    $scope.hback = function(){
-        window.history.back();
-    }
+    $scope.go = function ( path ) {
+              $location.path( path );
+          };
     
      $scope.address_info = {};  
      $scope.address_info.branch_area = '';
      $scope.address_info.area = '';
      $scope.address_info.branch = '';
      $scope.address_info.address1 = '';
-     $scope.address_info.code_posti = '';
+    
      document.getElementById('loading').removeAttribute('style');     
           $http({
                 method: 'GET',
@@ -622,8 +636,8 @@ angular.module('my-app')
         $scope.address_info.area = ''; 
      }; 
      
-      $scope.submit = function () {
-          
+      $scope.submit_add1 = function () {
+           $scope.address_info.code_posti = document.getElementById('code_posti').value;
             if($scope.address_info.branch == ''){
                   ons.notification.alert({
                      title: 'خطا',
@@ -698,216 +712,19 @@ angular.module('my-app')
       };//end submit           
 })
 
-.controller('NewcheckaddressController',function($http,$scope,$filter,$location,$rootScope,$routeParams){
-    
-    $scope.hback = function(){
-        window.history.back();
-    }
-    
-     $scope.address_info = {};  
-     $scope.address_info.branch_area = '';
-     $scope.address_info.area = '';
-     $scope.address_info.branch = '';
-     $scope.address_info.address1 = '';
-     $scope.address_info.code_posti = '';
-     document.getElementById('loading').removeAttribute('style');     
-          $http({
-                method: 'GET',
-                url: base_url+'new_address/HamiDaMin23QZYTRRE782',
-            }).then(function successCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                            if(response.data.done == 1)
-                            {
-                                $scope.areas = response.data.areas;
-                                $scope.branches_a = response.data.branches;
-                                $rootScope.branches =  $scope.branches_a;
-                            }   
-                            else
-                            {
-                                 ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                
-                            }
-                           
-                        }, function errorCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                           });
-                        return false;
-                 });
-    
-    $scope.changeArea = function(branch_id){
-        $scope.address_info.branch_area = $filter('filter')($scope.areas,{branch_id:branch_id},true);
-        $scope.address_info.area = ''; 
-     }; 
+
+.controller('chargeController',function($location,$scope,$http){
+  
+      $scope.go = function ( path ) { $location.path( path ); };
      
-      $scope.submit = function () {
-          
-            if($scope.address_info.branch == ''){
-                  ons.notification.alert({
-                     title: 'خطا',
-                     buttonLabel:"بستن " ,
-                     message: 'شعبه را انتخاب کنید'
-                });
-                return false;
-             }
-              if($scope.address_info.area == ''){
-                  ons.notification.alert({
-                     title: 'خطا',
-                     buttonLabel:"بستن " ,
-                     message: 'محدوده را انتخاب کنید'
-                });
-                return false;
-             }
-             if($scope.address_info.address1 == ''){
-                  ons.notification.alert({
-                     title: 'خطا',
-                     buttonLabel:"بستن " ,
-                     message: 'آدرس را وارد کنید'
-                });
-                return false;
-             }
-            document.getElementById('loading').removeAttribute('style');     
-             
-              $http({
-                method: 'POST',
-                url: base_url+'add_new_address/HamiDaMin23QZYTRRE782',
-                data: $.param({
-                     area_id:   $scope.address_info.area ,
-                     zip_code : $scope.address_info.code_posti,
-                     address :  $scope.address_info.address1,
-                     user_id :  localStorage.getItem('user_id')
-                    }),
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-            }).then(function successCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                            if (response.data != 0)
-                            {
-                               var addresses = JSON.parse(localStorage.getItem('address'));
-                               addresses.push({id:response.data , address : $scope.address_info.address1 , branch_id : $scope.address_info.branch , type: 1 });
-                               localStorage.setItem('address',JSON.stringify(addresses));
-                                ons.notification.alert({
-                                                title: 'پیام',
-                                                buttonLabel:"بستن" ,
-                                                message: 'آدرس با موفقیت ثبت شد'
-                                            });
-                                 $location.path('/checkout/'+$routeParams.id);           
-                                            
-                            }
-                            else
-                            {
-                                 ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                
-                            }
-                           
-                        }, function errorCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                           });
-                        return false;
-                 });    
-             
-      };//end submit           
-})
-
-
-.controller('OrderlistController',function($http,$scope,$q,$location,$rootScope,$route){
-   
-     document.getElementById('loading').setAttribute('style','display:none;'); 
-     $scope.detail = function (id){
-        if( id != '-1' )  
-        $location.path( '/myprofile/order_detail/'+id );
-     };
-     $scope.go = function ( path ) {$location.path( path );};
-     $scope.MyDelegate = {
-      configureItemScope: function(index, itemScope) {
-        if (!itemScope.item) {
-         itemScope.canceler = $q.defer();
-         itemScope.item = {
-            price : 0,
-            date: '',
-            name: '',
-            order_status: 'در حال بررسی' ,
-            id: '-1'
-          };
-          $http.get( base_url+'profile_orders/HamiDaMin23QZYTRRE782/'+localStorage.getItem('user_id')+'/'+index, {
-            timeout: itemScope.canceler.promise
-          }).success(function(data) {
-            console.log(data);
-            itemScope.item.date = data[0].date;
-            itemScope.item.price = data[0].final_price;
-            itemScope.item.id = data[0].id;
-            itemScope.item.name = data[0].name;
-            itemScope.item.order_status = data[0].order_status;
-           
-          }).error(function() {
-              itemScope.item.date = "خطا در برقراری ارتباط";
-              itemScope.item.name = "Error";
-             itemScope.item.id = "-1";
-           });
-        }
-      },
-      calculateItemHeight: function(index) {
-        return 73;
-      },
-      countItems: function() {
-           return  $rootScope.count_o;
-      },
-      destroyItemScope: function(index, itemScope) {
-        itemScope.canceler.resolve();
-        
-      }
-    };
-    
-    $scope.refresh = function(){
-        document.getElementById('loading').removeAttribute('style');     
-        $route.reload();
-    };
-    
-})
-
-.controller('OrderdetailController',function($scope,$location,$http,$routeParams){
-     $scope.go = function ( path ) {
-         document.getElementById('loading').removeAttribute('style');    
-         $location.path( path );
-     };
-    
-     document.getElementById('loading').removeAttribute('style');    
-     $http({
+      document.getElementById('loading').removeAttribute('style');     
+            $http({
                 method: 'GET',
-                url: base_url+'order_detail/HamiDaMin23QZYTRRE782/'+$routeParams.id+'/'+localStorage.getItem('user_id'),
-            }).then(function successCallback(response) {
+                url: base_url+'charj/HamiDaMin23QZYTRRE782'
+               }).then(function successCallback(response) {
                             document.getElementById('loading').setAttribute('style','display:none;'); 
-                            if(response.data.done == 1)
-                            {
-                               $scope.order = response.data.order;
-                               $scope.order_detail = response.data.order_detail;
-                               $scope.address = response.data.address;
-                                 
-                            }   
-                            else
-                            {
-                                 ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                
-                            }
-                           
+                            $scope.charj = response.data;
+                               
                         }, function errorCallback(response) {
                             document.getElementById('loading').setAttribute('style','display:none;'); 
                               ons.notification.alert({
@@ -915,20 +732,51 @@ angular.module('my-app')
                                 buttonLabel:"بستن " ,
                                 message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
                            });
-                        return false;
-                 });    
+                        
+                 }); 
+      
+       $scope.submit = function(){
+            $scope.user_price = document.getElementById('user_price').value;
+          if( $scope.user_price == ""){
+               ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'لطفا مبلغ را وارد کنید'
+                           });
+              return false;             
+          } 
+        if(  isNaN (Number($scope.user_price)) ){
+              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'مبلغ وارد شده معتبر نیست'
+                           });
+              return false;
+        }
         
-        
-        
+         if(  Number($scope.user_price) < 500 ){
+              ons.notification.alert({
+                                title: 'خطا',
+                                buttonLabel:"بستن " ,
+                                message: 'حداقل مبلغ شارژ 500 تومان است'
+                           });
+              return false;
+        }
+       /* okey */ 
+     };                
+     
+       $scope.buy = function(id){
+             alert(id); 
+          
+       };         
 })
-
-
 
 .controller('supportController',function($http,$scope,$q,$location,$rootScope,$route){
+ 
    document.getElementById('loading').setAttribute('style','display:none;'); 
-    $scope.go = function ( path ) {$location.path( path );};
+   $scope.go = function ( path ) {$location.path( path );};
    $scope.detail = function (id){
-        if(id != '-1')
+       if(id != '-1')
          $location.path( '/myprofile/support_detail/'+id );
      };
      
@@ -949,46 +797,43 @@ angular.module('my-app')
           $http.get( base_url+'profile_ticket/HamiDaMin23QZYTRRE782/'+localStorage.getItem('user_id')+'/'+index, {
             timeout: itemScope.canceler.promise
           }).success(function(data) {
-            console.log(data);
             itemScope.item.date = data[0].date;
             itemScope.item.subject = data[0].subject;
             itemScope.item.id = data[0].id;
             itemScope.item.status = data[0].status;
             
-         
            }).error(function() {
               itemScope.item.subject = "خطا در برقراری ارتباط";
               itemScope.item.date = "Error";
               itemScope.item.id = "-1";
-             
           
           });
         }
       },
       calculateItemHeight: function(index) {
-        return 73;
+        return 100;
       },
       countItems: function() {
-           return  $rootScope.count_t;
+          if($rootScope.count_t)
+           return Number( $rootScope.count_t );
+          else
+           return  0;
       },
       destroyItemScope: function(index, itemScope) {
         itemScope.canceler.resolve();
         
       }
     };
-   
+    
+       
 })
-
-.controller('supportdetailController',function($http,$scope,$location,$routeParams,$sce,$rootScope){
-   
+.controller('supportdetailController',function($http,$scope,$location,$routeParams,$sce){
+  
     $scope.id = $routeParams.id;
-    $rootScope.ticket_id = $scope.id;
-     $scope.go = function ( path ) {
+    $scope.go = function ( path ) {
          document.getElementById('loading').removeAttribute('style');    
          $location.path( path );
      };
-     
-       
     
      $scope.base_img = base_img + 'profile/' ;
      $scope.base_img_a = base_img_a + 'admin/uploads/profile/' ;
@@ -1026,29 +871,19 @@ angular.module('my-app')
                         return false;
                  });   
     
-      $scope.dialogs = {};
-         $scope.show = function(dlg) {
-                         if (!$scope.dialogs[dlg]) {
-                        ons.createDialog(dlg).then(function(dialog) {
-                            $scope.dialogs[dlg] = dialog;
-                            dialog.show();
-                        });
-                        } else {
-                          $scope.dialogs[dlg].show();
-                        }
-                 };
- 
-})
+     $scope.showDialog = function(id) {
+        document.getElementById(id).show();
+    };
 
-.directive('ticketAnswer', function($rootScope,$http,$location) {
-  return {
-    restrict: 'E',
-    link: function(scope) {
-        
-        scope.text = ""; 
-        scope.send_answer = function(){
-          scope.ticket_id = $rootScope.ticket_id;
-          if(scope.text == ""){
+    $scope.hideDialog = function(id) {
+        document.getElementById(id).hide();
+    };
+   
+    
+    $scope.send_answer = function(id) {
+        $scope.text = document.getElementById('text_a').value; 
+         $scope.ticket_id = $scope.id;
+          if($scope.text == ""){
                ons.notification.alert({
                                         title: 'خطا',
                                         buttonLabel:"بستن " ,
@@ -1057,15 +892,15 @@ angular.module('my-app')
                return false;                 
           }
           
-          dialog.hide();
+          document.getElementById(id).hide();
           document.getElementById('loading').removeAttribute('style');   
           $http({
                 method: 'POST',
                 url: base_url+'ticket_answer/HamiDaMin23QZYTRRE782',
                 data: $.param({
                    user_id :  localStorage.getItem('user_id'),
-                   ticket_id :  scope.ticket_id,
-                   text : scope.text
+                   ticket_id :   $scope.ticket_id,
+                   text :  $scope.text
                    }),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             }).then(function successCallback(response) {
@@ -1087,22 +922,15 @@ angular.module('my-app')
                         return false;
                  });
           
-        };
-       scope.close_modal = function(){
-            dialog.hide();
-         }     
-    }
-  };
-})
-
-
-.controller('supportnewController',function($scope,$location,$http,$rootScope){
-    $scope.go = function ( path ) {$location.path( path );};
-    $scope.unit_choose = "";
-    $scope.priority = "";
-    $scope.message = "";
-    $scope.subject = "";  
+      
+    };  
+  
     
+    
+})
+.controller('supportnewController',function($scope,$location,$http,$rootScope){
+  $scope.go = function ( path ) {$location.path( path );};
+ 
     document.getElementById('loading').removeAttribute('style');    
      $http({
                 method: 'GET',
@@ -1134,6 +962,11 @@ angular.module('my-app')
                  }); 
     
        $scope.submit = function(){
+           
+           $scope.unit_choose =  document.getElementById('unit_choose').value;
+           $scope.priority =  document.getElementById('priority').value;
+           $scope.message =  document.getElementById('message').value;
+           $scope.subject =  document.getElementById('subject').value;  
            
            if($scope.subject == ''){
                   ons.notification.alert({
@@ -1204,21 +1037,98 @@ angular.module('my-app')
                            });
                         return false;
                  });    
-       };       
-                 
+       };    
+})
+.controller('OrderlistController',function($http,$scope,$q,$location,$rootScope,$route){
+  
+     document.getElementById('loading').setAttribute('style','display:none;'); 
+     $scope.detail = function (id){
+        if(id != '-1')
+         $location.path( '/myprofile/order_detail/'+id );
+     };
+     $scope.go = function ( path ) {$location.path( path );};
+     $scope.MyDelegate = {
+      configureItemScope: function(index, itemScope) {
+        if (!itemScope.item) {
+         itemScope.canceler = $q.defer();
+         itemScope.item = {
+            price : 0,
+            date: '',
+            name: '',
+            order_status: 'در حال بررسی' ,
+            id: '-1'
+          };
+          $http.get( base_url+'profile_orders/HamiDaMin23QZYTRRE782/'+localStorage.getItem('user_id')+'/'+index, {
+            timeout: itemScope.canceler.promise
+          }).success(function(data) {
+            console.log(data);
+            itemScope.item.date = data[0].date;
+            itemScope.item.price = data[0].final_price;
+            itemScope.item.id = data[0].id;
+            itemScope.item.name = data[0].name;
+            itemScope.item.order_status = data[0].order_status;
+           
+          
+          }).error(function() {
+              itemScope.item.date = "خطا در برقراری ارتباط";
+              itemScope.item.name = "Error";
+              itemScope.item.id = "-1";
+             
+          
+          });
+        }
+      },
+      calculateItemHeight: function(index) {
+        return 95;
+      },
+      countItems: function() {
+          if($rootScope.count_o)
+           return Number($rootScope.count_o);
+          else
+           return 0;
+      },
+      destroyItemScope: function(index, itemScope) {
+        itemScope.canceler.resolve();
+        
+      }
+    };
+    
+    $scope.refresh = function(){
+        document.getElementById('loading').removeAttribute('style');     
+        $route.reload();
+    };
     
 })
 
-.controller('charjeController',function($scope,$location,$http){
-    $scope.go = function ( path ) { $location.path( path ); };
-     document.getElementById('loading').removeAttribute('style');     
-            $http({
+.controller('OrderdetailController',function($scope,$location,$http,$routeParams){
+     $scope.go = function ( path ) {
+         document.getElementById('loading').removeAttribute('style');    
+         $location.path( path );
+     };
+    
+     document.getElementById('loading').removeAttribute('style');    
+     $http({
                 method: 'GET',
-                url: base_url+'charj/HamiDaMin23QZYTRRE782'
-               }).then(function successCallback(response) {
+                url: base_url+'order_detail/HamiDaMin23QZYTRRE782/'+$routeParams.id+'/'+localStorage.getItem('user_id'),
+            }).then(function successCallback(response) {
                             document.getElementById('loading').setAttribute('style','display:none;'); 
-                            $scope.charj = response.data;
-                               
+                            if(response.data.done == 1)
+                            {
+                               $scope.order = response.data.order;
+                               $scope.order_detail = response.data.order_detail;
+                               $scope.address = response.data.address;
+                                  
+                            }   
+                            else
+                            {
+                                 ons.notification.alert({
+                                        title: 'خطا',
+                                        buttonLabel:"بستن " ,
+                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                                });
+                                
+                            }
+                           
                         }, function errorCallback(response) {
                             document.getElementById('loading').setAttribute('style','display:none;'); 
                               ons.notification.alert({
@@ -1226,45 +1136,11 @@ angular.module('my-app')
                                 buttonLabel:"بستن " ,
                                 message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
                            });
-                        
-                 }); 
-       $scope.user_price = "";
-       $scope.submit = function(){
-          if( $scope.user_price == ""){
-               ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'لطفا مبلغ را وارد کنید'
-                           });
-              return false;             
-          } 
-        if(  isNaN (Number($scope.user_price)) ){
-              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'مبلغ وارد شده معتبر نیست'
-                           });
-              return false;
-        }
+                        return false;
+                 });    
         
-         if(  Number($scope.user_price) < 500 ){
-              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'حداقل مبلغ شارژ 500 تومان است'
-                           });
-              return false;
-        }
-       /* okey */ 
-     };                
-     
-       $scope.buy = function(id){
-             alert(id); 
-          
-       };        
-            
-                 
+        
+        
 });
-
 
 

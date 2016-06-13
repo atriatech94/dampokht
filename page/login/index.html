@@ -1,21 +1,26 @@
-<dir-tabbar></dir-tabbar>
-<ons-page>
-    <ons-toolbar>
-        <div class="center">ورود  به حساب کاربری دمپخت</div>
-        <div class="left" ng-click="hback();" ><ons-back-button></ons-back-button></div>
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">ورود</div>
+        <div class="right">
+             <ons-toolbar-button ng-click="go('/branch')" modifier="material"><ons-icon icon="fa-cutlery"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('/cart')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
+        </div>
     </ons-toolbar>
+    <ons-page>
+        <div class="login_form">
+            <div class="form-row"><ons-input  id="username" type="text" placeholder="تلفن همراه یا ایمیل" modifier="underbar" style="width:100%" float></ons-input></div>
+            <div class="form-row"><ons-input  id="password" type="password" placeholder="رمز عبور" modifier="underbar"  style="width:100%" float></ons-input></div>
+            <br>
+            <ons-button ng-click="submit()" modifier="material">ورود</ons-button>
+            <br><br>
+            <ons-button ng-click="go('/forget_pass')" modifier="quiet" class="forgot-password"> <a>رمز عبور خود را فراموش کرده ام ! </a></ons-button>
+            <ons-button ng-click="go('/register')" modifier="quiet" class="forgot-password"><a>  عضویت در دمپخت </a> </ons-button>
+        </div>
 
-    <div class="login-form">
-        <form>
-             <div class="progress-bar progress-bar--indeterminate" style="display:none;" id="loading"></div>
-          <input type="text" ng-model="user"   class="text-input--underbar" placeholder="تلفن همراه یا ایمیل" >
-          <input type="password" ng-model="password" class="text-input--underbar" placeholder="رمز عبور" >
-          <br><br>
-          <ons-button ng-click="submit()"  modifier="large" class="login-button">ورود</ons-button>
-        </form>   
-          <br><br>
-          <ons-button modifier="quiet" ng-click="go('/forget_pass')" class="forgot-password"> رمز عبور خود را فراموش کرده ام ! </ons-button>
-          <ons-button modifier="quiet" ng-click="go('/register')" class="forgot-password">  عضویت در دمپخت  </ons-button>
-    </div>
-    
-</ons-page>  
+    </ons-page>
+</ons-template>

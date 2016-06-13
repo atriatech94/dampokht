@@ -1,9 +1,8 @@
 angular.module('my-app')
 .controller('MenuController', function($scope,$http,$location,$routeParams,$rootScope,$route) {
-         $scope.base_img = base_img + 'food-xsmall/' ;
+    $scope.base_img = base_img + 'food-xsmall/' ;
          $scope.branch_id = $routeParams.id;
           $scope.go = function ( path ) {
-              clearTimeout(timer);
               $location.path( path );
           };
           
@@ -62,7 +61,7 @@ angular.module('my-app')
              $scope.categories = $rootScope.root_food.category;
          }
          
-        
+        var timer;
 	    var timeout = 3000;
     
         $scope.add_to_card = function(id,branch_id,picname,price,name,branch_name){
@@ -116,9 +115,12 @@ angular.module('my-app')
         };
 })
 .controller('FoodController', function($scope,$http,$location,$routeParams,$filter,$rootScope,$sce) {
+             $scope.rate = [1,2,3,4,5]; 
        
-       $scope.rate = [1,2,3,4,5]; 
-       
+         $scope.video = function(video){
+             alert(video);
+         };
+
         $scope.share = function(id,branch_id){
               var options = {
                             message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
@@ -317,12 +319,14 @@ angular.module('my-app')
              $scope.food = $filter('filter')($rootScope.root_food.foods,{id : $routeParams.food_id },true);
              $scope.description = $sce.trustAsHtml($scope.food[0].description);
              $scope.realrate = Math.round( Number ($scope.food[0].rate) ); 
-        }  
-    
+              
+              
+         }  
 })
 
+
 .controller('GalleryController', function($scope,$http,$location,$routeParams) {
-          $scope.go = function ( path ) {
+     $scope.go = function ( path ) {
               $location.path( path );
           };
           $scope.base_img = base_img + 'food-small/' ;
@@ -364,75 +368,38 @@ angular.module('my-app')
                         return false;
                  });   
 })
-.controller('videoController', function($scope,$filter,$rootScope,$http,$routeParams,$sce) {
-   
-     $scope.base_img = base_img + 'food-video-pic/' ;
-    
-    if($rootScope.root_food == null || $rootScope.root_food.foods[0].b_id != $routeParams.branch_id )
-         { 
-            document.getElementById('loading').removeAttribute('style');  
+.controller('commentsController', function($scope,$routeParams,$http) {
+    $scope.go = function(){
+        window.history.back();
+    };
+     $scope.base_img = base_img + 'profile/' ;
+    document.getElementById('loading').removeAttribute('style');  
             $http({
                     method: 'POST',
-                    url: base_url+'food_detail/HamiDaMin23QZYTRRE782',
+                    url: base_url+'comments/HamiDaMin23QZYTRRE782',
                     data: $.param({ branch_id :  $routeParams.branch_id , food_id : $routeParams.food_id }),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(function successCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
-                                if(response.data.done == 1)
-                                {
-                                    $scope.food = response.data.food;
-                                    $scope.poster =  ($scope.food[0].video).split(".");
-                                    $scope.poster =  $scope.poster[0]+".jpg";
-                                    $scope.base_vid = base_img + 'food-video/' + $scope.food[0].video ;
-                                    $scope.base_vid = $sce.trustAsResourceUrl($scope.base_vid);
-                                   
-                                    
-                                  
-                                }
-                                else
-                                {
-                                    ons.notification.alert({
-                                            title: 'خطا',
-                                            buttonLabel:"بستن " ,
-                                            message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                    });
-                                    
-                                }
-                            
-                            }, function errorCallback(response) {
+                                $scope.comments = response.data;
+                              }, function errorCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
                                 ons.notification.alert({
                                     title: 'خطا',
                                     buttonLabel:"بستن " ,
                                     message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                            });
+                              });
                             return false;
                     }); 
-         }
-         else
-         {
-             $scope.food = $filter('filter')($rootScope.root_food.foods,{id : $routeParams.food_id },true);
-             $scope.poster =  ($scope.food[0].video).split(".");
-             $scope.poster =  $scope.poster[0]+".jpg";
-             $scope.base_vid = base_img + 'food-video/' + $scope.food[0].video ;
-             $scope.base_vid = $sce.trustAsResourceUrl($scope.base_vid);
-         }  
-
-
+    
    
-    $scope.goBack = function(){
-        window.history.back();
-    };
+   
 })
-
-
-
-.controller('commentController', function($scope,$location,$routeParams,$http,$rootScope) {
-    $scope.goBack = function(){
+.controller('newcommentController', function($scope,$location,$routeParams,$http,$rootScope) {
+     $scope.goBack = function(){
         window.history.back();
     };
     
-     $scope.comment = "";
      $scope.rate = 0;
 	 $scope.rate_f = function(rate){
 		 $scope.rate = rate;
@@ -448,8 +415,6 @@ angular.module('my-app')
                 }).then(function successCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
                                 $scope.rate = Number ( response.data[0].rate ); 
-                                console.log(response.data);
-                            
                             }, function errorCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
                                 ons.notification.alert({
@@ -462,6 +427,7 @@ angular.module('my-app')
       }    
      $scope.submit = function(){
         if(localStorage.getItem('user_id')){
+             $scope.comment = document.getElementById('comment_new').value;
             if( $scope.comment == "" && $scope.rate == 0 ){
                  ons.notification.alert({
                                             title: 'خطا',
@@ -520,188 +486,4 @@ angular.module('my-app')
            $scope.show('login.html');  
         }
     };
-    
-})
-.controller('branchController', function($scope,$http,$location) {
-   $scope.d_branch = localStorage.getItem('default_branch');
-   $scope.goBack = function(){window.history.back();};
-   if($scope.d_branch != 0 && localStorage.getItem('default_branch') != null ){
-        $location.path('/menu/'+$scope.d_branch); 
-   }
-    $scope.go = function ( path ) {
-              $location.path( path );
-          };
-   
-   
-    document.getElementById('loading').removeAttribute('style');     
-            $http({
-                method: 'GET',
-                url: base_url+'branches/HamiDaMin23QZYTRRE782',
-             }).then(function successCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                            $scope.branches = response.data;
-                            console.log( $scope.branches );
-                           
-                              
-                        }, function errorCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                           });
-                        
-                 });  
-  
-  $scope.add_branch = function(branch_id){
-    
-       document.getElementById('loading').removeAttribute('style');  
-            $http({
-                    method: 'POST',
-                    url: base_url+'default_branch/HamiDaMin23QZYTRRE782',
-                    data: $.param({ branch_id :  branch_id , user_id : localStorage.getItem('user_id') }),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }).then(function successCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.d_branch = branch_id;
-                                localStorage.setItem('default_branch',$scope.d_branch);
-                           
-                           }, function errorCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                  ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                return false;
-                    }); 
-  };  
-  
-   $scope.remove_branch = function(branch_id){
-    
-       document.getElementById('loading').removeAttribute('style');  
-            $http({
-                    method: 'POST',
-                    url: base_url+'default_branch_r/HamiDaMin23QZYTRRE782',
-                    data: $.param({ branch_id :  branch_id , user_id : localStorage.getItem('user_id') }),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }).then(function successCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.d_branch = 0;
-                                localStorage.setItem('default_branch',$scope.d_branch);
-                           
-                           }, function errorCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                  ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                return false;
-                    }); 
-  };                
-   
-})
-.controller('branchesController', function($scope,$http,$location) {
-   $scope.d_branch = localStorage.getItem('default_branch');
-   $scope.go = function ( path ) {
-              $location.path( path );
-          };
-    document.getElementById('loading').removeAttribute('style');     
-            $http({
-                method: 'GET',
-                url: base_url+'branches/HamiDaMin23QZYTRRE782',
-             }).then(function successCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                            $scope.branches = response.data;
-                            console.log( $scope.branches );
-                           
-                              
-                        }, function errorCallback(response) {
-                            document.getElementById('loading').setAttribute('style','display:none;'); 
-                              ons.notification.alert({
-                                title: 'خطا',
-                                buttonLabel:"بستن " ,
-                                message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                           });
-                        
-                 });  
-  
-  $scope.add_branch = function(branch_id){
-    
-       document.getElementById('loading').removeAttribute('style');  
-            $http({
-                    method: 'POST',
-                    url: base_url+'default_branch/HamiDaMin23QZYTRRE782',
-                    data: $.param({ branch_id :  branch_id , user_id : localStorage.getItem('user_id') }),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }).then(function successCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.d_branch = branch_id;
-                                localStorage.setItem('default_branch',$scope.d_branch);
-                           
-                           }, function errorCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                  ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                return false;
-                    }); 
-  };  
-  
-   $scope.remove_branch = function(branch_id){
-    
-       document.getElementById('loading').removeAttribute('style');  
-            $http({
-                    method: 'POST',
-                    url: base_url+'default_branch_r/HamiDaMin23QZYTRRE782',
-                    data: $.param({ branch_id :  branch_id , user_id : localStorage.getItem('user_id') }),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }).then(function successCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.d_branch = 0;
-                                localStorage.setItem('default_branch',$scope.d_branch);
-                           
-                           }, function errorCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                  ons.notification.alert({
-                                        title: 'خطا',
-                                        buttonLabel:"بستن " ,
-                                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                                });
-                                return false;
-                    }); 
-  };                
-   
-})
-
-
-.controller('commentdetailController', function($scope,$routeParams,$http) {
-    $scope.go = function(){
-        window.history.back();
-    };
-     $scope.base_img = base_img + 'profile/' ;
-    document.getElementById('loading').removeAttribute('style');  
-            $http({
-                    method: 'POST',
-                    url: base_url+'comments/HamiDaMin23QZYTRRE782',
-                    data: $.param({ branch_id :  $routeParams.branch_id , food_id : $routeParams.food_id }),
-                    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-                }).then(function successCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.comments = response.data;
-                              }, function errorCallback(response) {
-                                document.getElementById('loading').setAttribute('style','display:none;'); 
-                                ons.notification.alert({
-                                    title: 'خطا',
-                                    buttonLabel:"بستن " ,
-                                    message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
-                              });
-                            return false;
-                    }); 
-    
-    
-    
 });

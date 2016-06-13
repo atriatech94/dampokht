@@ -1,6 +1,6 @@
 angular.module('my-app')
 .controller('IntroController', function($location,$scope) {
-  $scope.go = function(go){ $location.path(go); } ;
+    $scope.go = function ( path ) {$location.path( path );};
 })
 .directive('introDir' , function (){
 		return {
