@@ -31,7 +31,7 @@
             <param name="SENDER_ID" value="dampokht-1336" />
     </plugin>
     <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
-    <gap:plugin name="nl.x-services.plugins.socialsharing" version="4.3.16" />
+    <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <icon src="icon.png" />
       <platform name="ios">
         <icon   src="res/icon/ios/icon.png" height="57" width="57" />
