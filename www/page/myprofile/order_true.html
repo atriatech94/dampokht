@@ -1,0 +1,69 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">سفارش #{{result.final_food[0].order_id}} </div>
+        <div class="right">
+              <ons-toolbar-button ng-click="go('/myprofile/address')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+
+
+        <ons-page class="order_list support_one order_true">
+            <ons-list-item>
+                <ons-row>
+                    <ons-col class="text-center">
+                        <ons-icon icon="ion-ios-checkmark-empty" size="40px" style="color:#1b9b22;padding-left:10px"></ons-icon>
+                        سفارش شما با موفقیت ثبت شد
+                    </ons-col>
+                </ons-row>      
+            </ons-list-item>
+            <!---=================================================================----->
+            <ons-list-header class="rtl f18 p10"> لیست خوراک ها </ons-list-header>
+             <ons-list-item modifier="tappable" ng-repeat="food in result.final_food">
+                 <ons-row>
+                     <ons-col class="f14" >{{food.name}}</ons-col>
+                     <ons-col width="55px" class="f14">{{food.quantity}} عدد</ons-col>
+                     <ons-col class="total f14 text-left" width="120px">{{ food.price * food.quantity | currency : '' : 0  }} <i>تومان</i></ons-col>
+                 </ons-row>
+            </ons-list-item>
+            <!---=================================================================-----> 
+            <ons-list-header class="rtl f18 p10"> جزئیات پرداخت </ons-list-header>
+
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col>مبلغ کل سفارش : </ons-col><ons-col class="f13 text-left"> {{ result.final_result.total_price | currency : '' : 0  }} تومان </ons-col></ons-row>
+            </ons-list-item>   
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col>مالیات بر ارزش افزوده : </ons-col><ons-col class="f13 text-left">{{ result.final_result.tax | currency : '' : 0  }} تومان</ons-col></ons-row>
+            </ons-list-item>  
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col> تخفیف : </ons-col><ons-col class="f13 text-left">{{ result.final_result.discount | currency : '' : 0  }} تومان</ons-col></ons-row>
+            </ons-list-item>  
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col >مبلغ قابل پرداخت : </ons-col><ons-col class="f13 text-left">{{ result.final_result.final_price | currency : '' : 0  }} تومان</ons-col></ons-row>
+            </ons-list-item>
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col>امتیاز استفاده شده :  </ons-col><ons-col class="f13 text-left">{{ result.final_result.point }}</ons-col></ons-row>
+            </ons-list-item>  
+            <ons-list-item class="f14 rtl">
+                <ons-row><ons-col >نحوه پرداخت : </ons-col>
+                   <ons-col ng-if="result.final_result.payment_type == 0" class="f13 text-left">استفاده از امتیاز</ons-col>
+                   <ons-col ng-if="result.final_result.payment_type == 1" class="f13 text-left">پرداخت آنلاین</ons-col>
+                   <ons-col ng-if="result.final_result.payment_type == 2" class="f13 text-left">پرداخت در محل</ons-col>
+                   <ons-col ng-if="result.final_result.payment_type == 3" class="f13 text-left">پرداخت از اعتبار کاربری</ons-col>
+                </ons-row>
+            </ons-list-item>
+
+            <!---=================================================================----->
+
+    </ons-page>
+</ons-template>
+
+<style>
+.ons-icon--ion{
+    vertical-align: middle;
+}
+</style>
