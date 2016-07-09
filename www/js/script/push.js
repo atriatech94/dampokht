@@ -22,8 +22,9 @@ var app1 = {
               senderID: "dampokht-1336"
             },
         });
-
+        alert(123);
         push.on('registration', function(data) {
+            alert(data.registrationId);
            localStorage.setItem('reg_id',data.registrationId);
         });
       
