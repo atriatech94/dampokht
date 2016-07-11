@@ -178,10 +178,10 @@ angular.module('my-app')
 .controller('verifyController', function($scope,$location,$http) {
       $scope.forgot_user_id = localStorage.getItem('forgot_user_id');
       $scope.go = function ( path ) {$location.path( path )};
-       var smsInboxPlugin = cordova.require('cordova/plugin/smsinboxplugin');
-       smsInboxPlugin.startReception (function(msg) {
-            alert(msg);
-            smsInboxPlugin.stopReception (function() {
+       var smsPlugin = cordova.require('cordova/plugin/smsPlugin');
+       smsPlugin.startReception (function(msg) {
+               alert(msg[smsPlugin.COLS.BODY]);
+           smsPlugin.stopReception (function() {
                 alert("Correctly stopped");
             });
         }, function() {
