@@ -16,7 +16,6 @@ var app1 = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-       alert(123); 
       push = PushNotification.init({
            android: {
               senderID: "346351995783"
@@ -24,7 +23,6 @@ var app1 = {
         });
        
         push.on('registration', function(data) {
-            alert(data.registrationId);
            localStorage.setItem('reg_id',data.registrationId);
         });
       

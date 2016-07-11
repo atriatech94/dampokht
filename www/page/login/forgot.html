@@ -1,0 +1,23 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">بازیابی رمز عبور</div>
+        <div class="right">
+             <ons-toolbar-button ng-click="go('/login')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page>
+        <div class="login_form">
+            <div class="form-row"><ons-input  id="username" type="text" placeholder="تلفن همراه یا ایمیل" modifier="underbar" style="width:100%" float></ons-input></div>
+            <br>
+            <ons-button ng-click="submit()" modifier="material">ارسال کد بازیابی</ons-button>
+            <br><br>
+            <ons-button ng-click="go('/verify_code')" modifier="quiet" class="forgot-password"> <a>کد را دارم برو به صفحه تغییر کلمه عبور</a></ons-button>
+        </div>
+
+    </ons-page>
+</ons-template>

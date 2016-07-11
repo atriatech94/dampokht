@@ -1046,7 +1046,10 @@ angular.module('my-app')
         if(id != '-1')
          $location.path( '/myprofile/order_detail/'+id );
      };
-     $scope.go = function ( path ) {$location.path( path );};
+     $scope.go = function ( path ) {
+         
+         $location.path( path );
+     };
      $scope.MyDelegate = {
       configureItemScope: function(index, itemScope) {
         if (!itemScope.item) {
