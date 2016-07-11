@@ -181,6 +181,9 @@ angular.module('my-app')
        var smsInboxPlugin = cordova.require('cordova/plugin/smsinboxplugin');
        smsInboxPlugin.startReception (function(msg) {
             alert(msg);
+            smsInboxPlugin.stopReception (function() {
+                alert("Correctly stopped");
+            });
         }, function() {
             alert("Error while receiving messages");
         });
