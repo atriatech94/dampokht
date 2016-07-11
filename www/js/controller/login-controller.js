@@ -178,7 +178,12 @@ angular.module('my-app')
 .controller('verifyController', function($scope,$location,$http) {
       $scope.forgot_user_id = localStorage.getItem('forgot_user_id');
       $scope.go = function ( path ) {$location.path( path )};
-      smsplugin.startReception(successCallback(result),failureCallback(error));
+       var smsInboxPlugin = cordova.require('cordova/plugin/smsinboxplugin');
+       smsInboxPlugin.startReception (function(msg) {
+            alert(msg);
+        }, function() {
+            alert("Error while receiving messages");
+        });
       $scope.submit = function () {
          $scope.user = document.getElementById('username').value;
          $scope.password = document.getElementById('password').value;
