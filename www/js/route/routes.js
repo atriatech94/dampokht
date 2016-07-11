@@ -149,6 +149,14 @@ angular.module('my-app')
             templateUrl: 'page/myprofile/order_false.html',
             controller: 'OrderfalseController',
 		})
+         .when('/forget_pass', {
+            templateUrl: 'page/login/forgot.html',
+            controller: 'forgetController',
+		})
+         .when('/verify_code', {
+            templateUrl: 'page/login/verify_code.html',
+            controller: 'verifyController',
+		})
 });
 
 /*
