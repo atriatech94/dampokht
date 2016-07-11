@@ -31,9 +31,6 @@
     <plugin name="phonegap-plugin-push" spec="1.6.0">
             <param name="SENDER_ID" value="346351995783" />
     </plugin>
-     <feature name="SmsPlugin">
-       <param name="android-package" value="com.applegrew.cordova.android.plugin.sms.SmsPlugin" />
-     </feature>
     <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
     <platform name="android">
