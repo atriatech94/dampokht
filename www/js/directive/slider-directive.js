@@ -23,16 +23,7 @@ angular.module('my-app')
                 });
         }/* end */
 }})
-.directive('foodDir' , function ($timeout){
-    return {
-        link: function() {
-            $timeout(function(){
-              //  Waves.attach('.flat-box', ['waves-block']);
-              //  Waves.attach('.wave', ['waves-button']);
-            });
-            
-        }/* end */
-}})
+
 .service('loadGoogleMapAPI', ['$window', '$q', function ( $window, $q ) {
 
         var deferred = $q.defer(); 

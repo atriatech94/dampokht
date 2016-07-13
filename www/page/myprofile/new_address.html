@@ -10,14 +10,10 @@
               <ons-toolbar-button ng-click="go('/myprofile/address')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
         </div>
     </ons-toolbar>
-
+    <div ng-init="show_case = '1' " ></div>
         <ons-page>
-            <ons-tabbar>
-                <ons-tab label="گرفتن از نقشه" page="tab2.html" ></ons-tab>
-                <ons-tab label="نوشتن آدرس" page="tab1.html" active></ons-tab>
-            </ons-tabbar>
-
-            <ons-template id="tab1.html">
+            
+            <div id="tab1" ng-if="show_case == '1' ">
                 <ons-page>
                     <div class="formarea newaddress">
                       <div class="form-row">
@@ -40,11 +36,11 @@
                         </div>      
                         <div class="form-row" style="margin-top:20px;"> <ons-input  id="code_posti" modifier="underbar" type="text"  class="width-full rtl"  placeholder="کد پستی (اختیاری)" float></ons-input> </div>
                         <div class="vspc form-row"><ons-button ng-click="submit_add1()" modifier="material">افزودن آدرس جدید</ons-button></div>
+                        
                     </div>
                 </ons-page>
-            </ons-template>
-
-            <ons-template id="tab2.html">
+            </div>
+            <div id="tab2" ng-if="show_case == '2' ">
                 <p class="address_p">  ابتدا شعبه را انتخاب کنید سپس مکان خود را روی نقشه انتخاب کنید ، توجه داشته باشید که مکان شما باید در محدوده مشخص شده شعبه باشد برای این کار می توانید از دکمه مکان یاب یا جستجوی نقشه استفاده کنید.  </p>	  
                 <div class="map_block">
                         <section id="place-on-map"> 
@@ -65,7 +61,6 @@
                                 <p class="note">محدوده خود را جستجو کنید</p>
                             </div>
                             <!-- /.form-group -->
-
                             <div class="show_gmap">
                                 <div id="submit-map" lat="29.36" long="52.33" class="googleMap" style="height:300px"></div>
                                 <div class="now_me"></div>
@@ -94,6 +89,11 @@
 
                 <div class="map_block"> <div class="vspc form-row"><ons-button ng-click="submit_map()" style="width:100%" modifier="material">افزودن آدرس جدید</ons-button> </div> </div>
                 <br><br>
-            </ons-template>
+                
+            </div>
     </ons-page>
+    <div class="address_tab">
+        <span ng-click="show_case = '1'" class="one" active="{{show_case}}">گرفتن از نقشه</span>
+        <span ng-click="show_case = '2'" class="two" active="{{show_case}}">نوشتن آدرس</span>
+    </div>
 </ons-template>

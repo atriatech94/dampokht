@@ -354,6 +354,13 @@ angular.module('my-app')
                 animateThumb: false,
                 showThumbByDefault: false
         });
+           
+         $('#lightgallery').on('onBeforeOpen.lg',function(event){
+               localStorage.setItem('gallery_lg',1);
+            }); 
+         $('#lightgallery').on('onBeforeClose.lg',function(event){
+               localStorage.removeItem('gallery_lg');
+            });    
         }
          
     }
@@ -365,7 +372,9 @@ angular.module('my-app')
           scope.go = function(path){
                     $location.path( path );
                 };
-
+           scope.exit = function(path){
+                   navigator.app.exitApp();
+                };
            scope.share = function(){
                     var options = {
                             message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
@@ -576,7 +585,7 @@ angular.module('my-app')
               for(var i = 0 ; i < scope.cart.length;  i++) {
                     if (scope.cart[i].id == id && scope.cart[i].branch_id == branch_id ) {
                           scope.cart[i].quantity = parseInt(scope.cart[i].quantity) - 1;
-                           for(var j=0 ; j<scope.cart_branch.length ; j++){
+                           for(var j=0 ; j<scope.cart_branch.length;j++){
                                if( scope.cart_branch[j].branch_id == branch_id )
                                 {
                                     scope.cart_branch[j].total =  scope.cart_branch[j].total -  parseInt(scope.cart[i].price);
@@ -588,7 +597,7 @@ angular.module('my-app')
                               scope.cart.splice(i,1);
                               scope.basket_size--;
                                var find = 0;
-                               for(var i = 0 ; i < scope.cart.length;  i++) {
+                               for(var i = 0 ; i < scope.cart.length;i++) {
                                   if(scope.cart[i].branch_id == branch_id)
                                   {
                                       find ++;
@@ -598,7 +607,7 @@ angular.module('my-app')
                                } 
                                if(find == 0)
                                {
-                                     for(var i = 0 ; i < scope.cart_branch.length;  i++) {
+                                     for(var i = 0;i < scope.cart_branch.length;i++) {
                                          
                                          if(scope.cart_branch[i].branch_id == branch_id )
                                          {
@@ -625,7 +634,7 @@ angular.module('my-app')
                     if (scope.cart[i].id == id && scope.cart[i].branch_id == branch_id ) {
                           scope.cart[i].quantity = parseInt(scope.cart[i].quantity) + 1;
                           localStorage.setItem('cart',JSON.stringify(scope.cart));
-                          for(var j=0 ; j<scope.cart_branch.length ; j++){
+                          for(var j=0 ; j<scope.cart_branch.length;j++){
                                if( scope.cart_branch[j].branch_id == branch_id )
                                 {
                                     scope.cart_branch[j].total =  scope.cart_branch[j].total +  parseInt(scope.cart[i].price);
@@ -643,7 +652,7 @@ angular.module('my-app')
              
               for(var i = 0 ; i < scope.cart.length;  i++) {
                     if (scope.cart[i].id == id && scope.cart[i].branch_id == branch_id ) {
-                          for(var j=0 ; j<scope.cart_branch.length ; j++){
+                          for(var j=0 ; j<scope.cart_branch.length;j++){
                             if( scope.cart_branch[j].branch_id == branch_id )
                                 {
                                     scope.cart_branch[j].total =  scope.cart_branch[j].total -  (parseInt(scope.cart[i].price) * parseInt(scope.cart[i].quantity) ) ;

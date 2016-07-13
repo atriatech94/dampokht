@@ -118,9 +118,8 @@ angular.module('my-app')
              $scope.rate = [1,2,3,4,5]; 
        
          $scope.video = function(video){
-             alert(video);
+             VideoPlayer.play("http://dampokht.com/food-video/"+video);
          };
-
         $scope.share = function(id,branch_id){
               var options = {
                             message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
