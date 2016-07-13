@@ -271,16 +271,17 @@ angular.module('my-app')
                 $scope.phone = Number(document.getElementById('phone').value);
                 $scope.home_phone = document.getElementById('home_phone').value;
                 $scope.current_pass = document.getElementById('current_pass').value;
-            if($scope.name == '' ||  $scope.email == '' || $scope.phone == '' || $scope.current_pass == ''){
+            if($scope.name == '' || $scope.phone == '' || $scope.current_pass == ''){
                   ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
-                     message: 'لطفا  فیلد های نام، ایمیل ، تلفن همراه ، کلمه عبور فعلی را پر کنید'
+                     message: 'لطفا  فیلد های نام، تلفن همراه ، کلمه عبور فعلی را پر کنید'
                 });
                 return false;
              }
              
              var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if($scope.email != ""){
              if(!re.test($scope.email))
              {
                 ons.notification.alert({
@@ -290,8 +291,8 @@ angular.module('my-app')
                 });
                 return false;
              }
-             
-            if($scope.phone.toString().length != 10 && $scope.phone.toString().length != 11 )
+         }    
+           if($scope.phone.toString().length != 10 && $scope.phone.toString().length != 11 )
              {
               
                 ons.notification.alert({

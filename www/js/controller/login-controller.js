@@ -59,6 +59,7 @@ angular.module('my-app')
                     localStorage.setItem('notification',$scope.user_info.notification);
                     localStorage.setItem('sms',$scope.user_info.sms);
                     localStorage.setItem('phone',$scope.user_info.phone);
+                    localStorage.setItem('verification',$scope.user_info.verification);
                     localStorage.setItem('picname',$scope.user_info.picname);
                     localStorage.setItem('home_phone',$scope.user_info.home_phone);
                     localStorage.setItem('address',JSON.stringify($scope.user_info.address));
@@ -77,7 +78,15 @@ angular.module('my-app')
                     else{
                        app1.initialize();  
                     }
-                    $location.path("/home");
+                    if(localStorage.getItem('verification') == 0){
+                       localStorage.removeItem('user_id');
+                       localStorage.setItem('user_id_temmp',$scope.user_info.customer_id);
+                       $location.path("/verification");
+                    }
+                    else{
+                      $location.path("/home");
+                    }
+                    
                 }
                                     
             }, function errorCallback(response) {
@@ -178,6 +187,7 @@ angular.module('my-app')
 .controller('verifyController', function($scope,$location,$http) {
       $scope.forgot_user_id = localStorage.getItem('forgot_user_id');
       $scope.go = function ( path ) {$location.path( path )};
+     
       $scope.submit = function () {
          $scope.user = document.getElementById('username').value;
          $scope.password = document.getElementById('password').value;
@@ -269,5 +279,127 @@ angular.module('my-app')
             });   
         }
       };
+
+})
+.controller('verificationController', function($scope,$location,$http,$timeout,$route) {
+      if(localStorage.getItem('verification') == 1){
+          $location.path('/home');
+      }
+      $scope.resend = false;
+       $scope.timer = 30;
+      document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'POST',
+                url: base_url+'verification/HDaMin2dsaZ3QZYTRRE782',
+                data: $.param({user_id: localStorage.getItem('user_id_temmp') }),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function successCallback(response) {
+                document.getElementById('loading').setAttribute('style','display:none;'); 
+                if(response.data == 0)
+                {
+                    ons.notification.alert({
+                        title: 'خطا',
+                        buttonLabel:"بستن" ,
+                        message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                    });
+                    $scope.resend = true;
+                    return false;  
+                }
+                 if(response.data == 1)
+                {
+                    ons.notification.alert({
+                        title: 'خطا',
+                        buttonLabel:"بستن" ,
+                        message: 'شما در یک روز تنها می توانید 5 بار درخواست کد تایید کنید'
+                    });
+                    $scope.resend = true;
+                    return false;  
+                }
+                 $timeout(function(){
+                    $scope.second();
+                    },1000);
+                    $scope.second = function(){
+                                $scope.timer =  $scope.timer-1 ;
+                                if($scope.timer == 0){
+                                    $scope.resend = true;
+                                }
+                                else
+                                {
+                                    $timeout(function(){ $scope.second(); },1000);   
+                                }
+                                console.log($scope.timer);
+                }; 
+               
+               
+
+          }, function errorCallback(response) {
+                document.getElementById('loading').setAttribute('style','display:none;'); 
+                ons.notification.alert({
+                    title: 'خطا',
+                    buttonLabel:"بستن " ,
+                    message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                });
+                $scope.resend = true;
+                return false;
+            }); 
+      $scope.go = function ( path ) {
+          $location.path( path );
+        };
+     $scope.refresh = function(){
+        document.getElementById('loading').removeAttribute('style');     
+        $route.reload();
+    };
+      $scope.submit = function () {
+         $scope.user = document.getElementById('username').value;
+        if($scope.user == '')
+        {
+            ons.notification.alert({
+                title: 'خطا',
+                buttonLabel:"بستن " ,
+                message: 'کد تایید را وارد کنید !!'
+            });
+                    
+        }
+        else
+        {
+                       
+            document.getElementById('loading').removeAttribute('style');     
+            $http({
+                method: 'POST',
+                url: base_url+'verification_done/HDaMin2dsaZ3QZYTRRE782',
+                data: $.param({code : $scope.user , user_id : localStorage.getItem('user_id_temmp')}),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).then(function successCallback(response) {
+                document.getElementById('loading').setAttribute('style','display:none;'); 
+                if(response.data == 0)
+                {
+                    ons.notification.alert({
+                        title: 'خطا',
+                        buttonLabel:"بستن" ,
+                        message: 'کد وارد شده معتبر نیست !!'
+                    });
+                    return false;  
+                }
+                else
+                {  
+                   localStorage.setItem('user_id',localStorage.getItem('user_id_temmp')); 
+                   localStorage.setItem('verification',1);
+                   localStorage.removeItem('user_id_temmp');
+                   $location.path('/home');
+                }
+                                    
+            },function errorCallback(response) {
+                document.getElementById('loading').setAttribute('style','display:none;'); 
+                ons.notification.alert({
+                    title: 'خطا',
+                    buttonLabel:"بستن " ,
+                    message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
+                });
+                return false;
+            });   
+        }
+                
+             
+    };
 
 });

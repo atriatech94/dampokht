@@ -157,6 +157,11 @@ angular.module('my-app')
             templateUrl: 'page/login/verify_code.html',
             controller: 'verifyController',
 		})
+        .when('/verification', {
+            templateUrl: 'page/login/verification.html',
+            controller: 'verificationController',
+		})
+        
 });
 
 /*

@@ -8,7 +8,8 @@ angular.module('my-app')
           }  
      $scope.go = function(path){
             $location.path(path);
-        }
+        }; 
+     
      $scope.total = 0 ;
         if(localStorage.getItem('cart'))
         {
@@ -19,7 +20,8 @@ angular.module('my-app')
                 }
                 else{
                   
-                   $scope.addresses = JSON.parse(localStorage.getItem('address')); 
+                   $scope.addresses1 = JSON.parse(localStorage.getItem('address')); 
+                   $scope.addresses = $filter('filter')( $scope.addresses1, {branch_id : $routeParams.id} ,true); 
                    $scope.foods  = $filter('filter')($scope.cart, {branch_id : $routeParams.id} ,true);  
                    for(var i=0 ; i< $scope.foods.length ; i++){
                         $scope.total =  $scope.total + ( $scope.foods[i].price *  $scope.foods[i].quantity);
@@ -167,7 +169,7 @@ angular.module('my-app')
         
             $scope.addr =  function(address){
                 var a = document.getElementsByClassName('address-p');
-                for(var i=0 ; i<a.length ; i++){
+                for(var i=0;i<a.length;i++){
                    a[i].removeAttribute("checked");
                 }
                 document.getElementById('p-'+address).setAttribute("checked", "checked");

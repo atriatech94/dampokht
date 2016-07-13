@@ -1,0 +1,35 @@
+<ons-sliding-menu  main-page="page1.html" menu-page="menu.html" side="right" max-slide-distance="250px" var="menu"></ons-sliding-menu>
+<ons-template id="menu.html" ><dir-link></dir-link></ons-template>
+<ons-template id="page1.html">
+    <ons-toolbar modifier="material" class="inbox-interface">
+        <div class="left">
+            <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
+        </div>
+        <div class="center">تایید حساب کاربری</div>
+        <div class="right">
+             <ons-toolbar-button ng-click="go('/login')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
+        </div>
+    </ons-toolbar>
+    <ons-page>
+        <div class="login_form">
+            <p>کد ارسال شده به تلفن همراه یا ایمیل خود را وارد کنید </p>
+            <br>
+            <div style="direction:rtl;" class="form-row"><ons-input  id="username" type="number" placeholder="کد " modifier="underbar" style="width:100%" float></ons-input></div>
+            <br>
+            <ons-button ng-click="submit()" modifier="material">تایید</ons-button>
+            <ons-button ng-if="!resend" class="btn-timer"  modifier="material">درخواست ارسال مجدد در {{timer}} ثانیه</ons-button>
+            <ons-button ng-if="resend" class="btn-resend" ng-click="refresh()" modifier="material">ارسال مجدد کد</ons-button>
+            <br><br>
+         </div>
+
+    </ons-page>
+</ons-template>
+<style>
+    .btn-timer{
+        background-color:#aaaaff;
+    }
+     .btn-resend{
+        background-color:#6f6fff;
+    }
+    
+</style>

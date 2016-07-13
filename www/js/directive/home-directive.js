@@ -364,7 +364,16 @@ angular.module('my-app')
       link: function(scope) {
           scope.go = function(path){
                     $location.path( path );
-                }
+                };
+
+           scope.share = function(){
+                    var options = {
+                            message: 'دمپخت', // not supported on some apps (Facebook, Instagram)
+                            subject: 'دمپخت', // fi. for email
+                            url: 'http://dampokht.com/'
+                        }
+                      window.plugins.socialsharing.shareWithOptions(options);
+                };      
           if(localStorage.getItem('user_id'))
           {
               scope.login = 1;
@@ -429,6 +438,7 @@ angular.module('my-app')
                                         localStorage.setItem('sms',scope.user_info.sms);
                                         localStorage.setItem('default_branch',scope.user_info.default_branch);
                                         localStorage.setItem('address',JSON.stringify(scope.user_info.address));
+                                        localStorage.setItem('verification',1);
                                         localStorage.setItem('whishlist',JSON.stringify(scope.user_info.whishlist));
                                         $rootScope.user_id_wish = 1;
                                         scope.food_is_whish = $filter('filter')(scope.user_info.whishlist,{food_id : $rootScope.food_wish_id , branch_id : $rootScope.branch_wish_id },true); 
@@ -544,7 +554,7 @@ angular.module('my-app')
                 }
                 else{
                     
-                   for(var i=0 ; i<scope.cart_branch.length ; i++){
+                   for(var i=0 ; i<scope.cart_branch.length;i++){
                          scope.cart_branch[i].total = 0; 
                          for ( var j=0 ; j< scope.cart.length ; j++ ){
                              if(scope.cart[j].branch_id == scope.cart_branch[i].branch_id ){

@@ -20,25 +20,27 @@ angular.module('my-app')
             $scope.password =  document.getElementById('password').value;
             $scope.ConfPassword =  document.getElementById('ConfPassword').value;
            
-             if($scope.Name == '' ||  $scope.email == '' || $scope.phone == '' || $scope.password == ''  || $scope.ConfPassword == ''){
+             if($scope.Name == '' || $scope.phone == '' || $scope.password == ''  || $scope.ConfPassword == ''){
                   ons.notification.alert({
                      title: 'خطا',
                      buttonLabel:"بستن " ,
-                     message: 'لطفا تمامی فیلد ها را پر کنید'
+                     message: 'لطفا تمامی فیلد های اجباری را پر کنید'
                 });
                 return false;
              }
              
              var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-             if(!re.test($scope.email))
-             {
-                ons.notification.alert({
-                     title: 'خطا',
-                     buttonLabel:"بستن " ,
-                     message: 'ایمیل وارد شده معتبر نیست !!'
-                });
-                return false;
-             } 
+           if($scope.email != ""){
+                if(!re.test($scope.email))
+                {
+                    ons.notification.alert({
+                        title: 'خطا',
+                        buttonLabel:"بستن " ,
+                        message: 'ایمیل وارد شده معتبر نیست !!'
+                    });
+                    return false;
+                } 
+            }
              $scope.phone = Number($scope.phone);
              if($scope.phone.toString().length != 10  )
              {
@@ -100,6 +102,7 @@ angular.module('my-app')
                                 localStorage.setItem('sms',1);
                                 localStorage.setItem('home_phone',"");
                                 localStorage.setItem('address',JSON.stringify($scope.user_info.address));
+                                localStorage.setItem('verification',0);
                                 localStorage.setItem('whishlist',JSON.stringify([]));
                                 /* register for push */
                                if(localStorage.getItem('reg_id')){
@@ -116,7 +119,14 @@ angular.module('my-app')
                                     app1.initialize();  
                                 }
                                 /* end register for push */
-                                $location.path("/home");
+                                if(localStorage.getItem('verification') == 0){
+                                    localStorage.removeItem('user_id');
+                                    localStorage.setItem('user_id_temmp',$scope.user_info.customer_id);
+                                    $location.path("/verification");
+                                }
+                                else{
+                                  $location.path("/home");
+                                }
                             }
                            
                         }, function errorCallback(response) {
