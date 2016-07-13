@@ -19,7 +19,7 @@ var app1 = {
       navigator.splashscreen.show();
       setTimeout(function() {
             navigator.splashscreen.hide();
-        }, 3000);
+        }, 9000);
       push = PushNotification.init({
            android: {
               senderID: "346351995783"
