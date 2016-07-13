@@ -8,6 +8,8 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
     <preference name="android-build-tool" value="gradle" />
+    <preference name="AutoHideSplashScreen" value="true" />
+    <preference name="SplashScreenDelay" value="5000" />
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -34,6 +36,18 @@
     <plugin name="com.moust.cordova.videoplayer" spec="1.0.0" source="pgb" />
     <plugin name="de.appplant.cordova.plugin.hidden-statusbar-overlay" spec="1.2.0" source="pgb" />
     <gap:plugin name="cordova-plugin-x-socialsharing" source="npm" />
+   <platform name="android">
+    <!-- you can use any density that exists in the Android project -->
+        <splash src="www/res/screen/android/splash-land-hdpi.png" density="land-hdpi"/>
+        <splash src="www/res/screen/android/splash-land-ldpi.png" density="land-ldpi"/>
+        <splash src="www/res/screen/android/splash-land-mdpi.png" density="land-mdpi"/>
+        <splash src="www/res/screen/android/splash-land-xhdpi.png" density="land-xhdpi"/>
+        <splash src="www/res/screen/android/splash-port-hdpi.png" density="port-hdpi"/>
+        <splash src="www/res/screen/android/splash-port-ldpi.png" density="port-ldpi"/>
+        <splash src="www/res/screen/android/splash-port-mdpi.png" density="port-mdpi"/>
+        <splash src="www/res/screen/android/splash-port-xhdpi.png" density="port-xhdpi"/>
+   </platform>
+   
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
