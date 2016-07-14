@@ -1,7 +1,7 @@
 
+document.addEventListener('deviceready',onDeviceReady, false);
+function onDeviceReady() {
 document.addEventListener("backbutton",amintest, false);
-/*======================================*/
-
 function amintest(){
     var loc =   window.location.hash;
     loc = loc.replace("#/", "");
@@ -66,6 +66,7 @@ function amintest(){
     else{
        window.history.back(); 
     }
+}
 }
 
 
