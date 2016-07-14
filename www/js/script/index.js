@@ -1,9 +1,13 @@
 
 document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {
-document.addEventListener("backbutton",amintest, false);
+ ons.ready(function () {
+    ons.disableDeviceBackButtonHandler();
+   document.addEventListener("backbutton",amintest, false);
+});   
+
 function amintest(){
-    ons.disableDeviceBackButtonHandler(); 
+   
     var loc =   window.location.hash;
     loc = loc.replace("#/", "");
     var loc1 = loc.split('/');
