@@ -3,8 +3,6 @@ document.addEventListener("backbutton",amintest, false);
 /*======================================*/
 
 function amintest(){
-
-
     var loc =   window.location.hash;
     loc = loc.replace("#/", "");
     loc1 = loc.split('/');
@@ -12,10 +10,13 @@ function amintest(){
     {
       window.location.hash = "#/home"; 
     }
-    else if(loc1[0] == 'menu' && localStorage.getItem('default_branch') != 0 ){
+    else if(loc1[0] == 'menu' && localStorage.getItem('default_branch')){
+      if(localStorage.getItem('default_branch') != 0)  
         window.location.hash = "#/home"; 
-    }
-    else if(loc1[0] == 'menu' && localStorage.getItem('default_branch') == 0){
+      else
+         window.location.hash = "#/branch"; 
+   }
+    else if(loc1[0] == 'menu' && !localStorage.getItem('default_branch')){
         window.location.hash = "#/branch"; 
     }
     else if(loc1[0] == 'food'){
