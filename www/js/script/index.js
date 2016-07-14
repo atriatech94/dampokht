@@ -4,6 +4,8 @@ function onDeviceReady() {
 document.addEventListener("backbutton",amintest, false);
 function amintest(){
     var loc =   window.location.hash;
+    alert (loc);
+    return false;
     loc = loc.replace("#/", "");
     loc1 = loc.split('/');
     if(loc == "cart" || loc == "myprofile/" ||  loc == "myprofile" || loc == "about" || loc == "branches" || loc == "branch" || loc == "contact" || loc == "cooperation" || loc == "cooperation" || loc == "faq" || loc == "law" || loc == 'login' || loc == 'register' )
