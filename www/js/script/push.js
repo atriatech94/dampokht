@@ -16,11 +16,7 @@ var app1 = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
-      navigator.splashscreen.show();
-      setTimeout(function() {
-            navigator.splashscreen.hide();
-        }, 9000);
-      push = PushNotification.init({
+       push = PushNotification.init({
            android: {
               senderID: "346351995783"
             },
