@@ -2,10 +2,9 @@
 document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {
  ons.ready(function () {
-    ons.disableDeviceBackButtonHandler();
+   ons.disableDeviceBackButtonHandler();
    document.addEventListener("backbutton",amintest, false);
 });   
-
 function amintest(){
    
     var loc =   window.location.hash;
