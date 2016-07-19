@@ -33,10 +33,8 @@ var app1 = {
             // data.sound,
             // data.image,
             // data.additionalData
-            alert(data.title);
-            return false;
-            if(data.id == 1){
-              window.location.hash = "#/myprofile/order_list"; 
+             if(data.title == "رد سفارش" || data.title == "تایید سفارش" || data.title == "ارسال سفارش" || data.title == "تحویل سفارش"){
+               window.location.hash = "#/myprofile/order_list"; 
             }
            
         });
