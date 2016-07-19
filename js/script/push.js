@@ -33,7 +33,7 @@ var app1 = {
             // data.sound,
             // data.image,
             // data.additionalData
-            alert(data.id);
+            alert(data.info);
             return false;
             if(data.id == 1){
               window.location.hash = "#/myprofile/order_list"; 
