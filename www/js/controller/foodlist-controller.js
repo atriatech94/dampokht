@@ -11,6 +11,7 @@ angular.module('my-app')
           }  
    $scope.d_branch = localStorage.getItem('default_branch');
    $scope.goBack = function(){window.history.back();};
+  
    if($scope.d_branch != 0 && localStorage.getItem('default_branch') != null ){
         $location.path('/menu/'+$scope.d_branch); 
    }

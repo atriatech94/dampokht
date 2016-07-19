@@ -1,6 +1,9 @@
 
 document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {
+    if(localStorage.getItem('test')){
+       alert(localStorage.getItem('test'));
+    }
  ons.ready(function () {
    ons.disableDeviceBackButtonHandler();
    document.addEventListener("backbutton",amintest, false);

@@ -423,7 +423,12 @@ angular.module('my-app')
                              });
                              return false;
                     });  
-      }    
+      } 
+       $scope.food_id = $routeParams.food_id; 
+       $scope.branch_id = $routeParams.branch_id;
+         $scope.go = function ( path ) {
+              $location.path( path );
+          };   
      $scope.submit = function(){
         if(localStorage.getItem('user_id')){
              $scope.comment = document.getElementById('comment_new').value;
@@ -449,7 +454,7 @@ angular.module('my-app')
                                             message: 'نظر شما با موفقیت ثبت شد'
                                     });
                                   if($rootScope.root_food != null && $rootScope.root_food !== undefined && response.data != null ){
-                                      for( var i=0 ; i<$rootScope.root_food.foods.length ; i++ ){
+                                      for( var i=0 ; i<$rootScope.root_food.foods.length;i++ ){
                                         if( $rootScope.root_food.foods[i].b_id == $routeParams.branch_id && $rootScope.root_food.foods[i].id == $routeParams.food_id ){
                                              $rootScope.root_food.foods[i].rate = Number (response.data[0].r);
                                              break;

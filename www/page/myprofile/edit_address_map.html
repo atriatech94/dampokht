@@ -12,15 +12,14 @@
         </div>
     </ons-toolbar>
     <ons-page>
-            
-            <p class="address_p">  ابتدا شعبه را انتخاب کنید سپس مکان خود را روی نقشه انتخاب کنید ، توجه داشته باشید که مکان شما باید در محدوده مشخص شده شعبه باشد برای این کار می توانید از دکمه مکان یاب یا جستجوی نقشه استفاده کنید.   </p>	  
-                <div class="map_block">
-                        <section id="place-on-map"> 
-                            <!--=================  ======================--->
-                            <select style="height: 50px;" class="width-full rtl add_branch">
-                                <option ng-selected="branch_now == option_1.id" ng-repeat="option_1 in branches" value="{{option_1.id}}">{{option_1.city}} - {{option_1.name}}</option>
-                            </select>
-                            <!--==================  =====================--->
+        <p class="address_p">  ابتدا شعبه را انتخاب کنید سپس مکان خود را روی نقشه انتخاب کنید ، توجه داشته باشید که مکان شما باید در محدوده مشخص شده شعبه باشد برای این کار می توانید از دکمه مکان یاب یا جستجوی نقشه استفاده کنید.   </p>	  
+        <div class="map_block">
+            <section id="place-on-map"> 
+                <!--=================  ======================--->
+                <select style="height: 50px;" class="width-full rtl add_branch">
+                    <option ng-selected="branch_now == option_1.id" ng-repeat="option_1 in branches" value="{{option_1.id}}">{{option_1.city}} - {{option_1.name}}</option>
+                </select>
+                <!--==================  =====================--->
                             <header class="section-title">
                                 <h2>مکان خود را بر روی نقشه مشخص کنید</h2>
                             </header>

@@ -161,6 +161,10 @@ angular.module('my-app')
             templateUrl: 'page/login/verification.html',
             controller: 'verificationController',
 		})
+        .when('/notification', {
+            templateUrl: 'page/notification/index.html',
+            controller: 'notificationController',
+		})
         
 });
 
