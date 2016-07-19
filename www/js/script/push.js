@@ -27,7 +27,13 @@ var app1 = {
         });
       
         push.on('notification', function(data) {
-            localStorage.setItem('test','test');
+            // data.message,
+            // data.title,
+            // data.count,
+            // data.sound,
+            // data.image,
+            // data.additionalData
+            alert(data.message);
         });
 
         push.on('error', function(e) {
