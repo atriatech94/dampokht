@@ -3144,13 +3144,13 @@ ons-input .text-input__container{
 }
 /*--=============-- address_tab  --===============--*/
 .address_tab{
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 50px;
     background-color: #ae1f33;
     right: 0px;
-    bottom: 0px;
-    z-index: 11;
+    bottom: 0;
+    z-index: 90;
 }
 .address_tab:after{
     content: "";

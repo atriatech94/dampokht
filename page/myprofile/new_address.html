@@ -11,7 +11,7 @@
         </div>
     </ons-toolbar>
     <div ng-init="show_case = '1' " ></div>
-        <ons-page>
+        <ons-page style="z-index:! !mportant">
             
             <div id="tab1" ng-if="show_case == '1' ">
                 <ons-page>
@@ -91,9 +91,10 @@
                 <br><br>
                 
             </div>
+            
     </ons-page>
     <div class="address_tab">
-        <span ng-click="show_case = '1'" class="one" active="{{show_case}}">گرفتن از نقشه</span>
-        <span ng-click="show_case = '2'" class="two" active="{{show_case}}">نوشتن آدرس</span>
+        <span ng-click="show_case = '1'" class="one" active="{{show_case}}">نوشتن آدرس </span>
+        <span ng-click="show_case = '2'" class="two" active="{{show_case}}">گرفتن از نقشه</span>
     </div>
 </ons-template>
