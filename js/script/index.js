@@ -23,6 +23,9 @@ function resume_app (){
     },2000);   
 }
 
+var deviceVersion = device.version;
+alert(deviceVersion);
+
 function amintest(){
    
     var loc =   window.location.hash;
