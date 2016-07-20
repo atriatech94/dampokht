@@ -22,11 +22,6 @@ function resume_app (){
     },2000);   
 }
 
-var deviceVersion = device.version;
-var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
-deviceVersion = parseFloat(rest);
-alert(deviceVersion);
-
 function amintest(){
    
     var loc =   window.location.hash;

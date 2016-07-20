@@ -399,8 +399,13 @@ angular.module('my-app')
         window.history.back();
     };
     
+     var deviceVersion = device.version;
+     var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
+     deviceVersion = parseFloat(rest);
+     
      $scope.rate = 0;
      $scope.dev_version = deviceVersion;
+     alert(123);
 	 $scope.rate_f = function(rate){
 		 $scope.rate = rate;
        }
