@@ -400,6 +400,7 @@ angular.module('my-app')
     };
     
      $scope.rate = 0;
+     $scope.dev_version = deviceVersion;
 	 $scope.rate_f = function(rate){
 		 $scope.rate = rate;
        }

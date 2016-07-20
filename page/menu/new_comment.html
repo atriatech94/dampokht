@@ -17,7 +17,7 @@
                 <p class="comment-desc">
                     شما می توانید نظر و رای خود را نسبت به این غذا بیان کنید 
                 </p>  
-                <div class="rating-cm" rate="{{rate}}"><span class="fa fa-star-o" ng-click="rate_f(5)"></span><span class="fa fa-star-o"  ng-click="rate_f(4)"></span><span class="fa fa-star-o"  ng-click="rate_f(3)"></span><span class="fa fa-star-o"  ng-click="rate_f(2)"></span><span class="fa fa-star-o"  ng-click="rate_f(1)"></span></div>
+                <div ng-if="dev_version >= 4.4" class="rating-cm" rate="{{rate}}"><span class="fa fa-star-o" ng-click="rate_f(5)"></span><span class="fa fa-star-o"  ng-click="rate_f(4)"></span><span class="fa fa-star-o"  ng-click="rate_f(3)"></span><span class="fa fa-star-o"  ng-click="rate_f(2)"></span><span class="fa fa-star-o"  ng-click="rate_f(1)"></span></div>
                <div class="comment-text"><textarea id="comment_new" class="textarea textarea--transparent" placeholder="نظر خود را در مورد این غذا بیان کنید" ></textarea></div>
              
                 <div style="padding: 10px 9px">

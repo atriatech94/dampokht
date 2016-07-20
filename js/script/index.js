@@ -1,4 +1,3 @@
-
 document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {   
  ons.ready(function () {
@@ -24,7 +23,8 @@ function resume_app (){
 }
 
 var deviceVersion = device.version;
-alert(deviceVersion);
+var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
+deviceVersion = parseFloat(rest);
 
 function amintest(){
    
