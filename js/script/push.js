@@ -40,7 +40,14 @@ var app1 = {
                window.location.hash = "#/notification"; 
                localStorage.setItem('push_redirect',1);
             }
-       }     
+       } 
+       else{
+            ons.notification.alert({
+                            title: data.title,
+                            buttonLabel:"بستن " ,
+                            message: data.message
+                    });
+       }    
              
            
         });
