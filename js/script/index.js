@@ -25,6 +25,7 @@ function resume_app (){
 var deviceVersion = device.version;
 var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
 deviceVersion = parseFloat(rest);
+alert(deviceVersion);
 
 function amintest(){
    
