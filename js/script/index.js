@@ -3,8 +3,26 @@ document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {   
  ons.ready(function () {
    ons.disableDeviceBackButtonHandler();
-   document.addEventListener("backbutton",amintest, false);
+   document.addEventListener("backbutton",amintest, false);  
 });   
+ 
+  setTimeout(function(){
+      localStorage.setItem('push_redirect',1);
+    },2000);
+ 
+ document.addEventListener("pause",pause_app, false);
+ document.addEventListener("resume", resume_app, false);
+
+function pause_app (){
+    localStorage.removeItem('push_redirect');
+}
+
+function resume_app (){
+    setTimeout(function(){
+      localStorage.setItem('push_redirect',1);
+    },2000);   
+}
+
 function amintest(){
    
     var loc =   window.location.hash;
@@ -65,6 +83,11 @@ function amintest(){
         window.location.hash = "#/myprofile/address"; 
     }
      else if(loc == 'home'){
+        localStorage.removeItem('push_redirect'); 
+        navigator.app.exitApp();
+    }
+     else if(loc == ''){
+        localStorage.removeItem('push_redirect'); 
         navigator.app.exitApp();
     }
     else{

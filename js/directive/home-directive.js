@@ -373,6 +373,7 @@ angular.module('my-app')
                     $location.path( path );
                 };
            scope.exit = function(path){
+                   localStorage.removeItem('push_redirect'); 
                    navigator.app.exitApp();
                 };
            scope.share = function(){

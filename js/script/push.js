@@ -16,6 +16,8 @@ var app1 = {
     // The scope of 'this' is the event. In order to call the 'receivedEvent'
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
+      
+      
        push = PushNotification.init({
            android: {
               senderID: "346351995783"
@@ -33,9 +35,13 @@ var app1 = {
             // data.sound,
             // data.image,
             // data.additionalData
-             if(data.title == "رد سفارش" || data.title == "تایید سفارش" || data.title == "ارسال سفارش" || data.title == "تحویل سفارش"){
-               window.location.hash = "#/myprofile/order_list"; 
+      if(!localStorage.getItem('push_redirect')){
+            if(data.title){
+               window.location.hash = "#/notification"; 
+               localStorage.setItem('push_redirect',1);
             }
+       }     
+             
            
         });
 
