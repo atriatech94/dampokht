@@ -8,6 +8,7 @@
         <div class="center">پشتیبانی</div>
         <div class="right">
             <ons-toolbar-button ng-click="refresh()" modifier="material"><ons-icon icon="ion-android-sync"></ons-icon></ons-toolbar-button>
+            <ons-toolbar-button ng-click="go('myprofile/support_new')" modifier="material"><ons-icon icon="ion-android-add"></ons-icon></ons-toolbar-button>
             <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
         </div>
     </ons-toolbar>
@@ -37,7 +38,7 @@
                 </ons-list-item>
             </ons-list>
             <!--========================================================-->
-           <div class="tiket_fab"  ng-click="go('myprofile/support_new')"><ons-icon icon="fa-plus"></ons-icon></div>
+           <div class="tiket_fab" ng-if="dev_version >= 4.4" ng-click="go('myprofile/support_new')"><ons-icon icon="fa-plus"></ons-icon></div>
                
                 
     </ons-page>

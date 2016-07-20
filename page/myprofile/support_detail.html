@@ -7,6 +7,7 @@
         </div>
         <div class="center">جزئیات درخواست شماره {{id}}# </div>
         <div class="right">
+            <ons-toolbar-button ng-click="showDialog('dialog-1')" modifier="material"><ons-icon icon="fa-reply"></ons-icon></ons-toolbar-button>
             <ons-toolbar-button ng-click="go('/myprofile/support')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
         </div>
     </ons-toolbar>
@@ -34,7 +35,7 @@
             </div> 
             <!--========================================tiketone -----------===============-->
         </div>
-        <div class="tiket_fab"  ng-click="showDialog('dialog-1')"><ons-icon icon="fa-reply"></ons-icon></div>
+        <div class="tiket_fab" ng-if="dev_version >= 4.4"  ng-click="showDialog('dialog-1')"><ons-icon icon="fa-reply"></ons-icon></div>
         
 
 

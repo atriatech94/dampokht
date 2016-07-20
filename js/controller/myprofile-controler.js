@@ -776,6 +776,12 @@ angular.module('my-app')
  
    document.getElementById('loading').setAttribute('style','display:none;'); 
    $scope.go = function ( path ) {$location.path( path );};
+  
+     var deviceVersion = device.version;
+     var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
+     deviceVersion = parseFloat(rest);
+     $scope.dev_version = deviceVersion;
+  
    $scope.detail = function (id){
        if(id != '-1')
          $location.path( '/myprofile/support_detail/'+id );
@@ -830,6 +836,12 @@ angular.module('my-app')
 })
 .controller('supportdetailController',function($http,$scope,$location,$routeParams,$sce){
   
+     var deviceVersion = device.version;
+     var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
+     deviceVersion = parseFloat(rest);
+     $scope.dev_version = deviceVersion;
+   
+   
     $scope.id = $routeParams.id;
     $scope.go = function ( path ) {
          document.getElementById('loading').removeAttribute('style');    

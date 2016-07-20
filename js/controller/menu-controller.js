@@ -402,11 +402,10 @@ angular.module('my-app')
      var deviceVersion = device.version;
      var rest = deviceVersion.substring(0, deviceVersion.lastIndexOf("."));
      deviceVersion = parseFloat(rest);
+     $scope.dev_version = deviceVersion;
      
      $scope.rate = 0;
-     $scope.dev_version = deviceVersion;
-     alert(123);
-	 $scope.rate_f = function(rate){
+     $scope.rate_f = function(rate){
 		 $scope.rate = rate;
        }
        
@@ -419,7 +418,10 @@ angular.module('my-app')
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).then(function successCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
-                                $scope.rate = Number ( response.data[0].rate ); 
+                               if($scope.dev_version >= 4.4){
+                                 $scope.rate = Number ( response.data[0].rate ); 
+                               } 
+                                
                             }, function errorCallback(response) {
                                 document.getElementById('loading').setAttribute('style','display:none;'); 
                                 ons.notification.alert({
