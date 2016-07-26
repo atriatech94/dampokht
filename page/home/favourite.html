@@ -6,7 +6,7 @@
         <div class="left">
             <ons-toolbar-button  ng-click="menu.toggleMenu()" modifier="material"><ons-icon icon="md-menu"></ons-icon></ons-toolbar-button>
         </div>
-        <div class="center">لیست علاقه مندی ها</div>
+        <div class="center">لیست علاقه مندی ها</div> 
         <div class="right">
             <ons-toolbar-button ng-click="go('/cart')" modifier="material"><span class="back_txt rubberBand">{{ basket_size }}</span><ons-icon icon="ion-android-cart"></ons-icon></ons-toolbar-button>
             <ons-toolbar-button ng-click="go('/myprofile')" modifier="material"><ons-icon icon="ion-arrow-left-c"></ons-icon></ons-toolbar-button>
@@ -36,12 +36,14 @@
                                         </div>
                                         <div class="desc">{{wish.price | currency : '' : 0  }}  تومان </div>
                                     </ons-col>
-                                    <ons-col ng-click="add_to_card(wish.id,wish.branch_id,wish.picname,wish.price,wish.name,branch.name)"   width="40px"><ons-icon icon="ion-android-cart"></ons-icon></ons-col>
+                                    <ons-col ng-if="wish.supply == '1'" ng-click="add_to_card(wish.id,wish.branch_id,wish.picname,wish.price,wish.name,branch.name)"   width="40px"><ons-icon icon="ion-android-cart"></ons-icon></ons-col>
+                                     <ons-col ng-if="wish.supply == '0'"  width="50px"><ons-icon  ng-click="not_available()"  icon="ion-android-alert"></ons-icon></ons-col>
                                 </ons-row>
                             </div>
                         </ons-carousel-item>
                         <ons-carousel-item>
                            <div ng-click="remove(wish.id,wish.branch_id)" class="remove_item"> <p><i class="fa fa-trash" aria-hidden="true"></i> برای حذف کلیک کنید</p></div>
+                           
                         </ons-carousel-item>
                     </ons-carousel>                
                 <!--=============================================================-->

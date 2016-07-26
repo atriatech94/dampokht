@@ -1,3 +1,4 @@
+
 document.addEventListener('deviceready',onDeviceReady, false);
 function onDeviceReady() {   
  ons.ready(function () {
@@ -20,7 +21,7 @@ function resume_app (){
     setTimeout(function(){
       localStorage.setItem('push_redirect',1);
     },2000);   
-}
+} 
 
 function amintest(){
    

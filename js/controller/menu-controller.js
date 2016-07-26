@@ -59,11 +59,20 @@ angular.module('my-app')
          {
              $scope.foods = $rootScope.root_food.foods;
              $scope.categories = $rootScope.root_food.category;
+            
          }
          
         var timer;
 	    var timeout = 3000;
-    
+         
+         $scope.not_available = function(){
+              ons.notification.alert({
+                                            title: 'پیام سیستم',
+                                            buttonLabel:"بستن " ,
+                                            message: 'غذا در حال حاضر موجود نیست'
+                                    });
+         };
+
         $scope.add_to_card = function(id,branch_id,picname,price,name,branch_name){
             
             /*==============animation================*/
@@ -117,6 +126,15 @@ angular.module('my-app')
 .controller('FoodController', function($scope,$http,$location,$routeParams,$filter,$rootScope,$sce) {
              $scope.rate = [1,2,3,4,5]; 
        
+         $scope.not_available = function(){
+              ons.notification.alert({
+                                            title: 'پیام سیستم',
+                                            buttonLabel:"بستن " ,
+                                            message: 'غذا در حال حاضر موجود نیست'
+                                    });
+         };
+        
+        
          $scope.video = function(video){
              VideoPlayer.play("http://dampokht.com/uploads/food-video/"+video);
          };
@@ -289,6 +307,7 @@ angular.module('my-app')
                                 if(response.data.done == 1)
                                 {
                                     $scope.food = response.data.food;
+                                     console.log( $scope.food);
                                     $scope.description = $sce.trustAsHtml($scope.food[0].description);
                                      $scope.realrate = Math.round( Number ($scope.food[0].rate) ); 
                                   
@@ -316,6 +335,7 @@ angular.module('my-app')
          else
          {
              $scope.food = $filter('filter')($rootScope.root_food.foods,{id : $routeParams.food_id },true);
+             console.log( $scope.food);
              $scope.description = $sce.trustAsHtml($scope.food[0].description);
              $scope.realrate = Math.round( Number ($scope.food[0].rate) ); 
               
@@ -430,7 +450,7 @@ angular.module('my-app')
                                     message: 'خطا در برقراری ارتباط دوباره تلاش کنید !!'
                              });
                              return false;
-                    });  
+                    });   
       } 
        $scope.food_id = $routeParams.food_id; 
        $scope.branch_id = $routeParams.branch_id;

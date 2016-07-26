@@ -8,4 +8,6 @@ angular.module('my-app')
 				
 				
             }/* end */
-}});
+}})
+
+

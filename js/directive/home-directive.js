@@ -82,6 +82,7 @@ angular.module('my-app')
                  }
           },1500);
           
+          localStorage.setItem('intro',1);
           
            if(localStorage.getItem('cart')){
              scope.basket_size = JSON.parse(localStorage.getItem('cart')).length; 
@@ -182,6 +183,16 @@ angular.module('my-app')
           else{
              scope.basket_size = 0; 
           }  
+            
+            
+              scope.not_available = function(){
+              ons.notification.alert({
+                                            title: 'پیام سیستم',
+                                            buttonLabel:"بستن " ,
+                                            message: 'غذا در حال حاضر موجود نیست'
+                                    });
+              };
+            
             
               scope.base_img = base_img + 'food-xsmall/' ;
               document.getElementById('loading').removeAttribute('style');     

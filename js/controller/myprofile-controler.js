@@ -23,6 +23,7 @@ angular.module('my-app')
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                    });
                localStorage.clear(); 
+               localStorage.setItem('intro',1);
                $location.path("/home");
           };
           document.getElementById('loading').removeAttribute('style');   
@@ -156,6 +157,7 @@ angular.module('my-app')
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                    });
                localStorage.clear();
+               localStorage.setItem('intro',1);
                $location.path("/home");
           };
 })
@@ -763,11 +765,20 @@ angular.module('my-app')
                            });
               return false;
         }
-       /* okey */ 
+       
+         ons.notification.alert({
+                                title: 'پیام',
+                                buttonLabel:"بستن " ,
+                                message: 'پرداخت آنلاین به زودی به برنامه اضافه می شود'
+                           });
      };                
      
        $scope.buy = function(id){
-             alert(id); 
+            ons.notification.alert({
+                                title: 'پیام',
+                                buttonLabel:"بستن " ,
+                                message: 'پرداخت آنلاین به زودی به برنامه اضافه می شود'
+                           });
           
        };         
 })
@@ -783,9 +794,9 @@ angular.module('my-app')
      $scope.dev_version = deviceVersion;
   
    $scope.detail = function (id){
-       if(id != '-1')
+      if(id != '-1')
          $location.path( '/myprofile/support_detail/'+id );
-     };
+      };
      
      $scope.refresh = function(){
         document.getElementById('loading').removeAttribute('style');     

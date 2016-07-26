@@ -11,4 +11,14 @@ angular.module('my-app')
                 });
 				
             }/* end */
-}});
+}})
+.controller('SplashController', function($scope,$location,$timeout) {
+     $timeout(function() {
+         if(localStorage.getItem('intro')){
+               window.location.hash = "#/home";  
+          }
+          else{
+              window.location.hash = "#/intro";  
+          }
+     },3000);
+});

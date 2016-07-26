@@ -6,8 +6,8 @@ angular.module('my-app')
             controller: 'IntroController',
         })
         .when('/', {
-            templateUrl: 'page/intro/index.html',
-            controller: 'IntroController',
+            templateUrl: 'page/intro/splash.html',
+            controller: 'SplashController',
         })
         .when('/home', {
             templateUrl: 'page/home/home.html',
@@ -164,6 +164,10 @@ angular.module('my-app')
         .when('/notification', {
             templateUrl: 'page/notification/index.html',
             controller: 'notificationController',
+		})
+        .when('/splash', {
+            templateUrl: 'page/intro/splash.html',
+            controller: 'SplashController',
 		})
         
 });

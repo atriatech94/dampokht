@@ -20,7 +20,7 @@
                 <h3 class="title-ios rtl">{{category.name}}</h3>
                 <ons-list-item modifier="" ng-repeat="food in foods | filter:{ category_id : category.id }  : true" class="list-item-container">
                   <ons-row>
-                    <ons-col ng-click="go('/food/' + food.id +'/'+ branch_id)" width="95px">
+                    <ons-col ng-click="go('/food/' + food.id +'/'+ branch_id)" width="95px"> 
                       <img ng-src="{{base_img + food.picname}}" class="thumbnail">
                     </ons-col>
                     <ons-col>
@@ -34,7 +34,8 @@
                             </div>
                         </a>
                       </ons-col>
-                    <ons-col  width="50px"><ons-icon  ng-click="add_to_card(food.id,branch_id,food.picname,food.price,food.name,food.b_name)"  icon="ion-android-cart"></ons-icon></ons-col>
+                    <ons-col ng-if="food.supply == '1'"  width="50px"><ons-icon  ng-click="add_to_card(food.id,branch_id,food.picname,food.price,food.name,food.b_name)"  icon="ion-android-cart"></ons-icon></ons-col>
+                    <ons-col ng-if="food.supply == '0'"  width="50px"><ons-icon  ng-click="not_available()"  icon="ion-android-alert"></ons-icon></ons-col>
                   </ons-row>
                 </ons-list-item>
                </div>  

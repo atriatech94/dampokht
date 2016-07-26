@@ -144,6 +144,22 @@ angular.module('my-app')
                                              $rootScope.order_result = response.data;
                                               $location.path('/myprofile/order_true');
                                         }
+                                       else if(response.data.done == 2)
+                                        {
+                                            var msg = response.data.food[0].name;
+                                            for(var k=1 ; k < response.data.food.length ; k++){
+                                                msg = msg+" و "+response.data.food[k].name;
+                                            }
+                                            
+                                             ons.notification.alert({
+                                                    title: 'خطا',
+                                                    buttonLabel:"بستن " ,
+                                                    message: msg+" موجود نیست "
+                                            }); 
+                                            $location.path('/cart');
+                                           
+                                        }
+                                       
                                         else
                                         {
                                              ons.notification.alert({

@@ -3178,7 +3178,49 @@ ons-input .text-input__container{
     color:#fff;
     border-bottom: 4px solid #fff;
 }
-/*--=============--   --===============--*/
+/*--=============-- splash  --===============--*/
+.splash{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0px;
+    right:0px;
+    overflow: hidden;
+    background-color: #AE1E35;
+}
+.splash .logo{
+    display: block;
+    width: 100%;
+    height: 180px;
+    background-image: url('../img/logo.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    margin-top:17%;
+}
+.splash .load{
+    background-image: url('../img/gears.gif');
+    display: block;
+    width: 100%;
+    height: 100px;
+    background-repeat: no-repeat;
+    background-position:center;
+    background-size: contain;
+    margin-top: 80px;
+    position: absolute;
+    bottom: 23%;
+    right: 0px;
+}
+.splash p{
+    text-align: center;
+    position: absolute;
+    bottom:   14%;
+    right: 0px;
+    width: 100%;
+    color:#eaeaea;
+    font-size: 23px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.54),0 -1px 1px rgba(0, 0, 0, 0.54),1px 0 1px rgba(0, 0, 0, 0.54),-1px 0 1px rgba(0, 0, 0, 0.54);
+}
 /*--=============--   --===============--*/
 /*--=============--   --===============--*/
 /*--=============--   -================--*/
