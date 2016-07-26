@@ -689,7 +689,16 @@ angular.module('my-app')
                                                 buttonLabel:"بستن" ,
                                                 message: 'آدرس با موفقیت ثبت شد'
                                             });
-                                 $location.path('/myprofile/address');           
+                                 if(localStorage.getItem('addr_add_check')){
+                                      var addr_add_branch = +localStorage.getItem('addr_add_branch');
+                                      localStorage.removeItem('addr_add_branch');
+                                      localStorage.removeItem('addr_add_check');
+                                      $location.path('/checkout/'+addr_add_branch);   
+                                 }
+                                 else{
+                                      $location.path('/myprofile/address');     
+                                 }           
+                                      
                                             
                             }
                             else
@@ -784,7 +793,9 @@ angular.module('my-app')
 })
 
 .controller('supportController',function($http,$scope,$q,$location,$rootScope,$route){
- 
+     if($rootScope.count_t == null || $rootScope.count_t == 0){
+       $scope.show_o = true;
+   }
    document.getElementById('loading').setAttribute('style','display:none;'); 
    $scope.go = function ( path ) {$location.path( path );};
   
@@ -860,7 +871,7 @@ angular.module('my-app')
      };
     
      $scope.base_img = base_img + 'profile/' ;
-     $scope.base_img_a = base_img_a + 'admin/uploads/profile/' ;
+     $scope.base_img_a = base_img_a + 'admin/uploads/profile/' ; 
      document.getElementById('loading').removeAttribute('style');    
      $http({
                 method: 'GET',
@@ -1064,7 +1075,9 @@ angular.module('my-app')
        };    
 })
 .controller('OrderlistController',function($http,$scope,$q,$location,$rootScope,$route){
-  
+   if($rootScope.count_o == null || $rootScope.count_o==0){
+       $scope.show_o = true;
+   }
      document.getElementById('loading').setAttribute('style','display:none;'); 
      $scope.detail = function (id){
         if(id != '-1')

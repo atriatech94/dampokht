@@ -404,7 +404,15 @@ angular.module('my-app')
                                                                             buttonLabel:"بستن" ,
                                                                             message: 'آدرس با موفقیت ثبت شد'
                                                                         });
-                                                            $location.path('/myprofile/address'); 
+                                                           if(localStorage.getItem('addr_add_check')){
+                                                                var addr_add_branch = +localStorage.getItem('addr_add_branch');
+                                                                localStorage.removeItem('addr_add_branch');
+                                                                localStorage.removeItem('addr_add_check');
+                                                                $location.path('/checkout/'+addr_add_branch);   
+                                                            }
+                                                            else{
+                                                                $location.path('/myprofile/address');     
+                                                            }   
                                                         }
                                                         else
                                                         {

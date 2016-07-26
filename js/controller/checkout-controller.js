@@ -7,6 +7,10 @@ angular.module('my-app')
              $scope.basket_size = 0; 
           }  
      $scope.go = function(path){
+            if(path == "/myprofile/new_address"){
+               localStorage.setItem('addr_add_check',1);
+               localStorage.setItem('addr_add_branch',$routeParams.id)
+            }
             $location.path(path);
         }; 
      
