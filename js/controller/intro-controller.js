@@ -18,7 +18,7 @@ angular.module('my-app')
          {
                window.location.hash = "#/notification";  
           }
-          else if(localStorage.getItem('untro'))
+          else if(localStorage.getItem('intro'))
           {
              window.location.hash = "#/home";    
           }
