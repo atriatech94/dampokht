@@ -86,6 +86,10 @@ function amintest(){
         localStorage.removeItem('push_redirect'); 
         navigator.app.exitApp();
     }
+     else if(loc == 'notification'){
+         window.location.hash = "#/myprofile/";
+      
+    }
      else if(loc == ''){
         localStorage.removeItem('push_redirect'); 
         navigator.app.exitApp();
