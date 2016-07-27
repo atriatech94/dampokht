@@ -14,11 +14,16 @@ angular.module('my-app')
 }})
 .controller('SplashController', function($scope,$location,$timeout) {
      $timeout(function() {
-         if(localStorage.getItem('intro')){
-               window.location.hash = "#/home";  
+         if(localStorage.getItem('push_redirect'))
+         {
+               window.location.hash = "#/notification";  
+          }
+          else if(localStorage.getItem('untro'))
+          {
+             window.location.hash = "#/home";    
           }
           else{
               window.location.hash = "#/intro";  
           }
-     },3000);
+     },2500);
 });

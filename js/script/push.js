@@ -29,12 +29,7 @@ var app1 = {
         });
       
         push.on('notification', function(data) {
-            // data.message,
-            // data.title,
-            // data.count,
-            // data.sound,
-            // data.image,
-            // data.additionalData
+            
       if(!localStorage.getItem('push_redirect')){
             if(data.title){
                window.location.hash = "#/notification"; 

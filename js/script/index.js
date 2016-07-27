@@ -8,7 +8,7 @@ function onDeviceReady() {
  
   setTimeout(function(){
       localStorage.setItem('push_redirect',1);
-    },2000);
+    },3200);
  
  document.addEventListener("pause",pause_app, false);
  document.addEventListener("resume", resume_app, false);
